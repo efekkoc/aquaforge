@@ -1,111 +1,94 @@
+# Hi, I'm Efekan 👋
+
+I'm a **Senior Software Engineering student** and **Systems & Full-Stack Developer** passionate about building clean, user-centric mobile applications, high-performance distributed systems, and intelligent automation pipelines. Today I work at the intersection of **Java 21 / PaperMC game systems**, **React & TypeScript full-stack tooling**, and **Flutter & Generative AI workflows**, turning creative ideas into scalable, real-world software.
+
+---
+
+### 🔭 What I'm working on
+
+- ⚡ **High-Performance & Game Systems:** Designing modless, concurrent server-side plugins, real-time HUD mechanics, and orchestrators using **Java 21** and PaperMC (e.g., [**AquaForge**](https://github.com/efekkoc/aquaforge), [**AquaMap**](https://github.com/efekkoc/AquaMap), [**AquaSecurity**](https://github.com/efekkoc/AquaSecurity), [**AquaRunes**](https://github.com/efekkoc/AquaRunes), [**AquaWatchdog**](https://github.com/efekkoc/AquaWatchdog), [**AquaFishing**](https://github.com/efekkoc/AquaFishing)).
+- 📱 **Mobile App Development:** Reactive, performant, and clean mobile applications using **Flutter & Dart** with offline-first architectures (e.g., [**NutriForest**](https://github.com/efekkoc/nutriforest), [**Sağlık Saatim**](https://github.com/efekkoc/ilac-hatirlatici)).
+- 🤖 **AI & Autonomous Pipelines:** End-to-end automated media studios and GenAI pipelines leveraging **Python** and cutting-edge vision/video models (e.g., [**FlowStudio**](https://github.com/efekkoc/FlowStudio) with Google Flow & Veo 3.1).
+- 🧪 **Architecture & Tooling:** Deep-diving into clean architecture, real-time WebSocket telemetry, local persistence (Hive, SQLite), and developer toolchains.
+
+---
+
+### 🛠 Tech I work with
+
+**Languages:**  
+![Java](https://img.shields.io/badge/Java_21_LTS-ED8B00?style=flat&logo=openjdk&logoColor=white)
+![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=flat&logo=typescript&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat&logo=javascript&logoColor=black)
+![Dart](https://img.shields.io/badge/Dart-0175C2?style=flat&logo=dart&logoColor=white)
+![Python](https://img.shields.io/badge/Python-3776AB?style=flat&logo=python&logoColor=white)
+![C++](https://img.shields.io/badge/C%2B%2B-00599C?style=flat&logo=c%2B%2B&logoColor=white)
+![SQL](https://img.shields.io/badge/SQL-4479A1?style=flat&logo=mysql&logoColor=white)
+![Bash](https://img.shields.io/badge/Bash-4EAA25?style=flat&logo=gnubash&logoColor=white)
+
+**Mobile, Web & UI:**  
+![Flutter](https://img.shields.io/badge/Flutter-02569B?style=flat&logo=flutter&logoColor=white)
+![Android](https://img.shields.io/badge/Android-3DDC84?style=flat&logo=android&logoColor=white)
+![iOS](https://img.shields.io/badge/iOS-000000?style=flat&logo=apple&logoColor=white)
+![React](https://img.shields.io/badge/React_18-61DAFB?style=flat&logo=react&logoColor=black)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38BDF8?style=flat&logo=tailwindcss&logoColor=white)
+![Vite](https://img.shields.io/badge/Vite-646CFF?style=flat&logo=vite&logoColor=white)
+
+**AI & Automation:**  
+![Google Gemini](https://img.shields.io/badge/Google_Gemini-8E75B2?style=flat&logo=google&logoColor=white)
+![OpenAI](https://img.shields.io/badge/OpenAI-412991?style=flat&logo=openai&logoColor=white)
+![Streamlit](https://img.shields.io/badge/Streamlit-FF4B4B?style=flat&logo=streamlit&logoColor=white)
+
+**Systems, Tools & Dev:**  
+![PaperMC](https://img.shields.io/badge/PaperMC_1.21.4-E53935?style=flat&logo=curseforge&logoColor=white)
+![Node.js](https://img.shields.io/badge/Node.js-339933?style=flat&logo=nodedotjs&logoColor=white)
+![WebSockets](https://img.shields.io/badge/WebSockets-010101?style=flat&logo=socketdotio&logoColor=white)
+![Docker](https://img.shields.io/badge/Docker-2496ED?style=flat&logo=docker&logoColor=white)
+![Git](https://img.shields.io/badge/Git-F05032?style=flat&logo=git&logoColor=white)
+![GitHub](https://img.shields.io/badge/GitHub-181717?style=flat&logo=github&logoColor=white)
+![Hive](https://img.shields.io/badge/Hive_DB-FFA000?style=flat&logo=firebase&logoColor=white)
+![SQLite](https://img.shields.io/badge/SQLite-003B57?style=flat&logo=sqlite&logoColor=white)
+![VS Code](https://img.shields.io/badge/VS_Code-007ACC?style=flat&logo=visualstudiocode&logoColor=white)
+![Android Studio](https://img.shields.io/badge/Android_Studio-3DDC84?style=flat&logo=androidstudio&logoColor=white)
+
+---
+
+### 🚀 Highlighted Repositories
+
+| Project | Stack | Description |
+| :--- | :--- | :--- |
+| ⚡ [**AquaForge**](https://github.com/efekkoc/aquaforge) | `React 18` `TypeScript` `Node.js` `WebSockets` | Next-Gen Minecraft server orchestrator, real-time diagnostic engine & marketplace |
+| 🗺️ [**AquaMap**](https://github.com/efekkoc/AquaMap) | `Java 21` `PaperMC` `Canvas 60FPS` | Clientless 60 FPS live canvas minimap, player radar & HUD compass engine for Paper 1.21.4 |
+| 🛡️ [**AquaSecurity**](https://github.com/efekkoc/AquaSecurity) | `Java 21` `Paper 1.21.4` `TOTP` | Enterprise 2FA TOTP (Google Authenticator) & session lockdown guard for Paper 1.21.4 |
+| 🔮 [**AquaRunes**](https://github.com/efekkoc/AquaRunes) | `Java 21` `Data Components` `PDC` | Modern 1.21.4 Data Components runic matrix engine with drag-and-drop socketing & particle auras |
+| 🐕 [**AquaWatchdog**](https://github.com/efekkoc/AquaWatchdog) | `Java 21` `Vector Math` `Webhooks` | Real-time sliding CPS & raycast reach anti-cheat telemetry with Discord webhook triage |
+| 🎣 [**AquaFishing**](https://github.com/efekkoc/AquaFishing) | `Java 21` `PaperMC` `BossBar` | Advanced RPG fishing engine featuring 40 custom fish, reeling mini-game & bossbars |
+| 🌿 [**NutriForest**](https://github.com/efekkoc/nutriforest) | `Flutter` `Dart` `Hive` | AI-powered, gamified island ecosystem nutrition & calorie tracker with offline-first Hive DB |
+| ⏰ [**Sağlık Saatim**](https://github.com/efekkoc/ilac-hatirlatici) | `Flutter` `Dart` `Notifications` | Smart medication tracker and personal health assistant with local scheduling & PDF exports |
+| 🎬 [**FlowStudio**](https://github.com/efekkoc/FlowStudio) | `Python` `Streamlit` `Veo 3.1` | Autonomous viral 3D video generation studio leveraging Google Flow & Veo 3.1 AI |
+
+---
+
+### ⚡ AquaForge & AquaMap In Action
+
 <div align="center">
+  <img src="https://raw.githubusercontent.com/efekkoc/aquaforge/main/docs/screenshots/aquaforge_dashboard.png" width="48%" style="border-radius: 8px;" alt="AquaForge Dashboard" />
+  &nbsp;
+  <img src="https://raw.githubusercontent.com/efekkoc/aquaforge/main/docs/screenshots/aquamap_radar.png" width="48%" style="border-radius: 8px;" alt="AquaMap Radar" />
+</div>
 
-# 👋 Hi there, I'm Turgut Efekan Koç (efekkoc)
-### ⚡ Systems & Full-Stack Engineer | High-Performance Minecraft Engine Developer
+---
 
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-0A66C2?style=for-the-badge&logo=linkedin)](https://linkedin.com)
-[![GitHub](https://img.shields.io/badge/GitHub-efekkoc-181717?style=for-the-badge&logo=github)](https://github.com/efekkoc)
-[![Portfolio](https://img.shields.io/badge/Portfolio-AquaForge_Ecosystem-06B6D4?style=for-the-badge&logo=minecraft)](https://github.com/efekkoc/aquaforge)
+### 📊 GitHub Activity
 
-<p align="center">
-  Passionate software engineer specializing in <b>distributed server infrastructure</b>, <b>real-time WebSocket telemetry</b>, and <b>modern Minecraft (Paper 1.21.4 / Java 21) ecosystems</b>.<br/>
-  Creator of the <b>Aqua Ecosystem</b> — enterprise-grade server tooling, anti-cheat telemetry, and clientless web minimaps.
+<p align="left">
+  <img src="https://github-readme-stats.vercel.app/api?username=efekkoc&show_icons=true&theme=tokyonight&hide_border=true&count_private=true" alt="Efekan's GitHub Stats" height="160" />
+  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=efekkoc&layout=compact&theme=tokyonight&hide_border=true" alt="Top Languages" height="160" />
 </p>
 
 ---
 
-</div>
+### 📫 Get in touch
 
-## 🚀 Featured Flagship Projects
-
-<table>
-  <tr>
-    <td width="50%">
-      <h3 align="center">⚡ AquaForge</h3>
-      <p align="center">Next-Gen Minecraft Server Orchestrator, Plugin Diagnostic Studio & Live Marketplace.</p>
-      <div align="center">
-        <a href="https://github.com/efekkoc/aquaforge">
-          <img src="https://raw.githubusercontent.com/efekkoc/aquaforge/main/docs/screenshots/aquaforge_dashboard.png" width="100%" style="border-radius: 8px;" alt="AquaForge" />
-        </a>
-      </div>
-      <p align="center">
-        <code>React 18</code> • <code>TypeScript</code> • <code>Node.js</code> • <code>PaperMC</code> • <code>WebSockets</code>
-      </p>
-    </td>
-    <td width="50%">
-      <h3 align="center">🗺️ AquaMap</h3>
-      <p align="center">Clientless 60 FPS live canvas world radar, player tracking & waypoint navigation for Paper 1.21.4.</p>
-      <div align="center">
-        <a href="https://github.com/efekkoc/AquaMap">
-          <img src="https://raw.githubusercontent.com/efekkoc/aquaforge/main/docs/screenshots/aquamap_radar.png" width="100%" style="border-radius: 8px;" alt="AquaMap" />
-        </a>
-      </div>
-      <p align="center">
-        <code>Java 21</code> • <code>Paper API</code> • <code>HTML5 Canvas</code> • <code>Real-Time Telemetry</code>
-      </p>
-    </td>
-  </tr>
-  <tr>
-    <td width="50%">
-      <h3 align="center">🛡️ AquaSecurity</h3>
-      <p align="center">Enterprise 2FA & Admin Session Guard with standard RFC 6238 TOTP (Google Authenticator) and total server lockdown.</p>
-      <p align="center">
-        <code>Java 21</code> • <code>Paper 1.21.4</code> • <code>TOTP / SHA-1</code> • <code>Zero-Trust</code>
-      </p>
-    </td>
-    <td width="50%">
-      <h3 align="center">🔮 AquaRunes</h3>
-      <p align="center">Modern 1.21.4 Data Components Runic Matrix. Drag & drop socketing for 6 legendary runes with custom particle auras.</p>
-      <p align="center">
-        <code>Java 21</code> • <code>Data Components</code> • <code>PDC</code> • <code>Combat Engine</code>
-      </p>
-    </td>
-  </tr>
-  <tr>
-    <td width="50%">
-      <h3 align="center">🐕 AquaWatchdog</h3>
-      <p align="center">Lightweight packet & raycast reach anti-cheat telemetry with async Discord/AquaForge webhook triage.</p>
-      <p align="center">
-        <code>Java 21</code> • <code>Vector Math</code> • <code>Sliding CPS</code> • <code>Discord Webhooks</code>
-      </p>
-    </td>
-    <td width="50%">
-      <h3 align="center">🎣 AquaFishing</h3>
-      <p align="center">Advanced RPG fishing plugin featuring 40 custom fish species, interactive reeling mini-games, and custom bossbars.</p>
-      <p align="center">
-        <code>Java 21</code> • <code>PaperMC</code> • <code>ResourcePack CDN</code> • <code>BossBar API</code>
-      </p>
-    </td>
-  </tr>
-</table>
-
----
-
-## 🛠️ Tech Stack & Engineering Tools
-
-<div align="center">
-
-| Domain | Technologies & Frameworks |
-|---|---|
-| **Core Languages** | `Java 21 LTS`, `TypeScript`, `JavaScript (ESNext)`, `SQL`, `Bash / Shell` |
-| **Game Engines & APIs** | `PaperMC 1.21.4`, `Purpur`, `Spigot API`, `PersistentDataContainer (PDC)`, `Data Components` |
-| **Frontend & UI** | `React 18`, `Vite`, `Tailwind CSS 3.4`, `HTML5 Canvas 60 FPS`, `Lucide Icons` |
-| **Backend & Real-Time** | `Node.js`, `Express`, `Native WebSockets`, `Chokidar (File Watching Daemon)` |
-| **Build & DevOps** | `Maven`, `Gradle`, `Docker`, `Git / GitHub Actions`, `Linux Server Administration` |
-
-</div>
-
----
-
-## 📊 GitHub Analytics
-
-<div align="center">
-  <img src="https://github-readme-stats.vercel.app/api?username=efekkoc&show_icons=true&theme=tokyonight&hide_border=true&count_private=true" alt="efekkoc GitHub Stats" height="160" />
-  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=efekkoc&layout=compact&theme=tokyonight&hide_border=true" alt="Top Languages" height="160" />
-</div>
-
----
-
-<div align="center">
-  <sub>Built with precision and care by <b>Turgut Efekan Koç</b> • 2026</sub>
-</div>
+- 💼 **LinkedIn:** [Turgut Efekan Koç](https://www.linkedin.com/in/turgut-efekan-ko%C3%A7-3305362b3/)
+- ✉️ **Email:** efekkoc@gmail.com
+- 🌐 **GitHub:** [@efekkoc](https://github.com/efekkoc)
