@@ -11,10 +11,40 @@ export class MarketplaceService {
   }
 
   /**
-   * Fetches the latest releases for efekkoc's Minecraft repositories.
+   * Fetches repositories for any GitHub username.
    */
-  public async getGitHubReleases(repoName: string): Promise<GitHubRepoRelease[]> {
-    const url = `https://api.github.com/repos/efekkoc/${repoName}/releases`;
+  public async getUserRepositories(username: string): Promise<any[]> {
+    const url = `https://api.github.com/users/${encodeURIComponent(username)}/repos?sort=updated&per_page=15`;
+    try {
+      const response = await axios.get(url, {
+        headers: { 'User-Agent': 'AquaForge-Minecraft-Suite' },
+        timeout: 4000
+      });
+      return response.data.map((r: any) => ({
+        name: r.name,
+        fullName: r.full_name,
+        description: r.description,
+        htmlUrl: r.html_url,
+        stars: r.stargazers_count,
+        language: r.language,
+        updatedAt: r.updated_at
+      }));
+    } catch (err) {
+      if (username.toLowerCase() === 'efekkoc') {
+        return [
+          { name: 'AquaFishing', fullName: 'efekkoc/AquaFishing', description: 'Advanced Paper 1.21 RPG Fishing Plugin', stars: 12, language: 'Java' },
+          { name: 'AquaMap', fullName: 'efekkoc/AquaMap', description: 'Paper 1.21 Clientless Minimap & Radar', stars: 8, language: 'Java' }
+        ];
+      }
+      return [];
+    }
+  }
+
+  /**
+   * Fetches releases for any GitHub repo.
+   */
+  public async getGitHubReleases(repoName: string, owner: string = 'efekkoc'): Promise<GitHubRepoRelease[]> {
+    const url = `https://api.github.com/repos/${encodeURIComponent(owner)}/${encodeURIComponent(repoName)}/releases`;
     try {
       const response = await axios.get(url, {
         headers: { 'User-Agent': 'AquaForge-Minecraft-Suite' },
@@ -24,7 +54,7 @@ export class MarketplaceService {
       return response.data.map((r: any) => {
         const jarAsset = r.assets?.find((a: any) => a.name.endsWith('.jar'));
         return {
-          repoName,
+          repoName: `${owner}/${repoName}`,
           releaseTag: r.tag_name,
           publishedAt: r.published_at,
           body: r.body || 'No release notes provided.',
@@ -41,13 +71,13 @@ export class MarketplaceService {
       // Fallback with mock releases if GitHub API rate-limited or offline
       return [
         {
-          repoName,
-          releaseTag: repoName === 'AquaFishing' ? 'v1.2.4-RELEASE' : 'v1.1.0-RELEASE',
+          repoName: `${owner}/${repoName}`,
+          releaseTag: 'v1.0.0-RELEASE',
           publishedAt: new Date(Date.now() - 1000 * 60 * 60 * 24 * 3).toISOString(),
-          body: `✨ Paper 1.21.x compatibility update, custom sound effects, performance optimizations, and bug fixes for ${repoName}.`,
+          body: `Paper compatibility update and bug fixes for ${repoName}.`,
           jarAsset: {
-            name: `${repoName}-1.2.4.jar`,
-            downloadUrl: `https://github.com/efekkoc/${repoName}/releases/download/v1.2.4/${repoName}-1.2.4.jar`,
+            name: `${repoName}-1.0.0.jar`,
+            downloadUrl: `https://github.com/${owner}/${repoName}/releases/download/v1.0.0/${repoName}-1.0.0.jar`,
             size: 2450000
           }
         }

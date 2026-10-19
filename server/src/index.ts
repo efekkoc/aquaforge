@@ -166,8 +166,18 @@ app.post('/api/plugins/upload', upload.single('file'), (req, res) => {
 });
 
 // 4. Marketplace & GitHub Integration
+app.get('/api/marketplace/github-user/:username', async (req, res) => {
+  const repos = await marketplaceService.getUserRepositories(req.params.username);
+  res.json({ repos });
+});
+
+app.get('/api/marketplace/github-releases/:owner/:repo', async (req, res) => {
+  const releases = await marketplaceService.getGitHubReleases(req.params.repo, req.params.owner);
+  res.json({ releases });
+});
+
 app.get('/api/marketplace/github-releases/:repo', async (req, res) => {
-  const releases = await marketplaceService.getGitHubReleases(req.params.repo);
+  const releases = await marketplaceService.getGitHubReleases(req.params.repo, 'efekkoc');
   res.json({ releases });
 });
 

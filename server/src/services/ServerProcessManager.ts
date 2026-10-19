@@ -34,12 +34,12 @@ export class ServerProcessManager {
     };
 
     this.metrics = {
-      tps: 20.0,
-      mspt: 11.2,
-      memoryUsedMB: 1240,
+      tps: 0.0,
+      mspt: 0.0,
+      memoryUsedMB: 0,
       memoryMaxMB: 4096,
-      cpuPercent: 4.8,
-      onlinePlayers: 3,
+      cpuPercent: 0.0,
+      onlinePlayers: 0,
       maxPlayers: 50,
       uptimeSeconds: 0
     };
@@ -307,8 +307,22 @@ export class ServerProcessManager {
     }
   }
 
+  private resetMetrics() {
+    this.metrics.tps = 0.0;
+    this.metrics.mspt = 0.0;
+    this.metrics.cpuPercent = 0.0;
+    this.metrics.memoryUsedMB = 0;
+    this.metrics.onlinePlayers = 0;
+    if (this.onMetricsCallback) {
+      this.onMetricsCallback(this.metrics);
+    }
+  }
+
   private setStatus(newStatus: ServerStatus) {
     this.status = newStatus;
+    if (newStatus === 'OFFLINE' || newStatus === 'CRASHED') {
+      this.resetMetrics();
+    }
     if (this.onStatusChangeCallback) {
       this.onStatusChangeCallback(newStatus);
     }
