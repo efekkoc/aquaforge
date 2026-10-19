@@ -35,9 +35,9 @@ export const App: React.FC = () => {
   const [toast, setToast] = useState<{ msg: string; type: 'success' | 'warn' | 'error' } | null>(null);
 
   // Background Media Customizer
-  const [bgMediaUrl, setBgMediaUrl] = useState<string>('/background.jpg');
-  const [bgType, setBgType] = useState<'none' | 'image' | 'video'>('image');
-  const [bgOpacity, setBgOpacity] = useState<number>(30);
+  const [bgMediaUrl, setBgMediaUrl] = useState<string>('/background.mp4');
+  const [bgType, setBgType] = useState<'none' | 'image' | 'video'>('video');
+  const [bgOpacity, setBgOpacity] = useState<number>(45);
 
   // Diagnostics state
   const [expandedReportId, setExpandedReportId] = useState<string | null>('demo-diagnostic-1');
