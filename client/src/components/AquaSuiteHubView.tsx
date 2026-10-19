@@ -9,7 +9,7 @@ import {
 export interface SuitePlugin {
   id: string;
   name: string;
-  category: 'Security & Auth' | 'Economy' | 'Combat & RPG' | 'Anti-Cheat' | 'Utility & Radar' | 'Moderation' | 'Loot & Rewards' | 'MMO Arena' | 'Chat & Social' | 'World Protection' | 'Progression' | 'Teleport & Spawn' | 'Enchantments' | 'Interface & Tab' | 'Ranks & Perms' | 'PvP Combat';
+  category: 'Security & Auth' | 'Economy' | 'Combat & RPG' | 'Anti-Cheat' | 'Utility & Radar' | 'Moderation' | 'Loot & Rewards' | 'MMO Arena' | 'Chat & Social' | 'World Protection' | 'Progression' | 'Teleport & Spawn' | 'Enchantments' | 'Interface & Tab' | 'Ranks & Perms' | 'PvP Combat' | 'Monetization & VIP';
   icon: any;
   color: string;
   version: string;
@@ -282,6 +282,17 @@ export const ALL_AQUA_PLUGINS: SuitePlugin[] = [
     description: 'Enterprise automated survival events, 1.21 Display wilderness supply drops & chat trivia engine.',
     githubUrl: 'https://github.com/efekkoc/AquaEvents',
     features: ['1.21 Display Entity parachuting supply crates with beacon flares', 'Server-wide boosters: Mining Rush (2x Ores), Double XP, Blood Moon', 'Chat reaction & trivia quizzes with instant cash prizes', 'Automatic 45-minute rotating survival event scheduler']
+  },
+  {
+    id: 'aquavip',
+    name: 'AquaVIP',
+    category: 'Monetization & VIP',
+    icon: Crown,
+    color: 'from-yellow-400 to-amber-600',
+    version: '1.20.x – 1.21.11 (Universal)',
+    description: 'Enterprise server monetization, web-store delivery sync, timed subscriptions, and donor perks suite.',
+    githubUrl: 'https://github.com/efekkoc/AquaVIP',
+    features: ['Web-store console sync (/givevip <player> <tier> <duration>)', 'Full server priority join bypass', 'Donor perk suite (/fly, /feed, /heal, /craft, /anvil, /ec, /hat, /near)', 'Auto-expiring subscriptions with persistent storage & alerts']
   }
 ];
 
@@ -289,10 +300,10 @@ export const PRESET_BUNDLES = [
   {
     id: 'ultimate',
     name: '🌟 Ultimate Complete Suite',
-    badge: 'ALL-IN-ONE (24 PLUGINS)',
-    description: 'Deploy all 24 Aqua flagship plugins simultaneously. 100% self-sufficient server network covering automated events, authentication, towns, survival graves, security, economy, combat, claims, chat, pass, skills, market, warps, enchants, scoreboard, ranks, and radar.',
+    badge: 'ALL-IN-ONE (25 PLUGINS)',
+    description: 'Deploy all 25 Aqua flagship plugins simultaneously. 100% self-sufficient server network covering automated events, donor VIP monetization, authentication, towns, survival graves, security, economy, combat, claims, chat, pass, skills, market, warps, enchants, scoreboard, ranks, and radar.',
     pluginIds: [
-      'aquaevents', 'aquaauth', 'aquamap', 'aquasecurity', 'aquarunes', 'aquawatchdog', 'aquaeconomy', 
+      'aquavip', 'aquaevents', 'aquaauth', 'aquamap', 'aquasecurity', 'aquarunes', 'aquawatchdog', 'aquaeconomy', 
       'aquacrates', 'aquastaff', 'aquadungeons', 'aquaclaims', 'aquaskills', 
       'aquachat', 'aquapass', 'aquafishing', 'aquamarket', 'aquawarps', 
       'aquabounties', 'aquaenchants', 'aquascoreboard', 'aquaranks', 'aquacombat',
@@ -304,9 +315,9 @@ export const PRESET_BUNDLES = [
     id: 'survival_smp',
     name: '⚔️ Complete Survival, SMP & Nations Package',
     badge: 'SURVIVAL PACKAGE',
-    description: 'The turnkey bundle for survival & SMP servers: survival events, airdrops, login authentication, 3D Display graves, sleep vote, silk spawners, elevators, nations/towns, claims, chat, economy, market, warps, enchants, ranks, scoreboard, and combat log prevention.',
+    description: 'The turnkey bundle for survival & SMP servers: donor VIP monetization, survival events, airdrops, login authentication, 3D Display graves, sleep vote, silk spawners, elevators, nations/towns, claims, chat, economy, market, warps, enchants, ranks, scoreboard, and combat log prevention.',
     pluginIds: [
-      'aquaevents', 'aquaauth', 'aquasurvival', 'aquanations', 'aquamap', 'aquaclaims', 'aquachat', 'aquaeconomy', 'aquamarket', 
+      'aquavip', 'aquaevents', 'aquaauth', 'aquasurvival', 'aquanations', 'aquamap', 'aquaclaims', 'aquachat', 'aquaeconomy', 'aquamarket', 
       'aquawarps', 'aquaskills', 'aquapass', 'aquaenchants', 'aquascoreboard', 
       'aquaranks', 'aquacombat', 'aquabounties', 'aquacrates'
     ],
