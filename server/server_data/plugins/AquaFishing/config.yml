@@ -1,0 +1,25 @@
+# AquaFishing 1.21+ Configuration
+# Created by efekkoc
+
+settings:
+  language: "tr_TR"
+  debug-mode: false
+  bossbar-mini-game: true
+  enable-particles: true
+
+fishing:
+  reeling-difficulty: "NORMAL"
+  reeling-time-seconds: 8
+  drop-multiplier: 1.0
+
+fishes:
+  golden_koi:
+    display-name: "&6Altın Koi"
+    custom-model-data: 1001
+    chance: 0.05
+    price: 250.0
+  deep_sea_angler:
+    display-name: "&bDerin Deniz Fenerbalığı"
+    custom-model-data: 1002
+    chance: 0.02
+    price: 600.0
