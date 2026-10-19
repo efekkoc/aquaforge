@@ -10,3 +10,4 @@ server_data/world_nether
 server_data/world_the_end
 server_data/cache
 server_data/*.backup
+*.tsbuildinfo

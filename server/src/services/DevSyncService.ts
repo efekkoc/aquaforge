@@ -1,10 +1,10 @@
-import chokidar from 'chokidar';
+import chokidar, { FSWatcher } from 'chokidar';
 import fs from 'fs';
 import path from 'path';
 import { DevSyncWatcher } from '../types.js';
 
 export class DevSyncService {
-  private watchers: Map<string, { config: DevSyncWatcher; watcher: chokidar.FSWatcher }> = new Map();
+  private watchers: Map<string, { config: DevSyncWatcher; watcher: FSWatcher }> = new Map();
   private pluginsDir: string;
   private onSyncCallback?: (watcher: DevSyncWatcher, fileName: string) => void;
 

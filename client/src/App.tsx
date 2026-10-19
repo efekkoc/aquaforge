@@ -5,7 +5,7 @@ import {
   Sparkles, AlertTriangle, ArrowUpRight, CheckCircle2, ChevronRight,
   Sliders, UserCheck, AlertOctagon, Download, Code2, Copy, Check, Power, Trash2, Wand2,
   Image as ImageIcon, Video, Github, Search, Plus, FolderSearch, ArrowRight, Save,
-  HelpCircle, ExternalLink, X, ChevronDown, UserX, Crown, Megaphone, Bell
+  HelpCircle, ExternalLink, X, ChevronDown, UserX, Crown, Megaphone, Bell, Upload
 } from 'lucide-react';
 import { ansiToHtml } from './utils/ansi';
 import { ServerStatus, ServerMetrics, DiagnosticReport, PluginMeta, DevSyncWatcher, ResourcePackItem } from './types';
@@ -74,13 +74,15 @@ export const App: React.FC = () => {
 
   // Helper to format file sizes accurately
   const formatFileSize = (bytes: number) => {
-    if (!bytes || bytes <= 0) return '1.50 MB';
-    if (bytes < 1024 * 1024) return `${Math.round(bytes / 1024)} KB`;
+    if (bytes === undefined || bytes === null || isNaN(bytes)) return '0 KB';
+    if (bytes === 0) return '0 B';
+    if (bytes < 1024) return `${bytes} B`;
+    if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(1)} KB`;
     return `${(bytes / (1024 * 1024)).toFixed(2)} MB`;
   };
 
-  // Dynamic GitHub Repos Sync state
-  const [githubUser, setGithubUser] = useState('efekkoc');
+  // Dynamic GitHub Repos Sync state (Neutral: global user can search any profile)
+  const [githubUser, setGithubUser] = useState('');
   const [userRepos, setUserRepos] = useState<any[]>([]);
   const [loadingRepos, setLoadingRepos] = useState(false);
   const [installingRepo, setInstallingRepo] = useState<string | null>(null);
@@ -121,8 +123,6 @@ export const App: React.FC = () => {
       .then(r => r.json())
       .then(d => setConfigContent(d.content || ''))
       .catch(() => {});
-
-    fetchGithubUserRepos('efekkoc');
   };
 
   const fetchGithubUserRepos = (username: string) => {
@@ -216,6 +216,27 @@ export const App: React.FC = () => {
       .then(() => fetch('/api/plugins').then(r => r.json()).then(d => setPlugins(d.plugins || [])));
   };
 
+  const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    const formData = new FormData();
+    formData.append('file', file);
+    fetch('/api/plugins/upload', {
+      method: 'POST',
+      body: formData,
+    })
+      .then(r => r.json())
+      .then(d => {
+        if (d.success) {
+          showToast(`Plugin ${file.name} uploaded successfully!`, 'success');
+          fetch('/api/plugins').then(r => r.json()).then(p => setPlugins(p.plugins || []));
+        } else {
+          showToast('Failed to upload plugin', 'error');
+        }
+      })
+      .catch(() => showToast('Error uploading plugin', 'error'));
+  };
+
   const handleDeployGithubRelease = (repoName: string) => {
     setInstallingRepo(repoName);
     fetch(`/api/marketplace/github-releases/${repoName}`)
@@ -299,15 +320,15 @@ export const App: React.FC = () => {
         )}
 
         {/* ================= TOP NAVIGATION HUD ================= */}
-        <header className="h-20 px-6 bg-[#0a0f18]/95 backdrop-blur-xl border-b border-[#182336] flex items-center justify-between sticky top-0 z-30 shadow-lg">
-          <div className="flex items-center gap-5">
+        <header className="h-24 px-6 bg-[#0a0f18]/95 backdrop-blur-xl border-b border-[#182336] flex items-center justify-between sticky top-0 z-30 shadow-2xl">
+          <div className="flex items-center gap-6">
             
             {/* BIG PROMINENT LOGO & BRANDING */}
-            <div className="flex items-center gap-3.5">
-              <div className="relative w-14 h-14 rounded-2xl overflow-hidden shadow-[0_0_30px_rgba(6,182,212,0.6)] border-2 border-cyan-400/60 bg-gradient-to-br from-cyan-950 via-slate-900 to-black flex items-center justify-center flex-shrink-0 group hover:scale-105 transition-transform duration-300">
+            <div className="flex items-center gap-4">
+              <div className="relative w-20 h-20 rounded-2xl overflow-hidden shadow-[0_0_35px_rgba(6,182,212,0.7)] border-2 border-cyan-400/80 bg-gradient-to-br from-cyan-950 via-slate-900 to-black flex items-center justify-center flex-shrink-0 group hover:scale-105 transition-transform duration-300">
                 <img 
                   src="/logo.png" 
-                  alt="AquaForge" 
+                  alt="AquaForge Universal Logo" 
                   onError={(e) => {
                     e.currentTarget.style.display = 'none';
                     const parent = e.currentTarget.parentElement;
@@ -320,13 +341,13 @@ export const App: React.FC = () => {
                 />
                 {/* SVG Fallback */}
                 <div id="aquaforge-svg-fallback" className="hidden w-full h-full items-center justify-center text-cyan-400 bg-cyan-950">
-                  <Server className="w-8 h-8 animate-pulse" />
+                  <Server className="w-10 h-10 animate-pulse" />
                 </div>
               </div>
 
               <div>
-                <div className="flex items-center gap-2.5">
-                  <span className="font-black text-xl tracking-wider bg-gradient-to-r from-cyan-300 via-teal-200 to-white bg-clip-text text-transparent drop-shadow-[0_2px_10px_rgba(6,182,212,0.4)]">
+                <div className="flex items-center gap-3">
+                  <span className="font-black text-2xl tracking-widest bg-gradient-to-r from-cyan-300 via-teal-200 to-white bg-clip-text text-transparent drop-shadow-[0_2px_12px_rgba(6,182,212,0.6)]">
                     AQUAFORGE
                   </span>
 
@@ -338,18 +359,23 @@ export const App: React.FC = () => {
                         setMcVersion(e.target.value);
                         showToast(`Switched active profile to ${e.target.value}`, 'success');
                       }}
-                      className="text-[11px] font-mono font-bold px-2.5 py-1 rounded-lg bg-cyan-950/90 text-cyan-300 border border-cyan-500/50 focus:outline-none cursor-pointer pr-6 appearance-none shadow-sm hover:border-cyan-400 transition-colors"
+                      className="text-xs font-mono font-bold px-3 py-1 rounded-lg bg-cyan-950/90 text-cyan-300 border border-cyan-500/60 focus:outline-none cursor-pointer pr-7 appearance-none shadow-sm hover:border-cyan-400 transition-colors"
                     >
                       {availableVersions.map(v => (
                         <option key={v} value={v} className="bg-slate-900 text-slate-200">{v}</option>
                       ))}
                     </select>
-                    <ChevronDown className="w-3 h-3 text-cyan-400 absolute right-1.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+                    <ChevronDown className="w-3.5 h-3.5 text-cyan-400 absolute right-2 top-1/2 -translate-y-1/2 pointer-events-none" />
                   </div>
                 </div>
-                <p className="text-[10px] font-mono text-slate-400">
-                  Created by <span className="text-cyan-300 font-bold">Turgut Efekan Koç (efekkoc)</span>
-                </p>
+                <div className="flex items-center gap-2 mt-0.5">
+                  <span className="text-[10px] font-mono uppercase tracking-wider text-cyan-400/90 font-bold bg-cyan-950/70 px-2 py-0.5 rounded border border-cyan-800/40">
+                    Enterprise Studio
+                  </span>
+                  <span className="text-[11px] font-mono text-slate-400">
+                    Created by <span className="text-cyan-300 font-bold">Turgut Efekan Koç (efekkoc)</span>
+                  </span>
+                </div>
               </div>
             </div>
 
@@ -1484,64 +1510,91 @@ export const App: React.FC = () => {
                 </div>
 
                 {/* Installed Plugins Grid */}
-                <h4 className="text-sm font-bold text-slate-200 pt-2">Currently Installed in server/plugins/ ({plugins.length})</h4>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                  {plugins.map((plugin) => (
-                    <div 
-                      key={plugin.fileName}
-                      className={`p-5 rounded-2xl border transition-all flex flex-col justify-between ${
-                        plugin.enabled ? 'bg-[#0d1424] border-slate-800' : 'bg-slate-950/50 border-slate-900 opacity-60'
-                      }`}
-                    >
-                      <div className="space-y-2.5">
-                        <div className="flex items-start justify-between">
-                          <div>
-                            <h4 className="text-sm font-bold text-white flex items-center gap-1.5">
-                              {plugin.name}
-                              {plugin.name.includes('Aqua') && (
-                                <span className="p-0.5 rounded bg-cyan-950 text-cyan-400" title="Created by efekkoc">
-                                  <Sparkles className="w-3 h-3" />
-                                </span>
-                              )}
-                            </h4>
-                            <span className="text-[10px] font-mono text-slate-400">v{plugin.version} • API {plugin.apiVersion}</span>
-                          </div>
-                          <span className={`text-[10px] font-mono px-2 py-0.5 rounded font-bold ${
-                            plugin.enabled ? 'bg-emerald-950 text-emerald-400 border border-emerald-800' : 'bg-slate-800 text-slate-500'
-                          }`}>
-                            {plugin.enabled ? 'ACTIVE' : 'DISABLED'}
-                          </span>
-                        </div>
-                        <p className="text-xs text-slate-400 line-clamp-2 leading-relaxed">{plugin.description}</p>
-                      </div>
-
-                      <div className="pt-3 mt-3 border-t border-slate-800/80 flex items-center justify-between">
-                        <span className="text-[10px] font-mono font-semibold text-cyan-400 bg-cyan-950/40 px-2 py-0.5 rounded border border-cyan-800/50">
-                          {formatFileSize(plugin.fileSizeBytes)}
-                        </span>
-                        <div className="flex gap-2">
-                          <button
-                            onClick={() => handleTogglePlugin(plugin.fileName)}
-                            className="p-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 cursor-pointer"
-                            title="Toggle Enable / Disable"
-                          >
-                            <Power className="w-3.5 h-3.5" />
-                          </button>
-                          <button
-                            onClick={() => {
-                              fetch(`/api/plugins/${plugin.fileName}`, { method: 'DELETE' })
-                                .then(() => fetch('/api/plugins').then(r => r.json()).then(d => setPlugins(d.plugins || [])));
-                            }}
-                            className="p-1.5 rounded-lg bg-red-950/40 hover:bg-red-900/60 text-red-400 cursor-pointer"
-                            title="Delete Plugin"
-                          >
-                            <Trash2 className="w-3.5 h-3.5" />
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  ))}
+                <div className="flex items-center justify-between pt-2">
+                  <h4 className="text-sm font-bold text-slate-200">
+                    Currently Installed in server/plugins/ ({plugins.length})
+                  </h4>
+                  <span className="text-[11px] font-mono text-slate-400">
+                    Exact Disk Size Auto-Calculated
+                  </span>
                 </div>
+
+                {plugins.length === 0 ? (
+                  <div className="p-8 rounded-2xl border-2 border-dashed border-slate-800 bg-[#0d1424]/60 flex flex-col items-center justify-center text-center space-y-4 shadow-inner">
+                    <div className="p-4 rounded-2xl bg-cyan-950/60 border border-cyan-800/40 text-cyan-400">
+                      <Box className="w-8 h-8" />
+                    </div>
+                    <div className="space-y-1">
+                      <h5 className="text-base font-bold text-white">No Plugins Installed</h5>
+                      <p className="text-xs text-slate-400 max-w-md mx-auto">
+                        Your server plugins directory is completely clean. AquaForge will not inject dummy or unrequested jars. Upload your custom plugin jar or discover plugins via GitHub/Modrinth.
+                      </p>
+                    </div>
+                    <label className="flex items-center gap-2 px-4 py-2.5 bg-gradient-to-r from-cyan-600 to-teal-600 hover:from-cyan-500 hover:to-teal-500 text-white font-bold text-xs rounded-xl cursor-pointer shadow-lg transition-all">
+                      <Upload className="w-4 h-4" />
+                      Upload Plugin (.jar)
+                      <input type="file" accept=".jar" onChange={handleFileUpload} className="hidden" />
+                    </label>
+                  </div>
+                ) : (
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    {plugins.map((plugin) => (
+                      <div 
+                        key={plugin.fileName}
+                        className={`p-5 rounded-2xl border transition-all flex flex-col justify-between ${
+                          plugin.enabled ? 'bg-[#0d1424] border-slate-800' : 'bg-slate-950/50 border-slate-900 opacity-60'
+                        }`}
+                      >
+                        <div className="space-y-2.5">
+                          <div className="flex items-start justify-between">
+                            <div>
+                              <h4 className="text-sm font-bold text-white flex items-center gap-1.5">
+                                {plugin.name}
+                                {plugin.name.includes('Aqua') && (
+                                  <span className="p-0.5 rounded bg-cyan-950 text-cyan-400" title="Created by efekkoc">
+                                    <Sparkles className="w-3 h-3" />
+                                  </span>
+                                )}
+                              </h4>
+                              <span className="text-[10px] font-mono text-slate-400">v{plugin.version} • API {plugin.apiVersion}</span>
+                            </div>
+                            <span className={`text-[10px] font-mono px-2 py-0.5 rounded font-bold ${
+                              plugin.enabled ? 'bg-emerald-950 text-emerald-400 border border-emerald-800' : 'bg-slate-800 text-slate-500'
+                            }`}>
+                              {plugin.enabled ? 'ACTIVE' : 'DISABLED'}
+                            </span>
+                          </div>
+                          <p className="text-xs text-slate-400 line-clamp-2 leading-relaxed">{plugin.description}</p>
+                        </div>
+
+                        <div className="pt-3 mt-3 border-t border-slate-800/80 flex items-center justify-between">
+                          <span className="text-[10px] font-mono font-semibold text-cyan-400 bg-cyan-950/40 px-2 py-0.5 rounded border border-cyan-800/50">
+                            {formatFileSize(plugin.fileSizeBytes)}
+                          </span>
+                          <div className="flex gap-2">
+                            <button
+                              onClick={() => handleTogglePlugin(plugin.fileName)}
+                              className="p-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 cursor-pointer"
+                              title="Toggle Enable / Disable"
+                            >
+                              <Power className="w-3.5 h-3.5" />
+                            </button>
+                            <button
+                              onClick={() => {
+                                fetch(`/api/plugins/${plugin.fileName}`, { method: 'DELETE' })
+                                  .then(() => fetch('/api/plugins').then(r => r.json()).then(d => setPlugins(d.plugins || [])));
+                              }}
+                              className="p-1.5 rounded-lg bg-red-950/40 hover:bg-red-900/60 text-red-400 cursor-pointer"
+                              title="Delete Plugin"
+                            >
+                              <Trash2 className="w-3.5 h-3.5" />
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
               </div>
             )}
 

@@ -10,7 +10,6 @@ export class PluginManager {
   constructor(pluginsDir: string) {
     this.pluginsDir = pluginsDir;
     this.ensureDirectory();
-    this.seedSamplePlugins();
   }
 
   private ensureDirectory() {
@@ -49,33 +48,21 @@ export class PluginManager {
         };
       }
 
-      let displaySize = stats.size;
-      if (displaySize < 50000) {
-        // Sample/mock files: provide realistic Paper plugin byte sizes
-        const lowerName = file.toLowerCase();
-        if (lowerName.includes('aquafishing')) displaySize = 2540000; // 2.42 MB
-        else if (lowerName.includes('aquamap')) displaySize = 1940000; // 1.85 MB
-        else if (lowerName.includes('luckperms')) displaySize = 5010000; // 4.78 MB
-        else if (lowerName.includes('spark')) displaySize = 3300000; // 3.15 MB
-        else if (lowerName.includes('vault')) displaySize = 635000; // 620 KB
-        else displaySize = 1570000; // 1.5 MB default
-      }
-
       plugins.push({
         fileName: file,
         name: meta.name || file.replace(/\.jar(\.disabled)?$/, ''),
         version: meta.version || '1.0.0',
         mainClass: meta.mainClass,
         apiVersion: meta.apiVersion || '1.16 - 1.21.x',
-        authors: meta.authors || ['efekkoc'],
-        description: meta.description || 'Minecraft Paper/Spigot Plugin',
+        authors: meta.authors || [],
+        description: meta.description || 'Minecraft Plugin Archive',
         website: meta.website,
         depends: meta.depends || [],
         softDepends: meta.softDepends || [],
         enabled: isEnabled,
-        fileSizeBytes: displaySize,
+        fileSizeBytes: stats.size, // Exact real size measured dynamically from disk
         modifiedAt: stats.mtime.toISOString(),
-        source: meta.name?.toLowerCase().includes('aqua') ? 'GITHUB' : 'LOCAL'
+        source: 'LOCAL'
       });
     }
 
