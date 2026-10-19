@@ -1,0 +1,12 @@
+node_modules
+dist
+.DS_Store
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+server_data/world
+server_data/world_nether
+server_data/world_the_end
+server_data/cache
+server_data/*.backup

@@ -1,0 +1,33 @@
+{
+  "name": "aquaforge",
+  "version": "1.0.0",
+  "description": "Next-Gen Minecraft Server Orchestrator, Plugin Diagnostic Engine & Marketplace Hub",
+  "main": "server/dist/index.js",
+  "scripts": {
+    "dev:server": "cd server && npm run dev",
+    "dev:client": "cd client && npm run dev",
+    "dev": "concurrently -k -n \"SERVER,CLIENT\" -c \"cyan,magenta\" \"npm run dev:server\" \"npm run dev:client\"",
+    "build": "npm run build:server && npm run build:client",
+    "build:server": "cd server && npm run build",
+    "build:client": "cd client && npm run build",
+    "start": "cd server && npm start"
+  },
+  "keywords": [
+    "minecraft",
+    "papermc",
+    "purpur",
+    "spigot",
+    "server-controller",
+    "plugin-manager",
+    "modrinth",
+    "curseforge",
+    "bug-fixer",
+    "diagnostic",
+    "developer-tool"
+  ],
+  "author": "efekkoc",
+  "license": "MIT",
+  "devDependencies": {
+    "concurrently": "^9.1.2"
+  }
+}
