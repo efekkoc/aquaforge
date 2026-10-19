@@ -1,16 +1,16 @@
 <div align="center">
 
 # 👮 AquaStaff
-### Unified Staff Mode, Vanish & Moderation Suite for Paper 1.20.x – 1.21.4
+### Unified Staff Mode, Vanish & Moderation Suite for Paper 1.20.x – 1.21.11
 
 ![Java](https://img.shields.io/badge/Java-21-orange?logo=openjdk)
-![PaperMC](https://img.shields.io/badge/PaperMC-1.20.x--1.21.4-blue?logo=minecraft)
-![Optimized](https://img.shields.io/badge/Optimized-1.21.1%20%7C%201.21.4-teal)
+![PaperMC](https://img.shields.io/badge/PaperMC-1.20.x--1.21.11-blue?logo=minecraft)
+![Optimized](https://img.shields.io/badge/Optimized-1.21.1%20%7C%201.21.4%20%7C%201.21.11-teal)
 ![Moderation](https://img.shields.io/badge/Moderation-StaffMode%20%7C%20Freeze-blueviolet)
 ![License](https://img.shields.io/badge/License-MIT-emerald)
 [![GitHub](https://img.shields.io/badge/Author-efekkoc-cyan?logo=github)](https://github.com/efekkoc)
 
-**AquaStaff** equips server administrators and moderators with a high-speed inspection kit: instant silent vanish, screen freeze lockdown with blindfold, live target inventory viewing, and flight mode.
+**AquaStaff** equips server administrators and moderators with a high-speed inspection kit: instant silent vanish, screen freeze lockdown with blindfold, live target inventory viewing, and flight mode. Universal support across Paper 1.20.x through **1.21.11 (Mounts of Mayhem)**.
 
 ---
 
