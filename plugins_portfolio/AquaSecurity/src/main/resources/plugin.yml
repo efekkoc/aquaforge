@@ -1,0 +1,28 @@
+name: AquaSecurity
+version: '1.0.0'
+main: com.aquaforge.security.AquaSecurity
+api-version: '1.21'
+author: Turgut Efekan Koç (efekkoc)
+website: https://github.com/efekkoc/AquaSecurity
+description: Enterprise 2FA & Admin Session Guard with TOTP Authentication
+
+commands:
+  2fa:
+    description: 2FA Authentication and Security Management
+    permission: aquasecurity.use
+    aliases: [twofactor, otp]
+    usage: /<command> [setup|verify|status|reset]
+
+permissions:
+  aquasecurity.use:
+    description: Allows using /2fa command
+    default: true
+  aquasecurity.require2fa:
+    description: Forces the player to authenticate with 2FA on login
+    default: op
+  aquasecurity.admin:
+    description: Allows resetting other players' 2FA secrets
+    default: op
+  aquasecurity.bypass:
+    description: Bypasses mandatory 2FA enforcement
+    default: false

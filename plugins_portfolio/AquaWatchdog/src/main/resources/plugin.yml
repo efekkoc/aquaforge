@@ -1,0 +1,22 @@
+name: AquaWatchdog
+version: '1.0.0'
+main: com.aquaforge.watchdog.AquaWatchdog
+api-version: '1.21'
+author: Turgut Efekan Koç (efekkoc)
+website: https://github.com/efekkoc/AquaWatchdog
+description: Real-time CPS, Reach & Packet Anomaly Inspector with Webhook Triage
+
+commands:
+  watchdog:
+    description: Master Watchdog anti-cheat and telemetry inspector
+    permission: aquawatchdog.staff
+    aliases: [wd, ac]
+    usage: /<command> [alerts|check|testwebhook|reload]
+
+permissions:
+  aquawatchdog.staff:
+    description: Receive in-game flag notifications and view checks
+    default: op
+  aquawatchdog.bypass:
+    description: Bypass anti-cheat checks
+    default: false

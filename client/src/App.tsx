@@ -111,6 +111,9 @@ export const App: React.FC = () => {
   const [reports, setReports] = useState<DiagnosticReport[]>([]);
   const [plugins, setPlugins] = useState<PluginMeta[]>([]);
   const [commandInput, setCommandInput] = useState('');
+  const [commandHistory, setCommandHistory] = useState<string[]>(['tps', 'spark health', 'list', 'save-all']);
+  const [historyIndex, setHistoryIndex] = useState<number>(-1);
+  const tempCommandRef = useRef<string>('');
   const [toast, setToast] = useState<{ msg: string; type: 'success' | 'warn' | 'error' } | null>(null);
 
   // Background Media Customizer
@@ -251,14 +254,21 @@ export const App: React.FC = () => {
   };
 
   const handleSendCommand = (cmd: string) => {
-    if (!cmd.trim()) return;
+    const trimmed = cmd.trim();
+    if (!trimmed) return;
+    
+    // Update history (prepend or deduplicate)
+    setCommandHistory(prev => [trimmed, ...prev.filter(c => c !== trimmed)].slice(0, 50));
+    setHistoryIndex(-1);
+    tempCommandRef.current = '';
+
     if (wsRef.current && wsRef.current.readyState === WebSocket.OPEN) {
-      wsRef.current.send(JSON.stringify({ type: 'command', data: cmd }));
+      wsRef.current.send(JSON.stringify({ type: 'command', data: trimmed }));
     } else {
       fetch('/api/server/command', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ command: cmd })
+        body: JSON.stringify({ command: trimmed })
       });
     }
     setCommandInput('');
@@ -1128,17 +1138,24 @@ export const App: React.FC = () => {
 
                 {/* Quick Chips & Command Bar */}
                 <div className="p-3 bg-[#0d1424] border-t border-[#182338] space-y-2">
-                  <div className="flex items-center gap-2 text-[11px] font-mono text-slate-400 overflow-x-auto">
-                    <span className="text-slate-500 font-sans">Quick:</span>
-                    {['tps', 'spark tps', 'plugins', 'save-all', 'kill @e[type=item]'].map((c) => (
-                      <button
-                        key={c}
-                        onClick={() => handleSendCommand(c)}
-                        className="px-2 py-0.5 bg-slate-900 hover:bg-slate-800 text-cyan-300 rounded border border-slate-800 transition-all cursor-pointer whitespace-nowrap"
-                      >
-                        /{c}
-                      </button>
-                    ))}
+                  <div className="flex items-center justify-between gap-2 text-[11px] font-mono text-slate-400">
+                    <div className="flex items-center gap-1.5 overflow-x-auto py-0.5">
+                      <span className="text-slate-500 font-sans text-xs">Quick:</span>
+                      {['tps', 'spark health', 'list', 'save-all', 'plugins', 'whitelist on', 'help'].map((c) => (
+                        <button
+                          key={c}
+                          onClick={() => handleSendCommand(c)}
+                          className="px-2 py-0.5 bg-slate-900 hover:bg-slate-800 text-cyan-300 rounded-lg border border-slate-800 hover:border-cyan-500/50 transition-all cursor-pointer whitespace-nowrap active:scale-95"
+                        >
+                          /{c}
+                        </button>
+                      ))}
+                    </div>
+                    <div className="hidden sm:flex items-center gap-1.5 text-[10px] text-slate-500 font-mono whitespace-nowrap">
+                      <kbd className="px-1.5 py-0.5 bg-slate-800/80 rounded border border-slate-700 text-slate-400">↑</kbd>
+                      <kbd className="px-1.5 py-0.5 bg-slate-800/80 rounded border border-slate-700 text-slate-400">↓</kbd>
+                      <span>History</span>
+                    </div>
                   </div>
 
                   <form 
@@ -1154,7 +1171,29 @@ export const App: React.FC = () => {
                         type="text"
                         value={commandInput}
                         onChange={(e) => setCommandInput(e.target.value)}
-                        placeholder="Type a Minecraft server command (e.g. tps, help, gamemode survival)..."
+                        onKeyDown={(e) => {
+                          if (e.key === 'ArrowUp') {
+                            e.preventDefault();
+                            if (commandHistory.length === 0) return;
+                            if (historyIndex === -1) {
+                              tempCommandRef.current = commandInput;
+                            }
+                            const nextIdx = Math.min(historyIndex + 1, commandHistory.length - 1);
+                            setHistoryIndex(nextIdx);
+                            setCommandInput(commandHistory[nextIdx]);
+                          } else if (e.key === 'ArrowDown') {
+                            e.preventDefault();
+                            if (historyIndex > 0) {
+                              const nextIdx = historyIndex - 1;
+                              setHistoryIndex(nextIdx);
+                              setCommandInput(commandHistory[nextIdx]);
+                            } else if (historyIndex === 0) {
+                              setHistoryIndex(-1);
+                              setCommandInput(tempCommandRef.current);
+                            }
+                          }
+                        }}
+                        placeholder="Type a Minecraft command (e.g. tps, help, gamemode survival) • Use ↑ / ↓ for history..."
                         className="flex-1 bg-transparent text-xs font-mono text-slate-200 placeholder-slate-600 focus:outline-none"
                       />
                     </div>

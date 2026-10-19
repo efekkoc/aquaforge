@@ -1,0 +1,45 @@
+# ===================================================================
+#  AquaRunes Configuration
+#  Author: Turgut Efekan Koç (efekkoc) - https://github.com/efekkoc
+# ===================================================================
+
+# Particle and visual ring effects around players holding or wearing runes
+particles:
+  ambient-ring-enabled: true
+  combat-bursts-enabled: true
+
+# Rune attributes & balance
+runes:
+  lifesteal:
+    name: "§c§lRune of the Vampire"
+    lore-tier: "§4§oLegendary Weapon Rune"
+    steal-percentage: 0.25 # Steals 25% of melee damage dealt as HP
+    cooldown-seconds: 1.5
+
+  thunderstrike:
+    name: "§e§lRune of the Tempest"
+    lore-tier: "§6§oMythic Weapon Rune"
+    proc-chance: 0.25 # 25% chance on hit
+    bonus-damage: 4.0
+
+  wind_burst:
+    name: "§b§lRune of the Gale"
+    lore-tier: "§3§oRare Weapon/Boot Rune"
+    dash-velocity: 1.4
+    cooldown-seconds: 5.0
+
+  frozen_blade:
+    name: "§9§lRune of Cryo Stasis"
+    lore-tier: "§1§oAncient Weapon Rune"
+    slowness-duration-seconds: 3.5
+    slowness-amplifier: 2
+
+  phoenix:
+    name: "§6§lRune of the Phoenix"
+    lore-tier: "§e§oDivine Armor Rune"
+    cooldown-minutes: 5.0
+
+  titan:
+    name: "§7§lRune of the Colossus"
+    lore-tier: "§8§oEpic Chestplate Rune"
+    reflect-percentage: 0.20 # Reflects 20% incoming melee damage

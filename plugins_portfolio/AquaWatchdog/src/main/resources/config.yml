@@ -1,0 +1,32 @@
+# ===================================================================
+#  AquaWatchdog Configuration
+#  Author: Turgut Efekan Koç (efekkoc) - https://github.com/efekkoc
+# ===================================================================
+
+# In-Game staff alert notification broadcast
+broadcast-to-staff: true
+
+# Reach Check
+reach:
+  enabled: true
+  max-distance: 3.05 # Minecraft survival raycast max distance (standard 3.0 blocks + latency leeway)
+  cancel-on-flag: true
+
+# CPS (Clicks Per Second) Check
+cps:
+  enabled: true
+  max-cps: 20 # Sustained clicks per second limit
+  flag-threshold: 22
+
+# Webhook Alert Dispatcher
+# Can post directly to AquaForge (/api/discord/alert) or Discord Webhook
+webhook:
+  enabled: true
+  url: "http://localhost:4000/api/discord/alert"
+  alert-on-reach: true
+  alert-on-autoclicker: true
+
+messages:
+  prefix: "§b§lAquaWatchdog §8» "
+  flag-reach: "§c⚠ %player% §7flagged for §eReach §8(§f%distance% blocks§8, §7ping: §f%ping%ms§8)"
+  flag-cps: "§c⚠ %player% §7flagged for §eAutoClicker / Macro §8(§f%cps% CPS§8, §7ping: §f%ping%ms§8)"

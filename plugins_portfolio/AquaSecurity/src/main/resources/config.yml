@@ -1,0 +1,46 @@
+# ===================================================================
+#  AquaSecurity Configuration
+#  Author: Turgut Efekan Koç (efekkoc) - https://github.com/efekkoc
+# ===================================================================
+
+# Force 2FA for all Operators (OP) automatically
+force-op-2fa: true
+
+# Session Caching
+# If true, players will not be asked for 2FA if they reconnect from the exact same IP within the session duration.
+session-caching:
+  enabled: true
+  duration-hours: 24
+
+# Freeze restrictions until authenticated:
+restrictions:
+  prevent-movement: true
+  prevent-chat: true
+  prevent-commands: true
+  prevent-interactions: true
+  prevent-inventory-click: true
+  prevent-damage: true
+  blindness-effect: true
+
+# Time in seconds before unauthenticated player is kicked
+auth-timeout-seconds: 120
+
+# Allowed commands while frozen (without leading slash)
+allowed-commands:
+  - "2fa"
+  - "twofactor"
+  - "otp"
+
+# Webhook Alert on Admin Verification / Failure
+webhook:
+  enabled: false
+  url: "http://localhost:4000/api/security/alert"
+
+messages:
+  prefix: "§3§lAquaSecurity §8» "
+  prompt-verify: "§c⚠ §eThis account is protected by 2FA! Please type: §b/2fa verify <6-digit-code>"
+  prompt-setup: "§6Your account requires 2FA setup. Type §b/2fa setup §6to generate your authenticator secret."
+  verify-success: "§a✔ 2FA verified successfully! Welcome back."
+  verify-failed: "§c✖ Invalid authentication code. Please check your authenticator app."
+  timeout-kick: "§c[AquaSecurity] Authentication timed out. Please reconnect and verify."
+  reset-success: "§a✔ 2FA secret reset for {player}."

@@ -1,0 +1,19 @@
+name: AquaRunes
+version: '1.0.0'
+main: com.aquaforge.runes.AquaRunes
+api-version: '1.21'
+author: Turgut Efekan Koç (efekkoc)
+website: https://github.com/efekkoc/AquaRunes
+description: Modern 1.21.4 Data Components Weapon and Armor Enchant Rune Engine
+
+commands:
+  aquarunes:
+    description: Master rune management command
+    permission: aquarunes.admin
+    aliases: [rune, runes]
+    usage: /<command> [give|list|reload]
+
+permissions:
+  aquarunes.admin:
+    description: Allows granting and configuring legendary runes
+    default: op
