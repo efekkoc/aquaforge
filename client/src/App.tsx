@@ -377,12 +377,12 @@ export const App: React.FC = () => {
         )}
 
         {/* ================= TOP NAVIGATION HUD ================= */}
-        <header className="h-28 px-6 bg-[#0a0f18]/95 backdrop-blur-xl border-b border-[#182336] flex items-center justify-between sticky top-0 z-30 shadow-2xl">
-          <div className="flex items-center gap-6 shrink-0">
+        <header className="h-24 px-4 sm:px-6 bg-[#0a0f18]/95 backdrop-blur-xl border-b border-[#182336] flex items-center justify-between sticky top-0 z-30 shadow-2xl gap-3">
+          <div className="flex items-center gap-3 sm:gap-4 min-w-0">
             
             {/* BIG PROMINENT LOGO & BRANDING */}
-            <div className="flex items-center gap-4">
-              <div className="relative w-24 h-24 rounded-2xl overflow-hidden shadow-[0_0_45px_rgba(6,182,212,0.85)] border-2 border-cyan-400 bg-gradient-to-br from-cyan-950 via-slate-900 to-black flex items-center justify-center flex-shrink-0 group hover:scale-105 transition-transform duration-300">
+            <div className="flex items-center gap-3 sm:gap-3.5 min-w-0">
+              <div className="relative w-16 h-16 sm:w-20 sm:h-20 rounded-2xl overflow-hidden shadow-[0_0_35px_rgba(6,182,212,0.8)] border-2 border-cyan-400 bg-gradient-to-br from-cyan-950 via-slate-900 to-black flex items-center justify-center flex-shrink-0 group hover:scale-105 transition-transform duration-300">
                 <img 
                   src="/logo.png" 
                   alt="AquaForge Universal Logo" 
@@ -398,25 +398,25 @@ export const App: React.FC = () => {
                 />
                 {/* SVG Fallback */}
                 <div id="aquaforge-svg-fallback" className="hidden w-full h-full items-center justify-center text-cyan-400 bg-cyan-950">
-                  <Server className="w-12 h-12 animate-pulse" />
+                  <Server className="w-10 h-10 animate-pulse" />
                 </div>
               </div>
 
-              <div>
-                <div className="flex items-center gap-3">
-                  <span className="font-black text-3xl tracking-widest bg-gradient-to-r from-cyan-300 via-teal-200 to-white bg-clip-text text-transparent drop-shadow-[0_2px_14px_rgba(6,182,212,0.7)]">
+              <div className="min-w-0">
+                <div className="flex items-center gap-2 sm:gap-3">
+                  <span className="font-black text-xl sm:text-2xl lg:text-3xl tracking-widest bg-gradient-to-r from-cyan-300 via-teal-200 to-white bg-clip-text text-transparent drop-shadow-[0_2px_14px_rgba(6,182,212,0.7)] shrink-0">
                     AQUAFORGE
                   </span>
 
-                  {/* DYNAMIC MINECRAFT ALL-ERA VERSION SELECTOR */}
-                  <div className="relative inline-block max-w-xs sm:max-w-md">
+                  {/* DYNAMIC MINECRAFT ALL-ERA VERSION SELECTOR (Responsive auto-truncated) */}
+                  <div className="relative inline-block max-w-[140px] sm:max-w-[180px] md:max-w-[220px] lg:max-w-[270px]">
                     <select
                       value={mcVersion}
                       onChange={(e) => {
                         setMcVersion(e.target.value);
                         showToast(`Switched active profile to ${e.target.value}`, 'success');
                       }}
-                      className="text-xs font-mono font-bold px-3 py-1.5 rounded-xl bg-cyan-950/90 text-cyan-300 border border-cyan-500/70 focus:outline-none cursor-pointer pr-8 appearance-none shadow-md hover:border-cyan-400 transition-colors truncate max-w-full"
+                      className="text-[11px] sm:text-xs font-mono font-bold px-2.5 py-1.5 rounded-xl bg-cyan-950/90 text-cyan-300 border border-cyan-500/70 focus:outline-none cursor-pointer pr-7 appearance-none shadow-md hover:border-cyan-400 transition-colors truncate w-full"
                     >
                       {MINECRAFT_VERSIONS_DATA.map((group) => (
                         <optgroup key={group.era} label={group.era} className="bg-slate-950 text-cyan-400 font-bold">
@@ -428,27 +428,22 @@ export const App: React.FC = () => {
                         </optgroup>
                       ))}
                     </select>
-                    <ChevronDown className="w-3.5 h-3.5 text-cyan-400 absolute right-2.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+                    <ChevronDown className="w-3.5 h-3.5 text-cyan-400 absolute right-2 top-1/2 -translate-y-1/2 pointer-events-none" />
                   </div>
                 </div>
-                <div className="flex flex-wrap items-center gap-2 mt-1">
-                  <span className="text-[10px] font-mono uppercase tracking-wider text-cyan-400 font-bold bg-cyan-950/80 px-2 py-0.5 rounded border border-cyan-800/50">
-                    Enterprise Studio
+                <div className="flex items-center gap-2 mt-1 truncate">
+                  <span className="text-[9px] sm:text-[10px] font-mono uppercase tracking-wider text-cyan-400 font-bold bg-cyan-950/80 px-1.5 py-0.5 rounded border border-cyan-800/50 shrink-0">
+                    Studio
                   </span>
-                  <span className="text-[11px] font-mono text-slate-400">
+                  <span className="text-[10px] sm:text-[11px] font-mono text-slate-400 truncate">
                     Created by <span className="text-cyan-300 font-bold">Turgut Efekan Koç (efekkoc)</span>
-                  </span>
-                  <span className="hidden xl:inline text-[11px] text-cyan-500/80 font-mono">
-                    • {activeVersionInfo.features}
                   </span>
                 </div>
               </div>
             </div>
 
-            <div className="h-6 w-[1px] bg-slate-800 hidden sm:block" />
-
-            {/* Server Status Pill (Accurate: 0 players and OFFLINE when not running) */}
-            <div className="hidden sm:flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#0e1626] border border-slate-800 text-xs font-mono whitespace-nowrap shrink-0">
+            {/* Server Status Pill (Visible on wider screens to prevent header squeeze) */}
+            <div className="hidden 2xl:flex items-center gap-2 px-3 py-1 rounded-full bg-[#0e1626] border border-slate-800 text-xs font-mono whitespace-nowrap shrink-0">
               <span className={`w-2 h-2 rounded-full ${
                 status === 'ONLINE' ? 'bg-emerald-400 shadow-[0_0_8px_#34d399]' :
                 status === 'STARTING' ? 'bg-amber-400 animate-ping' : 'bg-slate-600'
@@ -459,9 +454,9 @@ export const App: React.FC = () => {
             </div>
           </div>
 
-          {/* Center Telemetry Gauges (Only shown when server is actually ONLINE) */}
+          {/* Center Telemetry Gauges (Only shown when server is actually ONLINE and space permits) */}
           {status === 'ONLINE' && (
-            <div className="hidden xl:flex items-center gap-6 px-4 py-2 bg-[#0b1220]/90 rounded-xl border border-[#1b273d] text-xs font-mono whitespace-nowrap shrink-0">
+            <div className="hidden 2xl:flex items-center gap-6 px-4 py-2 bg-[#0b1220]/90 rounded-xl border border-[#1b273d] text-xs font-mono whitespace-nowrap shrink-0">
               <div className="flex items-center gap-2">
                 <Activity className="w-3.5 h-3.5 text-cyan-400" />
                 <span className="text-slate-400">TPS:</span>
@@ -485,16 +480,16 @@ export const App: React.FC = () => {
             </div>
           )}
 
-          {/* Right Controls: Role Switcher & Power Buttons & Info */}
-          <div className="flex items-center gap-3 shrink-0">
+          {/* Right Controls: Role Switcher & Power Buttons & Info (ALWAYS VISIBLE & LOCKED) */}
+          <div className="flex items-center gap-2 sm:gap-3 shrink-0 ml-auto">
             {/* Guide / Info Modal Trigger */}
             <button
               onClick={() => setShowInfoModal(true)}
-              className="flex items-center gap-1.5 px-3 py-1.5 bg-cyan-950/60 hover:bg-cyan-900/60 text-cyan-300 border border-cyan-700/50 rounded-xl text-xs font-semibold cursor-pointer transition-all shadow-sm"
+              className="flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 bg-cyan-950/60 hover:bg-cyan-900/60 text-cyan-300 border border-cyan-700/50 rounded-xl text-xs font-semibold cursor-pointer transition-all shadow-sm"
               title="How to Use AquaForge Guide"
             >
               <HelpCircle className="w-3.5 h-3.5" />
-              <span className="hidden sm:inline">Guide & Info</span>
+              <span className="hidden lg:inline">Guide & Info</span>
             </button>
 
             {/* Role Switcher: 👑 Admin Mode vs ⚡ Developer Mode */}
@@ -505,14 +500,14 @@ export const App: React.FC = () => {
                   setActiveTab('overview');
                   showToast('Switched to Server Admin View (Simple & Safe)', 'success');
                 }}
-                className={`flex items-center gap-1.5 px-3 py-1 rounded-lg transition-all cursor-pointer ${
+                className={`flex items-center gap-1 sm:gap-1.5 px-2.5 sm:px-3 py-1 rounded-lg transition-all cursor-pointer ${
                   userRole === 'admin' 
                     ? 'bg-gradient-to-r from-emerald-600 to-teal-600 text-white shadow-md' 
                     : 'text-slate-400 hover:text-white'
                 }`}
               >
                 <Shield className="w-3.5 h-3.5" />
-                Admin
+                <span className="hidden sm:inline">Admin</span>
               </button>
               <button
                 onClick={() => {
@@ -520,25 +515,25 @@ export const App: React.FC = () => {
                   setActiveTab('diagnostics');
                   showToast('Switched to Developer View (Bug Hunter & Hot-Swap)', 'success');
                 }}
-                className={`flex items-center gap-1.5 px-3 py-1 rounded-lg transition-all cursor-pointer ${
+                className={`flex items-center gap-1 sm:gap-1.5 px-2.5 sm:px-3 py-1 rounded-lg transition-all cursor-pointer ${
                   userRole === 'developer' 
                     ? 'bg-gradient-to-r from-cyan-600 to-blue-600 text-white shadow-md' 
                     : 'text-slate-400 hover:text-white'
                 }`}
               >
                 <Code2 className="w-3.5 h-3.5" />
-                Developer
+                <span className="hidden sm:inline">Developer</span>
               </button>
             </div>
 
-            {/* Power Controls */}
+            {/* Power Controls (Always guaranteed room) */}
             {status === 'OFFLINE' ? (
               <button
                 onClick={() => handleServerAction('start')}
-                className="flex items-center gap-1.5 px-3.5 py-1.5 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl text-xs font-bold transition-all shadow-md shadow-emerald-600/30 cursor-pointer"
+                className="flex items-center gap-1.5 px-3.5 py-1.5 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl text-xs font-bold transition-all shadow-lg shadow-emerald-600/40 cursor-pointer shrink-0"
               >
                 <Play className="w-3.5 h-3.5 fill-white" />
-                Start Server
+                <span>Start Server</span>
               </button>
             ) : (
               <div className="flex items-center gap-1.5">
