@@ -3,7 +3,7 @@ import {
   Sparkles, CheckCircle2, Shield, Zap, Coins, Box, Compass, 
   Fish, Swords, Lock, Eye, Download, Check, ExternalLink, Server, Layers,
   MessageSquare, Award, MapPin, TrendingUp, ShoppingCart, Navigation, Target,
-  BarChart3, Crown, Flame, Pickaxe, Landmark, Trees, KeyRound
+  BarChart3, Crown, Flame, Pickaxe, Landmark, Trees, KeyRound, PartyPopper
 } from 'lucide-react';
 
 export interface SuitePlugin {
@@ -271,6 +271,17 @@ export const ALL_AQUA_PLUGINS: SuitePlugin[] = [
     description: 'Enterprise player authentication, password confirmation & session lockdown gatekeeper.',
     githubUrl: 'https://github.com/efekkoc/AquaAuth',
     features: ['Password registration with confirmation (/register <pass> <passAgain>)', 'Salted SHA-256 key-stretched cryptographic hashing', 'Pre-login complete movement, chat & damage lockdown', '30-minute verified IP session auto-login cache']
+  },
+  {
+    id: 'aquaevents',
+    name: 'AquaEvents',
+    category: 'Loot & Rewards',
+    icon: PartyPopper,
+    color: 'from-amber-400 to-rose-500',
+    version: '1.20.x – 1.21.11 (Universal)',
+    description: 'Enterprise automated survival events, 1.21 Display wilderness supply drops & chat trivia engine.',
+    githubUrl: 'https://github.com/efekkoc/AquaEvents',
+    features: ['1.21 Display Entity parachuting supply crates with beacon flares', 'Server-wide boosters: Mining Rush (2x Ores), Double XP, Blood Moon', 'Chat reaction & trivia quizzes with instant cash prizes', 'Automatic 45-minute rotating survival event scheduler']
   }
 ];
 
@@ -278,10 +289,10 @@ export const PRESET_BUNDLES = [
   {
     id: 'ultimate',
     name: '🌟 Ultimate Complete Suite',
-    badge: 'ALL-IN-ONE (23 PLUGINS)',
-    description: 'Deploy all 23 Aqua flagship plugins simultaneously. 100% self-sufficient server network covering authentication, towns, survival graves, security, economy, combat, claims, chat, pass, skills, market, warps, enchants, scoreboard, ranks, and radar.',
+    badge: 'ALL-IN-ONE (24 PLUGINS)',
+    description: 'Deploy all 24 Aqua flagship plugins simultaneously. 100% self-sufficient server network covering automated events, authentication, towns, survival graves, security, economy, combat, claims, chat, pass, skills, market, warps, enchants, scoreboard, ranks, and radar.',
     pluginIds: [
-      'aquaauth', 'aquamap', 'aquasecurity', 'aquarunes', 'aquawatchdog', 'aquaeconomy', 
+      'aquaevents', 'aquaauth', 'aquamap', 'aquasecurity', 'aquarunes', 'aquawatchdog', 'aquaeconomy', 
       'aquacrates', 'aquastaff', 'aquadungeons', 'aquaclaims', 'aquaskills', 
       'aquachat', 'aquapass', 'aquafishing', 'aquamarket', 'aquawarps', 
       'aquabounties', 'aquaenchants', 'aquascoreboard', 'aquaranks', 'aquacombat',
@@ -293,9 +304,9 @@ export const PRESET_BUNDLES = [
     id: 'survival_smp',
     name: '⚔️ Complete Survival, SMP & Nations Package',
     badge: 'SURVIVAL PACKAGE',
-    description: 'The turnkey bundle for survival & SMP servers: login authentication, 3D Display graves, sleep vote, silk spawners, elevators, nations/towns, claims, chat, economy, market, warps, enchants, ranks, scoreboard, and combat log prevention.',
+    description: 'The turnkey bundle for survival & SMP servers: survival events, airdrops, login authentication, 3D Display graves, sleep vote, silk spawners, elevators, nations/towns, claims, chat, economy, market, warps, enchants, ranks, scoreboard, and combat log prevention.',
     pluginIds: [
-      'aquaauth', 'aquasurvival', 'aquanations', 'aquamap', 'aquaclaims', 'aquachat', 'aquaeconomy', 'aquamarket', 
+      'aquaevents', 'aquaauth', 'aquasurvival', 'aquanations', 'aquamap', 'aquaclaims', 'aquachat', 'aquaeconomy', 'aquamarket', 
       'aquawarps', 'aquaskills', 'aquapass', 'aquaenchants', 'aquascoreboard', 
       'aquaranks', 'aquacombat', 'aquabounties', 'aquacrates'
     ],
