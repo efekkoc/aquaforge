@@ -1,0 +1,26 @@
+# ==============================================================================
+#                      AquaCombat Configuration
+#     Universal Anti-CombatLog & BossBar PvP Tag (Paper 1.20.x – 1.21.11)
+#         Author: Turgut Efekan Koç (efekkoc) | GitHub: efekkoc/AquaCombat
+# ==============================================================================
+
+settings:
+  engine_version: "1.21.11-Universal"
+  combat_duration_seconds: 15
+  kill_on_combat_quit: true
+  drop_items_on_combat_quit: true
+
+blocked_commands_during_combat:
+  - "spawn"
+  - "home"
+  - "tp"
+  - "tpa"
+  - "warp"
+  - "rtp"
+  - "ah"
+  - "trade"
+
+bossbar:
+  title: "<gradient:#ff416c:#ff4b2b>⚔ IN COMBAT</gradient> <gray>(%seconds%s remaining)"
+  color: "RED"
+  overlay: "NOTCHED_10"

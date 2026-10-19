@@ -1,0 +1,22 @@
+name: AquaCombat
+version: '1.0.0'
+main: com.aquaforge.combat.AquaCombat
+api-version: '1.21'
+author: Turgut Efekan Koç (efekkoc)
+website: https://github.com/efekkoc/AquaCombat
+description: Anti-CombatLog, Dynamic BossBar & PvP Tag Engine for Paper 1.20.x – 1.21.11
+
+commands:
+  combattag:
+    description: View your remaining combat tag duration
+    permission: aquacombat.use
+    aliases: [ct, pvpstatus]
+    usage: /<command>
+
+permissions:
+  aquacombat.use:
+    description: Standard combat tag tracking
+    default: true
+  aquacombat.bypass:
+    description: Bypass combat tag restrictions
+    default: op

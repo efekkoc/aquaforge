@@ -1,0 +1,17 @@
+# ==============================================================================
+#                      AquaMarket Configuration
+#    Universal Auction House & Player Marketplace for Paper 1.20.x – 1.21.11
+#         Author: Turgut Efekan Koç (efekkoc) | GitHub: efekkoc/AquaMarket
+# ==============================================================================
+
+settings:
+  engine_version: "1.21.11-Universal"
+  listing_duration_hours: 48
+  max_listings_per_player: 10
+  sales_tax_percent: 5.0
+  min_listing_price: 10.0
+  max_listing_price: 10000000.0
+
+mailbox:
+  auto_purge_days: 14
+  notify_on_join: true

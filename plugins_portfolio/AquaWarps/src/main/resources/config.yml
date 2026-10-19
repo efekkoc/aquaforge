@@ -1,0 +1,23 @@
+# ==============================================================================
+#                      AquaWarps Configuration
+#   Universal Teleport, Spawn, Home, TPA & Safe-RTP Engine (1.20.x – 1.21.11)
+#         Author: Turgut Efekan Koç (efekkoc) | GitHub: efekkoc/AquaWarps
+# ==============================================================================
+
+settings:
+  engine_version: "1.21.11-Universal"
+  teleport_delay_seconds: 3
+  cancel_on_move: true
+
+rtp:
+  min_radius: 500
+  max_radius: 5000
+  cooldown_seconds: 30
+  blacklisted_biomes:
+    - "DEEP_OCEAN"
+    - "OCEAN"
+    - "LAVA"
+
+homes:
+  default_max_homes: 3
+  vip_max_homes: 10

@@ -2,13 +2,14 @@ import React, { useState } from 'react';
 import { 
   Sparkles, CheckCircle2, Shield, Zap, Coins, Box, Compass, 
   Fish, Swords, Lock, Eye, Download, Check, ExternalLink, Server, Layers,
-  MessageSquare, Award, MapPin, TrendingUp
+  MessageSquare, Award, MapPin, TrendingUp, ShoppingCart, Navigation, Target,
+  BarChart3, Crown, Flame, Pickaxe
 } from 'lucide-react';
 
 export interface SuitePlugin {
   id: string;
   name: string;
-  category: 'Security & Auth' | 'Economy' | 'Combat & RPG' | 'Anti-Cheat' | 'Utility & Radar' | 'Moderation' | 'Loot & Rewards' | 'MMO Arena' | 'Chat & Social' | 'World Protection' | 'Progression';
+  category: 'Security & Auth' | 'Economy' | 'Combat & RPG' | 'Anti-Cheat' | 'Utility & Radar' | 'Moderation' | 'Loot & Rewards' | 'MMO Arena' | 'Chat & Social' | 'World Protection' | 'Progression' | 'Teleport & Spawn' | 'Enchantments' | 'Interface & Tab' | 'Ranks & Perms' | 'PvP Combat';
   icon: any;
   color: string;
   version: string;
@@ -160,6 +161,83 @@ export const ALL_AQUA_PLUGINS: SuitePlugin[] = [
     description: 'Advanced RPG fishing engine with 40 custom fish, reeling mini-game, 10 rod tiers & bossbars.',
     githubUrl: 'https://github.com/efekkoc/AquaFishing',
     features: ['Interactive timing & reeling mini-game', '40 custom fish species & rarity tiers', '10 RPG fishing rod upgrades', 'ResourcePack CDN custom models']
+  },
+  {
+    id: 'aquamarket',
+    name: 'AquaMarket',
+    category: 'Economy',
+    icon: ShoppingCart,
+    color: 'from-amber-400 to-emerald-500',
+    version: '1.20.x – 1.21.11 (Universal)',
+    description: 'High-performance global auction house, player market listings & return mailbox engine.',
+    githubUrl: 'https://github.com/efekkoc/AquaMarket',
+    features: ['54-slot interactive virtual auction GUI', '1.21 Data Components weapon support', 'Player item return mailbox (/ah mailbox)', 'Sales tax and deflationary currency sink']
+  },
+  {
+    id: 'aquawarps',
+    name: 'AquaWarps',
+    category: 'Teleport & Spawn',
+    icon: Navigation,
+    color: 'from-blue-500 to-cyan-500',
+    version: '1.20.x – 1.21.11 (Universal)',
+    description: 'Spawn, personal homes, public warps, peer TPA & intelligent raycast safe-wilderness RTP.',
+    githubUrl: 'https://github.com/efekkoc/AquaWarps',
+    features: ['Safe-RTP raycast block scanner', '3-second PvP anti-combat teleport warmup', 'Multi-home management (/home)', 'Async chunk pre-loading engine']
+  },
+  {
+    id: 'aquabounties',
+    name: 'AquaBounties',
+    category: 'Loot & Rewards',
+    icon: Target,
+    color: 'from-red-500 to-rose-600',
+    version: '1.20.x – 1.21.11 (Universal)',
+    description: 'Player head bounties, dynamic hunter tracking compass & PvP rivalry leaderboards.',
+    githubUrl: 'https://github.com/efekkoc/AquaBounties',
+    features: ['Place cash bounties on players (/bounty)', 'Hunter tracking compass locks target location', 'Trophy victim skull decapitation on kill', 'Global server announcement broadcast']
+  },
+  {
+    id: 'aquaenchants',
+    name: 'AquaEnchants',
+    category: 'Enchantments',
+    icon: Pickaxe,
+    color: 'from-violet-500 to-fuchsia-600',
+    version: '1.20.x – 1.21.11 (Universal)',
+    description: 'Modern 1.21.x custom enchantments with VeinMiner, Timber, Auto-Smelt and Telepathy.',
+    githubUrl: 'https://github.com/efekkoc/AquaEnchants',
+    features: ['VeinMiner cluster ore mining (Shift+Mine)', 'Timber whole-tree logging mechanics', 'Auto-Smelt raw ores directly into ingots', 'Telepathy item delivery to inventory']
+  },
+  {
+    id: 'aquascoreboard',
+    name: 'AquaScoreboard',
+    category: 'Interface & Tab',
+    icon: BarChart3,
+    color: 'from-sky-400 to-indigo-500',
+    version: '1.20.x – 1.21.11 (Universal)',
+    description: 'Flicker-free RGB sidebar scoreboard & modern Tablist header/footer engine with MiniMessage.',
+    githubUrl: 'https://github.com/efekkoc/AquaScoreboard',
+    features: ['Flicker-free team packet buffering', 'Kyori Adventure gradient & hex titles', 'Modern tablist header & footer with ping meters', 'Per-player visibility toggle (/sb)']
+  },
+  {
+    id: 'aquaranks',
+    name: 'AquaRanks',
+    category: 'Ranks & Perms',
+    icon: Crown,
+    color: 'from-yellow-400 to-amber-600',
+    version: '1.20.x – 1.21.11 (Universal)',
+    description: 'Lightweight in-memory rank management, overhead name tags, and permission cascades.',
+    githubUrl: 'https://github.com/efekkoc/AquaRanks',
+    features: ['Zero-SQL lightweight in-memory ranks', 'MiniMessage gradient overhead nametags', 'Fast administrative rank assignment (/rank set)', 'Priority based inheritance cascading']
+  },
+  {
+    id: 'aquacombat',
+    name: 'AquaCombat',
+    category: 'PvP Combat',
+    icon: Flame,
+    color: 'from-red-600 to-orange-600',
+    version: '1.20.x – 1.21.11 (Universal)',
+    description: 'Anti-CombatLog engine with notched BossBar timer, command blocking, and inventory drops on quit.',
+    githubUrl: 'https://github.com/efekkoc/AquaCombat',
+    features: ['Instantly slays players who combat-log', 'Dynamic 15-second notched BossBar countdown', 'Blocks escape commands (/spawn, /home, /tpa)', 'Smooth visual and sound transitions']
   }
 ];
 
@@ -167,33 +245,42 @@ export const PRESET_BUNDLES = [
   {
     id: 'ultimate',
     name: '🌟 Ultimate Complete Suite',
-    badge: 'ALL-IN-ONE (13 PLUGINS)',
-    description: 'Deploy all 13 Aqua flagship plugins simultaneously. Complete coverage for security, economy, combat, claims, chat, pass, skills, moderation, and telemetries.',
-    pluginIds: ['aquamap', 'aquasecurity', 'aquarunes', 'aquawatchdog', 'aquaeconomy', 'aquacrates', 'aquastaff', 'aquadungeons', 'aquaclaims', 'aquaskills', 'aquachat', 'aquapass', 'aquafishing'],
+    badge: 'ALL-IN-ONE (20 PLUGINS)',
+    description: 'Deploy all 20 Aqua flagship plugins simultaneously. 100% self-sufficient server network covering security, economy, combat, claims, chat, pass, skills, market, warps, enchants, scoreboard, ranks, and radar.',
+    pluginIds: [
+      'aquamap', 'aquasecurity', 'aquarunes', 'aquawatchdog', 'aquaeconomy', 
+      'aquacrates', 'aquastaff', 'aquadungeons', 'aquaclaims', 'aquaskills', 
+      'aquachat', 'aquapass', 'aquafishing', 'aquamarket', 'aquawarps', 
+      'aquabounties', 'aquaenchants', 'aquascoreboard', 'aquaranks', 'aquacombat'
+    ],
     tagColor: 'border-cyan-500 bg-cyan-950/60 text-cyan-300'
   },
   {
     id: 'survival_smp',
     name: '⚔️ Competitive Survival & SMP',
     badge: 'POPULAR',
-    description: 'Ideal for public survival, SMP, and Lifesteal servers with claims, chat, economy, runes, crates, skills, pass, and radar.',
-    pluginIds: ['aquamap', 'aquaclaims', 'aquachat', 'aquaeconomy', 'aquaskills', 'aquapass', 'aquarunes', 'aquafishing', 'aquacrates'],
+    description: 'Ideal for public survival, SMP, and Lifesteal servers with claims, chat, economy, market, warps, enchants, ranks, scoreboard, and combat log prevention.',
+    pluginIds: [
+      'aquamap', 'aquaclaims', 'aquachat', 'aquaeconomy', 'aquamarket', 
+      'aquawarps', 'aquaskills', 'aquapass', 'aquaenchants', 'aquascoreboard', 
+      'aquaranks', 'aquacombat', 'aquabounties', 'aquacrates'
+    ],
     tagColor: 'border-emerald-500 bg-emerald-950/60 text-emerald-300'
   },
   {
     id: 'hardcore_security',
     name: '🛡️ Hardcore Secure Network',
     badge: 'PROTECTION',
-    description: 'Focused on high-security networks with 2FA, anti-cheat packet inspection, staff tools, chat moderation, and banking.',
-    pluginIds: ['aquasecurity', 'aquawatchdog', 'aquastaff', 'aquachat', 'aquaeconomy'],
+    description: 'Focused on high-security networks with 2FA, anti-cheat packet inspection, staff tools, combat log guard, ranks, and banking.',
+    pluginIds: ['aquasecurity', 'aquawatchdog', 'aquastaff', 'aquacombat', 'aquaranks', 'aquachat', 'aquaeconomy'],
     tagColor: 'border-blue-500 bg-blue-950/60 text-blue-300'
   },
   {
     id: 'mmo_rpg',
     name: '🏰 MMO Dungeons & Adventure',
     badge: 'RPG READY',
-    description: 'Turn your server into an RPG world with mob arenas, skills leveling, battle pass, rune socketing, custom loot boxes, and fishing.',
-    pluginIds: ['aquadungeons', 'aquaskills', 'aquapass', 'aquarunes', 'aquacrates', 'aquamap', 'aquafishing'],
+    description: 'Turn your server into an RPG world with mob arenas, skills leveling, custom enchants, battle pass, rune socketing, market, and fishing.',
+    pluginIds: ['aquadungeons', 'aquaskills', 'aquaenchants', 'aquapass', 'aquarunes', 'aquacrates', 'aquamarket', 'aquamap', 'aquafishing', 'aquascoreboard'],
     tagColor: 'border-purple-500 bg-purple-950/60 text-purple-300'
   }
 ];

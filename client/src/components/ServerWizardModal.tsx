@@ -39,11 +39,11 @@ export const ServerWizardModal: React.FC<ServerWizardModalProps> = ({
   const handleArchetypeSelect = (archId: string) => {
     setArchetype(archId);
     if (archId === 'smp') {
-      setSelectedPlugins(['aquamap', 'aquaclaims', 'aquachat', 'aquaeconomy', 'aquaskills', 'aquapass', 'aquarunes', 'aquafishing', 'aquacrates']);
+      setSelectedPlugins(['aquamap', 'aquaclaims', 'aquachat', 'aquaeconomy', 'aquamarket', 'aquawarps', 'aquaskills', 'aquapass', 'aquaenchants', 'aquascoreboard', 'aquaranks', 'aquacombat', 'aquabounties', 'aquacrates']);
     } else if (archId === 'security') {
-      setSelectedPlugins(['aquasecurity', 'aquawatchdog', 'aquastaff', 'aquachat', 'aquaeconomy']);
+      setSelectedPlugins(['aquasecurity', 'aquawatchdog', 'aquastaff', 'aquacombat', 'aquaranks', 'aquachat', 'aquaeconomy']);
     } else if (archId === 'rpg') {
-      setSelectedPlugins(['aquadungeons', 'aquaskills', 'aquapass', 'aquarunes', 'aquacrates', 'aquamap', 'aquafishing']);
+      setSelectedPlugins(['aquadungeons', 'aquaskills', 'aquaenchants', 'aquapass', 'aquarunes', 'aquacrates', 'aquamarket', 'aquamap', 'aquafishing', 'aquascoreboard']);
     } else if (archId === 'all') {
       setSelectedPlugins(ALL_AQUA_PLUGINS.map(p => p.id));
     }
@@ -127,10 +127,10 @@ export const ServerWizardModal: React.FC<ServerWizardModalProps> = ({
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2">
                 {[
-                  { id: 'smp', title: '⚔️ Competitive Survival & SMP', desc: 'Public survival with land claims, economy, custom chat, RPG skills, and battle pass.', badge: 'MOST POPULAR' },
-                  { id: 'security', title: '🛡️ Hardcore Secure Network', desc: 'Zero-trust network with 2FA TOTP Google Authenticator, raycast anti-cheat, and staff vanish.', badge: 'HIGH SECURITY' },
-                  { id: 'rpg', title: '🏰 MMO Dungeons & Adventure', desc: 'Procedural mob arenas, weapon rune socketing, RPG fishing mini-game, and tiered loot crates.', badge: 'RPG ENGINE' },
-                  { id: 'all', title: '🌟 Ultimate Complete Suite', desc: 'Deploys all 13 standalone Aqua plugins authored by efekkoc with 100% native compatibility.', badge: 'ALL 13 PLUGINS' }
+                  { id: 'smp', title: '⚔️ Competitive Survival & SMP', desc: 'Public survival with land claims, economy, auction house, custom chat, RPG skills, and battle pass.', badge: 'MOST POPULAR' },
+                  { id: 'security', title: '🛡️ Hardcore Secure Network', desc: 'Zero-trust network with 2FA TOTP Google Authenticator, raycast anti-cheat, combat tag, and staff vanish.', badge: 'HIGH SECURITY' },
+                  { id: 'rpg', title: '🏰 MMO Dungeons & Adventure', desc: 'Procedural mob arenas, custom enchants, weapon runes, RPG fishing mini-game, and tiered crates.', badge: 'RPG ENGINE' },
+                  { id: 'all', title: '🌟 Ultimate Complete Suite', desc: 'Deploys all 20 standalone Aqua plugins authored by efekkoc with 100% native compatibility.', badge: 'ALL 20 PLUGINS' }
                 ].map((item) => (
                   <div
                     key={item.id}
@@ -202,7 +202,7 @@ export const ServerWizardModal: React.FC<ServerWizardModalProps> = ({
                   onClick={() => setSelectedPlugins(ALL_AQUA_PLUGINS.map(p => p.id))}
                   className="text-xs text-cyan-400 hover:text-cyan-300 underline font-semibold cursor-pointer"
                 >
-                  Select All (13)
+                  Select All ({ALL_AQUA_PLUGINS.length})
                 </button>
               </div>
 

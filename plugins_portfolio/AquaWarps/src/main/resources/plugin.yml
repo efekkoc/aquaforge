@@ -1,0 +1,66 @@
+name: AquaWarps
+version: '1.0.0'
+main: com.aquaforge.warps.AquaWarps
+api-version: '1.21'
+author: Turgut Efekan Koç (efekkoc)
+website: https://github.com/efekkoc/AquaWarps
+description: Spawn, Homes, Warps, TPA and Safe-RTP Engine for Paper 1.20.x – 1.21.11
+
+commands:
+  spawn:
+    description: Teleport to global server spawn
+    permission: aquawarps.spawn
+    usage: /<command>
+  setspawn:
+    description: Set the global server spawn
+    permission: aquawarps.admin
+    usage: /<command>
+  warp:
+    description: Teleport to a public warp
+    permission: aquawarps.warp
+    usage: /<command> <name>
+  setwarp:
+    description: Create a public warp
+    permission: aquawarps.admin
+    usage: /<command> <name>
+  rtp:
+    description: Randomly teleport into the safe wilderness
+    permission: aquawarps.rtp
+    aliases: [wild]
+    usage: /<command>
+  sethome:
+    description: Save your personal home
+    permission: aquawarps.home
+    usage: /<command> [name]
+  home:
+    description: Teleport to your saved home
+    permission: aquawarps.home
+    usage: /<command> [name]
+  tpa:
+    description: Request to teleport to another player
+    permission: aquawarps.tpa
+    usage: /<command> <player>
+  tpaccept:
+    description: Accept an incoming teleport request
+    permission: aquawarps.tpa
+    usage: /<command>
+
+permissions:
+  aquawarps.spawn:
+    description: Permission to use /spawn
+    default: true
+  aquawarps.warp:
+    description: Permission to use /warp
+    default: true
+  aquawarps.home:
+    description: Permission to use /home
+    default: true
+  aquawarps.rtp:
+    description: Permission to use /rtp
+    default: true
+  aquawarps.tpa:
+    description: Permission to use /tpa
+    default: true
+  aquawarps.admin:
+    description: Admin commands for warps & spawn
+    default: op

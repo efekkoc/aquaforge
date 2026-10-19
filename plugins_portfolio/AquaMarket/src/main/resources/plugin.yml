@@ -1,0 +1,29 @@
+name: AquaMarket
+version: '1.0.0'
+main: com.aquaforge.market.AquaMarket
+api-version: '1.21'
+author: Turgut Efekan Koç (efekkoc)
+website: https://github.com/efekkoc/AquaMarket
+description: Modern Auction House & Player Economy Exchange for Paper 1.20.x – 1.21.11
+
+commands:
+  ah:
+    description: Open the Global Auction House
+    permission: aquamarket.use
+    aliases: [auction, market]
+    usage: /<command> [sell <price>|mailbox]
+  marketadmin:
+    description: Administer auction listings
+    permission: aquamarket.admin
+    usage: /<command> [clear|reload]
+
+permissions:
+  aquamarket.use:
+    description: Access to browse and buy in auction house
+    default: true
+  aquamarket.sell:
+    description: Permission to list items for auction
+    default: true
+  aquamarket.admin:
+    description: Admin controls for marketplace
+    default: op

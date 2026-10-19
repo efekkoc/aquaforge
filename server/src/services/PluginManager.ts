@@ -220,6 +220,34 @@ export class PluginManager {
       aquafishing: {
         fileName: 'AquaFishing-1.0.0.jar',
         yml: `name: AquaFishing\nversion: 1.0.0\nmain: com.efekoc.aquafishing.AquaFishing\napi-version: '1.21'\nauthor: efekkoc\ndescription: Advanced RPG Fishing with 40 custom fish, reeling mini-game, and bossbars (1.20.x - 1.21.11).`
+      },
+      aquamarket: {
+        fileName: 'AquaMarket-1.0.0.jar',
+        yml: `name: AquaMarket\nversion: 1.0.0\nmain: com.aquaforge.market.AquaMarket\napi-version: '1.21'\nauthor: efekkoc\ndescription: Universal Auction House, Player Marketplace & Economy Exchange (1.20.x - 1.21.11).`
+      },
+      aquawarps: {
+        fileName: 'AquaWarps-1.0.0.jar',
+        yml: `name: AquaWarps\nversion: 1.0.0\nmain: com.aquaforge.warps.AquaWarps\napi-version: '1.21'\nauthor: efekkoc\ndescription: Spawn, Homes, Warps, TPA and Safe-RTP Engine (1.20.x - 1.21.11).`
+      },
+      aquabounties: {
+        fileName: 'AquaBounties-1.0.0.jar',
+        yml: `name: AquaBounties\nversion: 1.0.0\nmain: com.aquaforge.bounties.AquaBounties\napi-version: '1.21'\nauthor: efekkoc\ndescription: Player Head Bounties, Tracker Compass & PvP Rivalry Engine (1.20.x - 1.21.11).`
+      },
+      aquaenchants: {
+        fileName: 'AquaEnchants-1.0.0.jar',
+        yml: `name: AquaEnchants\nversion: 1.0.0\nmain: com.aquaforge.enchants.AquaEnchants\napi-version: '1.21'\nauthor: efekkoc\ndescription: Universal Custom Enchantments, VeinMiner, Timber & Auto-Smelt (1.20.x - 1.21.11).`
+      },
+      aquascoreboard: {
+        fileName: 'AquaScoreboard-1.0.0.jar',
+        yml: `name: AquaScoreboard\nversion: 1.0.0\nmain: com.aquaforge.scoreboard.AquaScoreboard\napi-version: '1.21'\nauthor: efekkoc\ndescription: Flicker-Free RGB Scoreboard & Modern Tablist Engine (1.20.x - 1.21.11).`
+      },
+      aquaranks: {
+        fileName: 'AquaRanks-1.0.0.jar',
+        yml: `name: AquaRanks\nversion: 1.0.0\nmain: com.aquaforge.ranks.AquaRanks\napi-version: '1.21'\nauthor: efekkoc\ndescription: Lightweight In-Memory Ranks, Prefixes & Perms Engine (1.20.x - 1.21.11).`
+      },
+      aquacombat: {
+        fileName: 'AquaCombat-1.0.0.jar',
+        yml: `name: AquaCombat\nversion: 1.0.0\nmain: com.aquaforge.combat.AquaCombat\napi-version: '1.21'\nauthor: efekkoc\ndescription: Universal Anti-CombatLog, Dynamic BossBar & PvP Tag Engine (1.20.x - 1.21.11).`
       }
     };
 

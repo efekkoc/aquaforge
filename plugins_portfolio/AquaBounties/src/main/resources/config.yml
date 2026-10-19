@@ -1,0 +1,16 @@
+# ==============================================================================
+#                     AquaBounties Configuration
+#   Universal Head Bounty & Tracking Engine for Paper 1.20.x – 1.21.11
+#         Author: Turgut Efekan Koç (efekkoc) | GitHub: efekkoc/AquaBounties
+# ==============================================================================
+
+settings:
+  engine_version: "1.21.11-Universal"
+  minimum_bounty: 100.0
+  bounty_tax_percent: 5.0
+  drop_victim_skull_on_kill: true
+  broadcast_bounty_placed: true
+
+compass:
+  update_interval_ticks: 40
+  glow_target_on_distance: 25

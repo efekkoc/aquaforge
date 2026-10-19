@@ -1,0 +1,17 @@
+# ==============================================================================
+#                     AquaEnchants Configuration
+#    Universal Custom Enchants & VeinMiner for Paper 1.20.x – 1.21.11
+#         Author: Turgut Efekan Koç (efekkoc) | GitHub: efekkoc/AquaEnchants
+# ==============================================================================
+
+settings:
+  engine_version: "1.21.11-Universal"
+  enable_vein_miner: true
+  vein_miner_max_blocks: 64
+  enable_timber: true
+  enable_auto_smelt: true
+  enable_telepathy: true
+
+particles:
+  vein_break_sound: "BLOCK_AMETHYST_CLUSTER_BREAK"
+  telepathy_sound: "ENTITY_ITEM_PICKUP"

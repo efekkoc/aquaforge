@@ -1,0 +1,25 @@
+name: AquaRanks
+version: '1.0.0'
+main: com.aquaforge.ranks.AquaRanks
+api-version: '1.21'
+author: Turgut Efekan Koç (efekkoc)
+website: https://github.com/efekkoc/AquaRanks
+description: Lightweight In-Memory Ranks, Prefixes & Perms Engine for Paper 1.20.x – 1.21.11
+
+commands:
+  rank:
+    description: Manage player ranks and view permissions
+    permission: aquaranks.admin
+    usage: /<command> [set <player> <rank>|list]
+  rankinfo:
+    description: View your active rank and prefix
+    permission: aquaranks.use
+    usage: /<command>
+
+permissions:
+  aquaranks.use:
+    description: View rank info
+    default: true
+  aquaranks.admin:
+    description: Admin commands to change player ranks
+    default: op

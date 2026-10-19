@@ -1,0 +1,26 @@
+name: AquaScoreboard
+version: '1.0.0'
+main: com.aquaforge.scoreboard.AquaScoreboard
+api-version: '1.21'
+author: Turgut Efekan Koç (efekkoc)
+website: https://github.com/efekkoc/AquaScoreboard
+description: Flicker-Free RGB Scoreboard & Tablist Header/Footer for Paper 1.20.x – 1.21.11
+
+commands:
+  sb:
+    description: Toggle your personal scoreboard visibility
+    permission: aquascoreboard.toggle
+    aliases: [sidebar]
+    usage: /<command>
+  sbreload:
+    description: Reload scoreboard configurations
+    permission: aquascoreboard.admin
+    usage: /<command>
+
+permissions:
+  aquascoreboard.toggle:
+    description: Permission to toggle personal scoreboard
+    default: true
+  aquascoreboard.admin:
+    description: Admin reload command
+    default: op

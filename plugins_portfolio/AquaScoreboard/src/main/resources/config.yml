@@ -1,0 +1,27 @@
+# ==============================================================================
+#                    AquaScoreboard Configuration
+#    Universal RGB Scoreboard & Tablist Engine (Paper 1.20.x – 1.21.11)
+#         Author: Turgut Efekan Koç (efekkoc) | GitHub: efekkoc/AquaScoreboard
+# ==============================================================================
+
+settings:
+  engine_version: "1.21.11-Universal"
+  update_interval_ticks: 20
+
+scoreboard:
+  title: "<gradient:#00d2ff:#3a7bd5><b>AQUAFORGE NETWORK</b></gradient>"
+  lines:
+    - "<gray>-------------------"
+    - "<gray>Player: <gold>%player%"
+    - "<gray>Rank: <aqua>%rank%"
+    - "<gray>Balance: <green>$%balance%"
+    - "<gray>Ping: <white>%ping% ms"
+    - ""
+    - "<gray>Online: <yellow>%online% / %max%"
+    - "<gray>TPS: <emerald>%tps%"
+    - "<gray>-------------------"
+    - "<gradient:#00d2ff:#3a7bd5>play.aquaforge.gg</gradient>"
+
+tablist:
+  header: "<gradient:#00d2ff:#3a7bd5><b>★ AQUAFORGE SMP ★</b></gradient>\n<gray>Welcome to the 1.21.11 Universal Realm\n"
+  footer: "\n<gray>Store: <aqua>store.aquaforge.gg <gray>| Discord: <indigo>discord.gg/aquaforge"

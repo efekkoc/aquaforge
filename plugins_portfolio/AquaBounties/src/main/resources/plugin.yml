@@ -1,0 +1,28 @@
+name: AquaBounties
+version: '1.0.0'
+main: com.aquaforge.bounties.AquaBounties
+api-version: '1.21'
+author: Turgut Efekan Koç (efekkoc)
+website: https://github.com/efekkoc/AquaBounties
+description: Player Bounties, Head Trophies & Tracker Compass for Paper 1.20.x – 1.21.11
+
+commands:
+  bounty:
+    description: Place or view active bounties on players
+    permission: aquabounties.use
+    usage: /<command> [top|set <player> <amount>]
+  hunter:
+    description: Receive a tracking compass pointing towards the top bounty
+    permission: aquabounties.track
+    usage: /<command>
+
+permissions:
+  aquabounties.use:
+    description: Place and view bounties
+    default: true
+  aquabounties.track:
+    description: Use hunter tracking compass
+    default: true
+  aquabounties.admin:
+    description: Clear and manage player bounties
+    default: op

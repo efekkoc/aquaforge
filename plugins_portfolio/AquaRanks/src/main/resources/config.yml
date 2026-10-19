@@ -1,0 +1,34 @@
+# ==============================================================================
+#                      AquaRanks Configuration
+#   Universal In-Memory Ranks & Prefixes for Paper 1.20.x – 1.21.11
+#         Author: Turgut Efekan Koç (efekkoc) | GitHub: efekkoc/AquaRanks
+# ==============================================================================
+
+settings:
+  engine_version: "1.21.11-Universal"
+  default_rank: "member"
+
+ranks:
+  owner:
+    prefix: "<gradient:#ff416c:#ff4b2b><b>[OWNER]</b></gradient> "
+    weight: 100
+    permissions:
+      - "*"
+  admin:
+    prefix: "<gradient:#f12711:#f5af19><b>[ADMIN]</b></gradient> "
+    weight: 80
+    permissions:
+      - "aquastaff.*"
+      - "aquasecurity.*"
+  vip:
+    prefix: "<gradient:#38ef7d:#11998e><b>[VIP]</b></gradient> "
+    weight: 20
+    permissions:
+      - "aquachat.color"
+      - "aquapass.premium"
+  member:
+    prefix: "<gray>[Member] "
+    weight: 1
+    permissions:
+      - "aquachat.user"
+      - "aquawarps.spawn"
