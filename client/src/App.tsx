@@ -15,10 +15,11 @@ import { VisualPropertiesView } from './components/VisualPropertiesView';
 import { BackupVaultView } from './components/BackupVaultView';
 import { DiscordBridgeView } from './components/DiscordBridgeView';
 import { DependencyMatrixView } from './components/DependencyMatrixView';
+import { AquaSuiteHubView } from './components/AquaSuiteHubView';
 
 export const App: React.FC = () => {
   // Navigation & Role Mode (Admin vs Developer)
-  const [activeTab, setActiveTab] = useState<'overview' | 'terminal' | 'diagnostics' | 'plugins' | 'devsync' | 'config' | 'resourcepack' | 'map' | 'properties' | 'backups' | 'discord' | 'dependencies' | 'players' | 'settings'>('overview');
+  const [activeTab, setActiveTab] = useState<'overview' | 'terminal' | 'diagnostics' | 'plugins' | 'devsync' | 'config' | 'resourcepack' | 'map' | 'properties' | 'backups' | 'discord' | 'dependencies' | 'players' | 'settings' | 'suite'>('overview');
   const [userRole, setUserRole] = useState<'admin' | 'developer'>('admin');
   
   // Selected Minecraft Version (Dynamic All-Era Database)
@@ -282,6 +283,24 @@ export const App: React.FC = () => {
           fetch('/api/diagnostics').then(r => r.json()).then(d => setReports(d.reports || []));
         }, 400);
       });
+  };
+
+  const handleDeployPreset = (pluginIds: string[]) => {
+    fetch('/api/suite/deploy', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ pluginIds })
+    })
+      .then(r => r.json())
+      .then(d => {
+        if (d.success) {
+          showToast(`🚀 Deployed ${d.total} Aqua Suite plugins into server!`, 'success');
+          fetch('/api/plugins').then(r => r.json()).then(p => setPlugins(p.plugins || []));
+        } else {
+          showToast('Failed to deploy plugins', 'error');
+        }
+      })
+      .catch(() => showToast('Error contacting orchestrator', 'error'));
   };
 
   const handleTogglePlugin = (fileName: string) => {
@@ -604,6 +623,21 @@ export const App: React.FC = () => {
                   </button>
 
                   <button
+                    onClick={() => setActiveTab('suite')}
+                    className={`w-full flex items-center justify-between px-3 py-2 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
+                      activeTab === 'suite' ? 'bg-gradient-to-r from-cyan-950 to-teal-950 text-cyan-300 border border-cyan-500 shadow-lg' : 'text-slate-300 hover:bg-slate-900 border border-cyan-900/40 bg-cyan-950/20'
+                    }`}
+                  >
+                    <div className="flex items-center gap-2.5">
+                      <Sparkles className="w-4 h-4 text-cyan-400 animate-pulse" />
+                      <span className="font-bold">Aqua Suite Hub</span>
+                    </div>
+                    <span className="text-[9px] px-1.5 py-0.2 rounded font-mono bg-cyan-900 text-cyan-300 border border-cyan-700/60 font-bold">
+                      PRESETS
+                    </span>
+                  </button>
+
+                  <button
                     onClick={() => setActiveTab('map')}
                     className={`w-full flex items-center justify-between px-3 py-2 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
                       activeTab === 'map' ? 'bg-cyan-950/90 text-cyan-300 border border-cyan-500/70 shadow-md' : 'text-slate-400 hover:bg-slate-900'
@@ -688,6 +722,21 @@ export const App: React.FC = () => {
               {/* TABS FOR DEVELOPER MODE */}
               {userRole === 'developer' && (
                 <>
+                  <button
+                    onClick={() => setActiveTab('suite')}
+                    className={`w-full flex items-center justify-between px-3 py-2 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
+                      activeTab === 'suite' ? 'bg-gradient-to-r from-cyan-950 to-teal-950 text-cyan-300 border border-cyan-500 shadow-lg' : 'text-slate-300 hover:bg-slate-900 border border-cyan-900/40 bg-cyan-950/20'
+                    }`}
+                  >
+                    <div className="flex items-center gap-2.5">
+                      <Sparkles className="w-4 h-4 text-cyan-400 animate-pulse" />
+                      <span className="font-bold">Aqua Suite Hub</span>
+                    </div>
+                    <span className="text-[9px] px-1.5 py-0.2 rounded font-mono bg-cyan-900 text-cyan-300 border border-cyan-700/60 font-bold">
+                      PRESETS
+                    </span>
+                  </button>
+
                   <button
                     onClick={() => setActiveTab('diagnostics')}
                     className={`w-full flex items-center justify-between px-3 py-2 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
@@ -1920,6 +1969,14 @@ export const App: React.FC = () => {
                   ))}
                 </div>
               </div>
+            )}
+
+            {/* ================= TAB: AQUA SUITE & PRESETS HUB ================= */}
+            {activeTab === 'suite' && (
+              <AquaSuiteHubView
+                onDeployPreset={handleDeployPreset}
+                installedPluginIds={plugins.map(p => p.name.toLowerCase())}
+              />
             )}
 
             {/* ================= TAB: AQUAMAP LIVE RADAR ================= */}

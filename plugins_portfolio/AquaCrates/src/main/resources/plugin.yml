@@ -1,0 +1,19 @@
+name: AquaCrates
+version: '1.0.0'
+main: com.aquaforge.crates.AquaCrates
+api-version: '1.21'
+author: Turgut Efekan Koç (efekkoc)
+website: https://github.com/efekkoc/AquaCrates
+description: 3D Particle Animated Loot Crate & Reward Matrix for Paper 1.20.x – 1.21.4
+
+commands:
+  aquacrates:
+    description: Master crate and key management
+    permission: aquacrates.admin
+    aliases: [crates, crate]
+    usage: /<command> [givekey|open|list|reload]
+
+permissions:
+  aquacrates.admin:
+    description: Admin controls for crates and keys
+    default: op

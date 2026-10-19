@@ -166,17 +166,21 @@ aquaforge/
 
 ---
 
-## 🎯 The Aqua Ecosystem Plugins
+## 🎯 The Complete Aqua Ecosystem Suite
 
-AquaForge is designed to power and showcase the flagship Minecraft plugins created by **Turgut Efekan Koç (efekkoc)**:
+AquaForge provides **1-Click Ready Server Presets (Hazır Paketler)** and full integration with the complete 9-plugin arsenal authored by **Turgut Efekan Koç (efekkoc)**:
 
-| Plugin | Version | Description |
-|---|---|---|
-| 🗺️ **[AquaMap](https://github.com/efekkoc/AquaMap)** | Paper 1.21.4 | Clientless 60 FPS live radar, minimap, and HUD compass engine. |
-| 🛡️ **[AquaSecurity](https://github.com/efekkoc/AquaSecurity)** | Paper 1.21.4 | Enterprise 2FA TOTP & Admin Session Guard (Google Authenticator). |
-| 🔮 **[AquaRunes](https://github.com/efekkoc/AquaRunes)** | Paper 1.21.4 | Modern Data Components RPG weapon & armor socketing engine. |
-| 🐕 **[AquaWatchdog](https://github.com/efekkoc/AquaWatchdog)** | Paper 1.21.4 | Packet & CPS/Reach anti-cheat telemetry with Discord webhook triage. |
-| 🎣 **[AquaFishing](https://github.com/efekkoc/AquaFishing)** | Paper 1.21.4 | Advanced RPG fishing with 40 custom fish, reeling mini-game & bossbars. |
+| Plugin | Version | Domain | Description |
+|---|---|---|---|
+| 🗺️ **[AquaMap](https://github.com/efekkoc/AquaMap)** | 1.20.x – 1.21.4 | Utility & Radar | Clientless 60 FPS live radar, minimap, double-click waypoints, and HUD compass engine. |
+| 🛡️ **[AquaSecurity](https://github.com/efekkoc/AquaSecurity)** | 1.20.x – 1.21.4 | Security & 2FA | Enterprise RFC 6238 TOTP (Google Authenticator) & session lockdown guard for staff accounts. |
+| 🔮 **[AquaRunes](https://github.com/efekkoc/AquaRunes)** | 1.20.x – 1.21.4 | Combat & RPG | Modern Data Components RPG weapon & armor rune matrix with rotating particle auras. |
+| 🐕 **[AquaWatchdog](https://github.com/efekkoc/AquaWatchdog)** | 1.20.x – 1.21.4 | Anti-Cheat | Real-time sliding window CPS & raycast reach telemetry with Discord & AquaForge webhook triage. |
+| 🏦 **[AquaEconomy](https://github.com/efekkoc/AquaEconomy)** | 1.20.x – 1.21.4 | Economy & Banking | Zero-lag in-memory financial engine, dual Wallet + Bank with interest, Vault API provider. |
+| 🎁 **[AquaCrates](https://github.com/efekkoc/AquaCrates)** | 1.20.x – 1.21.4 | Loot & Rewards | 3D particle spiral animated loot boxes, pitch escalation sounds, and pity guarantee system. |
+| 👮 **[AquaStaff](https://github.com/efekkoc/AquaStaff)** | 1.20.x – 1.21.4 | Moderation | Unified staff mode (/staff), silent vanish, suspect freeze lockdown, and live invsee inspector. |
+| ⚔️ **[AquaDungeons](https://github.com/efekkoc/AquaDungeons)** | 1.20.x – 1.21.4 | MMO Arena | Procedural wave-based mob arenas, Trial Spawner boss encounters, and multi-phase BossBars. |
+| 🎣 **[AquaFishing](https://github.com/efekkoc/AquaFishing)** | 1.20.x – 1.21.4 | Mini-Game | Advanced RPG fishing with 40 custom fish, reeling mini-game, 10 rod tiers & custom bossbars. |
 
 ---
 

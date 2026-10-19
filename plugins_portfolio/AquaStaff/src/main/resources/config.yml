@@ -1,0 +1,18 @@
+# ===================================================================
+#  AquaStaff Configuration
+#  Author: Turgut Efekan Koç (efekkoc) - https://github.com/efekkoc
+# ===================================================================
+
+staff-mode:
+  enable-flight: true
+  enable-night-vision: true
+  enable-vanish-by-default: true
+
+freeze:
+  title: "§c§lYOU ARE FROZEN"
+  subtitle: "§7Do NOT disconnect! Follow staff instructions in chat."
+  blindness: true
+
+xray-detector:
+  enabled: true
+  diamond-threshold-per-minute: 8

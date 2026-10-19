@@ -1,0 +1,35 @@
+name: AquaEconomy
+version: '1.0.0'
+main: com.aquaforge.economy.AquaEconomy
+api-version: '1.21'
+author: Turgut Efekan Koç (efekkoc)
+website: https://github.com/efekkoc/AquaEconomy
+description: Enterprise High-Performance Banking & Economy Engine for Paper 1.20.x – 1.21.4
+
+commands:
+  economy:
+    description: Master administrative economy management
+    permission: aquaeconomy.admin
+    aliases: [eco]
+    usage: /<command> [give|take|set|bal]
+  balance:
+    description: Check your wallet and bank balance
+    permission: aquaeconomy.user
+    aliases: [bal, money]
+    usage: /<command> [player]
+  pay:
+    description: Transfer currency to another online player
+    permission: aquaeconomy.user
+    usage: /<command> <player> <amount>
+  bank:
+    description: Open the interactive Banking GUI
+    permission: aquaeconomy.user
+    usage: /<command> [deposit|withdraw|history]
+
+permissions:
+  aquaeconomy.user:
+    description: Standard player economy access
+    default: true
+  aquaeconomy.admin:
+    description: Administrator financial controls
+    default: op

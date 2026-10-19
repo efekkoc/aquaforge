@@ -1,0 +1,34 @@
+# ===================================================================
+#  AquaCrates Configuration
+#  Author: Turgut Efekan Koç (efekkoc) - https://github.com/efekkoc
+# ===================================================================
+
+animation:
+  particle-ring: true
+  fireworks-on-win: true
+  ticks-per-spin: 2
+
+pity-system:
+  enabled: true
+  guaranteed-epic-spins: 15
+
+crates:
+  mystic:
+    name: "§d§lMystic Celestial Crate"
+    key-name: "§d✦ Mystic Crate Key ✦"
+    rewards:
+      - id: "diamonds"
+        chance: 40.0
+        material: "DIAMOND"
+        amount: 8
+        broadcast: false
+      - id: "netherite"
+        chance: 20.0
+        material: "NETHERITE_INGOT"
+        amount: 2
+        broadcast: true
+      - id: "elytra"
+        chance: 5.0
+        material: "ELYTRA"
+        amount: 1
+        broadcast: true

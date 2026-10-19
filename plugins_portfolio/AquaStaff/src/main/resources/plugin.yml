@@ -1,0 +1,33 @@
+name: AquaStaff
+version: '1.0.0'
+main: com.aquaforge.staff.AquaStaff
+api-version: '1.21'
+author: Turgut Efekan Koç (efekkoc)
+website: https://github.com/efekkoc/AquaStaff
+description: Unified Staff Mode, Vanish, Freeze & Moderation Suite for Paper 1.20.x – 1.21.4
+
+commands:
+  staff:
+    description: Toggle staff mode with moderation utilities
+    permission: aquastaff.mod
+    aliases: [staffmode, sm]
+    usage: /<command>
+  vanish:
+    description: Toggle silent admin invisibility
+    permission: aquastaff.mod
+    aliases: [v]
+    usage: /<command>
+  freeze:
+    description: Freeze or unfreeze a suspected player
+    permission: aquastaff.mod
+    aliases: [ss]
+    usage: /<command> <player>
+  invsee:
+    description: Inspect a player's real-time inventory
+    permission: aquastaff.mod
+    usage: /<command> <player>
+
+permissions:
+  aquastaff.mod:
+    description: Moderator controls access
+    default: op

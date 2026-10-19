@@ -1,0 +1,26 @@
+# ===================================================================
+#  AquaEconomy Configuration
+#  Author: Turgut Efekan Koç (efekkoc) - https://github.com/efekkoc
+# ===================================================================
+
+currency:
+  symbol: "$"
+  singular: "AquaCoin"
+  plural: "AquaCoins"
+  initial-balance: 500.0
+
+bank:
+  enabled: true
+  interest-rate-percent: 1.5 # Paid every 24 in-game hours
+  max-deposit-limit: 10000000.0
+
+storage:
+  type: "YAML" # YAML | SQLITE | MYSQL
+  auto-save-interval-minutes: 5
+
+messages:
+  prefix: "§2§lAquaEconomy §8» "
+  balance: "§7Your current wallet: §a$%amount% §8| §7Bank: §e$%bank%"
+  received: "§a+$%amount% received from §f%sender%."
+  sent: "§c-$%amount% sent to §f%target%."
+  insufficient: "§cYou do not have sufficient funds for this transaction."

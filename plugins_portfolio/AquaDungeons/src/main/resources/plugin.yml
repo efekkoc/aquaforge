@@ -1,0 +1,22 @@
+name: AquaDungeons
+version: '1.0.0'
+main: com.aquaforge.dungeons.AquaDungeons
+api-version: '1.21'
+author: Turgut Efekan Koç (efekkoc)
+website: https://github.com/efekkoc/AquaDungeons
+description: Procedural Wave-based Mob Arena & Boss Engine for Paper 1.20.x – 1.21.4
+
+commands:
+  aquadungeons:
+    description: Master dungeon arena controls
+    permission: aquadungeons.user
+    aliases: [dungeons, dungeon, arena]
+    usage: /<command> [join|leave|startwave|admin]
+
+permissions:
+  aquadungeons.user:
+    description: Player arena access
+    default: true
+  aquadungeons.admin:
+    description: Arena management and wave triggers
+    default: op

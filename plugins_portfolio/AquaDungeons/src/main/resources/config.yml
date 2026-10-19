@@ -1,0 +1,18 @@
+# ===================================================================
+#  AquaDungeons Configuration
+#  Author: Turgut Efekan Koç (efekkoc) - https://github.com/efekkoc
+# ===================================================================
+
+dungeon:
+  max-players-per-session: 4
+  waves-count: 5
+  boss-on-final-wave: true
+
+boss:
+  name: "§4§lIgnis the Corrupted Wither"
+  base-health: 300.0
+  bar-color: "RED"
+
+rewards:
+  money-reward: 2500.0
+  bonus-keys: 2

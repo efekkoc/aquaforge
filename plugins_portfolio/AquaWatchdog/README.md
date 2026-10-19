@@ -1,12 +1,13 @@
 <div align="center">
 
 # 🐕 AquaWatchdog
-### CPS, Reach & Packet Anomaly Inspector with Discord & AquaForge Webhook Triage
+### CPS, Reach & Packet Anomaly Inspector for Paper 1.20.x – 1.21.4
 
 ![Java](https://img.shields.io/badge/Java-21-orange?logo=openjdk)
-![PaperMC](https://img.shields.io/badge/PaperMC-1.21.4-blue?logo=minecraft)
+![PaperMC](https://img.shields.io/badge/PaperMC-1.20.x--1.21.4-blue?logo=minecraft)
+![Optimized](https://img.shields.io/badge/Optimized-1.21.1%20%7C%201.21.4-teal)
 ![AntiCheat](https://img.shields.io/badge/Anti--Cheat-Packet%20Telemetry-red)
-![License](https://img.shields.io/badge/License-MIT-teal)
+![License](https://img.shields.io/badge/License-MIT-emerald)
 [![GitHub](https://img.shields.io/badge/Author-efekkoc-cyan?logo=github)](https://github.com/efekkoc)
 
 **AquaWatchdog** is a lightweight, high-performance telemetry engine and anti-cheat triage module designed for modern Paper 1.21.4 networks. It tracks combat packet anomalies (AutoClickers / Macros, Raycast Reach violations) and seamlessly reports alerts directly to staff and external webhooks (Discord / AquaForge Studio).

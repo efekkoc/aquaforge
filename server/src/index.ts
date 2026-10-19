@@ -417,6 +417,14 @@ app.get('/api/radar/players', (req, res) => {
   });
 });
 
+app.post('/api/suite/deploy', (req, res) => {
+  const { pluginIds } = req.body;
+  if (!Array.isArray(pluginIds)) {
+    return res.status(400).json({ success: false, error: 'pluginIds must be an array' });
+  }
+  const deployed = pluginManager.deployAquaPlugins(pluginIds);
+  res.json({ success: true, deployed, total: deployed.length });
+});
 
 // WebSocket Connection Handler
 wss.on('connection', (ws) => {
