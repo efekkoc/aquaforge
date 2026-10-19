@@ -404,11 +404,7 @@ app.post('/api/properties', (req, res) => {
 });
 
 // 12. AquaMap Live Radar & World Coordinates
-const radarPlayers = [
-  { id: '1', name: 'efekkoc', x: 124, y: 72, z: -350, world: 'world', health: 20, gamemode: 'SURVIVAL', ping: 18 },
-  { id: '2', name: 'Alex_Master', x: -85, y: 64, z: 210, world: 'world', health: 18, gamemode: 'SURVIVAL', ping: 32 },
-  { id: '3', name: 'PaperAdmin', x: 0, y: 110, z: 0, world: 'world', health: 20, gamemode: 'CREATIVE', ping: 12 }
-];
+const radarPlayers: any[] = [];
 
 app.get('/api/radar/players', (req, res) => {
   res.json({

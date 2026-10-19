@@ -15,14 +15,6 @@ export interface Waypoint {
   world: 'world' | 'world_nether' | 'world_the_end';
 }
 
-const DEFAULT_WAYPOINTS: Waypoint[] = [
-  { id: 'wp-1', name: 'World Spawn', x: 0, z: 0, color: '#facc15', world: 'world' },
-  { id: 'wp-2', name: 'Diamond Ravine', x: 180, z: -240, color: '#06b6d4', world: 'world' },
-  { id: 'wp-3', name: 'Nether Outpost', x: -95, z: 120, color: '#a855f7', world: 'world' },
-  { id: 'wp-4', name: 'Blaze Fortress', x: 220, z: -80, color: '#ef4444', world: 'world_nether' },
-  { id: 'wp-5', name: 'End Exit Portal', x: 0, z: 0, color: '#a855f7', world: 'world_the_end' }
-];
-
 interface AquaMapRadarViewProps {
   serverStatus: string;
 }
@@ -39,13 +31,19 @@ export const AquaMapRadarView: React.FC<AquaMapRadarViewProps> = ({ serverStatus
   const [isDragging, setIsDragging] = useState<boolean>(false);
   const dragStartRef = useRef<{ mouseX: number; mouseY: number; startCenterX: number; startCenterZ: number } | null>(null);
 
-  // Persistent Waypoints
+  // Persistent Waypoints - Clean slate: ONLY waypoints explicitly added by the user
   const [waypoints, setWaypoints] = useState<Waypoint[]>(() => {
     try {
       const saved = localStorage.getItem('aquaforge_waypoints');
-      return saved ? JSON.parse(saved) : DEFAULT_WAYPOINTS;
+      if (!saved) return [];
+      const parsed = JSON.parse(saved);
+      // Remove any previously stored mock demo items
+      if (Array.isArray(parsed)) {
+        return parsed.filter((wp: Waypoint) => !['wp-1', 'wp-2', 'wp-3', 'wp-4', 'wp-5'].includes(wp.id));
+      }
+      return [];
     } catch {
-      return DEFAULT_WAYPOINTS;
+      return [];
     }
   });
 
