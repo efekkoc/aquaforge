@@ -15,18 +15,75 @@ export const App: React.FC = () => {
   const [activeTab, setActiveTab] = useState<'overview' | 'terminal' | 'diagnostics' | 'plugins' | 'devsync' | 'config' | 'resourcepack' | 'players' | 'settings'>('overview');
   const [userRole, setUserRole] = useState<'admin' | 'developer'>('admin');
   
-  // Selected Minecraft Version (Dynamic!)
-  const [mcVersion, setMcVersion] = useState<string>('Paper 1.21.4');
-  const availableVersions = [
-    'Paper 1.21.4',
-    'Paper 1.21.1',
-    'Paper 1.20.6',
-    'Paper 1.20.4',
-    'Paper 1.19.4',
-    'Paper 1.16.5',
-    'Purpur 1.21.4',
-    'Spigot 1.20.4'
+  // Selected Minecraft Version (Dynamic All-Era Database)
+  const [mcVersion, setMcVersion] = useState<string>('1.21.4 – The Garden Awakens');
+  
+  const MINECRAFT_VERSIONS_DATA = [
+    {
+      era: '4. Yeni Takvim Bazlı Sürüm Sistemi (2026 ve Sonrası)',
+      versions: [
+        { id: '26.3 – Wilderness Bound', name: '26.3 – Wilderness Bound (Eylül 2026)', date: 'Eylül 2026', features: 'Benekli Orman (Dappled Forest), Yeni Vahşi Yaşam & Güvenlik' },
+        { id: '26.2 – Chaos Cubed', name: '26.2 – Chaos Cubed (Haziran 2026)', date: 'Haziran 2026', features: 'Sülfür Mağaraları, Sülfür Küpü Mobu & Vulkan Sürücüsü' },
+        { id: '26.1 – Tiny Takeover', name: '26.1 – Tiny Takeover (Mart 2026)', date: 'Mart 2026', features: 'Bebek Mob Modelleri, Altın Karahindiba & İsim Etiketleri' }
+      ]
+    },
+    {
+      era: '3. "Game Drops" Dönemi (1.21.x: 2024 – 2025)',
+      versions: [
+        { id: '1.21.11 – Mounts of Mayhem', name: '1.21.11 – Mounts of Mayhem (Aralık 2025)', date: 'Aralık 2025', features: 'Mızrak (Spear), Nautilus Binekleri, Netherite At Zırhı' },
+        { id: '1.21.9 – The Copper Age', name: '1.21.9 – The Copper Age (Eylül 2025)', date: 'Eylül 2025', features: 'Bakır Zırh/Alet Seti, Bakır Golem Otomasyonu, Raflar' },
+        { id: '1.21.6 – Chase the Skies', name: '1.21.6 – Chase the Skies (Haziran 2025)', date: 'Haziran 2025', features: 'Üretilebilir Eyerler, Player Locator & Happy Ghast' },
+        { id: '1.21.5 – Spring to Life', name: '1.21.5 – Spring to Life (İlkbahar 2025)', date: 'İlkbahar 2025', features: 'İnek/Domuz/Tavuk Varyasyonları, Kır Çiçekleri' },
+        { id: '1.21.4 – The Garden Awakens', name: '1.21.4 – The Garden Awakens (Aralık 2024)', date: 'Aralık 2024', features: 'Soluk Bahçe (Pale Garden), Creaking, Göz Salkımı' },
+        { id: '1.21.3 – Bundles of Bravery', name: '1.21.3 – Bundles of Bravery (Ekim 2024)', date: 'Ekim 2024', features: 'Çıkınlar (Bundles) ve Hardcore Mod Güncellemeleri' },
+        { id: '1.21 – Tricky Trials', name: '1.21 – Tricky Trials (Haziran 2024)', date: 'Haziran 2024', features: 'Trial Chambers, Breeze, Topuz (Mace) ve Crafter' }
+      ]
+    },
+    {
+      era: '2. Klasik Sürüm Numaralandırması (Java Edition 1.x: 2011 – 2024)',
+      versions: [
+        { id: '1.20 – Trails & Tales', name: '1.20 – Trails & Tales (Haziran 2023)', date: 'Haziran 2023', features: 'Arkeoloji, Deve, Kiraz Çiçeği ve Armor Trims' },
+        { id: '1.19 – The Wild Update', name: '1.19 – The Wild Update (Haziran 2022)', date: 'Haziran 2022', features: 'Deep Dark, Warden, Antik Şehirler, Mangrov' },
+        { id: '1.18 – Caves & Cliffs Part II', name: '1.18 – Caves & Cliffs: Part II (Kasım 2021)', date: 'Kasım 2021', features: 'Devasa Mağara/Dağlar, Y=-64 Taban Sınırı' },
+        { id: '1.17 – Caves & Cliffs Part I', name: '1.17 – Caves & Cliffs: Part I (Haziran 2021)', date: 'Haziran 2021', features: 'Bakır, Ametist, Aksolotl ve Keçiler' },
+        { id: '1.16 – Nether Update', name: '1.16 – Nether Update (Haziran 2020)', date: 'Haziran 2020', features: 'Sıfırdan Yenilenen Nether, Piglinler ve Netherite' },
+        { id: '1.15 – Buzzy Bees', name: '1.15 – Buzzy Bees (Aralık 2019)', date: 'Aralık 2019', features: 'Arılar, Kovanlar, Bal Blokları ve Optimizasyon' },
+        { id: '1.14 – Village & Pillage', name: '1.14 – Village & Pillage (Nisan 2019)', date: 'Nisan 2019', features: 'Yenilenen Köyler, Yağmacılar, Baskınlar, Çapraz Yay' },
+        { id: '1.13 – Update Aquatic', name: '1.13 – Update Aquatic (Temmuz 2018)', date: 'Temmuz 2018', features: 'Okyanuslar, Batıklar, Yunuslar, Üçlü Mızrak, Drowned' },
+        { id: '1.12 – The World of Color', name: '1.12 – The World of Color (Haziran 2017)', date: 'Haziran 2017', features: 'Beton, Terakota, Papağanlar ve Tarif Kitabı' },
+        { id: '1.11 – The Exploration Update', name: '1.11 – The Exploration Update (Kasım 2016)', date: 'Kasım 2016', features: 'Orman Malikanesi, Totem, Lamalar ve Shulker' },
+        { id: '1.10 – The Frostburn Update', name: '1.10 – The Frostburn Update (Haziran 2016)', date: 'Haziran 2016', features: 'Kutup Ayıları, Magma Blokları, Husk ve Stray' },
+        { id: '1.9 – The Combat Update', name: '1.9 – The Combat Update (Şubat 2016)', date: 'Şubat 2016', features: 'Yenilenen Dövüş, Çift El, Kalkan, Elitra ve Shulker' },
+        { id: '1.8 – The Bountiful Update', name: '1.8 – The Bountiful Update (Eylül 2014)', date: 'Eylül 2014', features: 'Okyanus Anıtları, Slime Blokları, Zırh Askısı' },
+        { id: '1.7 – The Update That Changed The World', name: '1.7 – The Update That Changed The World (Ekim 2013)', date: 'Ekim 2013', features: 'Lekeli Camlar, Savana, Açelya ve Çiçekler' },
+        { id: '1.6 – Horse Update', name: '1.6 – Horse Update (Temmuz 2013)', date: 'Temmuz 2013', features: 'Atlar, Eşekler, Katırlar ve Tasmalar' },
+        { id: '1.5 – Redstone Update', name: '1.5 – Redstone Update (Mart 2013)', date: 'Mart 2013', features: 'Karşılaştırıcı, Huni (Hopper) ve Redstone Blokları' },
+        { id: '1.4 – Pretty Scary Update', name: '1.4 – Pretty Scary Update (Ekim 2012)', date: 'Ekim 2012', features: 'Wither, Cadı, Örs ve Komut Blokları' },
+        { id: '1.3', name: '1.3 (Temmuz 2012)', date: 'Temmuz 2012', features: 'Zümrüt, Köylü Ticareti ve Çöl/Orman Tapınakları' },
+        { id: '1.2', name: '1.2 (Mart 2012)', date: 'Mart 2012', features: 'Orman Biyomu, Demir Golem, Kediler, 256 Blok Sınırı' },
+        { id: '1.1', name: '1.1 (Ocak 2012)', date: 'Ocak 2012', features: 'Spawn Yumurtaları ve Türkçe Dil Desteği' },
+        { id: '1.0.0 – Adventure Update', name: '1.0.0 – Adventure Update (Kasım 2011)', date: 'Kasım 2011', features: 'Tam Sürüm! Ender Ejderhası, The End ve İksirler' }
+      ]
+    },
+    {
+      era: '1. İlk Geliştirme Dönemleri (2009 – 2011)',
+      versions: [
+        { id: 'Beta (2010 – 2011)', name: 'Beta (Aralık 2010 – Kasım 2011)', date: '2010 – 2011', features: 'Açlık Barı, Pistonlar, XP, Köyler ve Stronghold' },
+        { id: 'Alpha (2010)', name: 'Alpha (Haziran 2010 – Aralık 2010)', date: '2010', features: 'Redstone, Nether Boyutu, Biyomlar ve Sesler' },
+        { id: 'Infdev (2010)', name: 'Infdev (Şubat 2010 – Haziran 2010)', date: '2010', features: 'Sonsuz Harita Nesli (Infinite Worlds)' },
+        { id: 'Indev (2010)', name: 'Indev (Ocak 2010 – Şubat 2010)', date: '2010', features: 'Envanter, Gece-Gündüz, Crafting & Yaratıklar' },
+        { id: 'Classic (2009)', name: 'Classic (Mayıs 2009 – Aralık 2009)', date: '2009', features: 'Çok Oyunculu Mod, TNT ve İlk Temel Bloklar' },
+        { id: 'Pre-Classic / Cave Game (2009)', name: 'Pre-Classic / Cave Game (Mayıs 2009)', date: '2009', features: 'Markus "Notch" Persson İlk Konsept Testi' }
+      ]
+    }
   ];
+
+  const activeVersionInfo = MINECRAFT_VERSIONS_DATA.flatMap(g => g.versions).find(v => v.id === mcVersion) || {
+    id: mcVersion,
+    name: mcVersion,
+    date: 'Aktif Sürüm',
+    features: 'Universal Minecraft Profile'
+  };
 
   // Info Modal Guide State
   const [showInfoModal, setShowInfoModal] = useState(false);
@@ -320,12 +377,12 @@ export const App: React.FC = () => {
         )}
 
         {/* ================= TOP NAVIGATION HUD ================= */}
-        <header className="h-24 px-6 bg-[#0a0f18]/95 backdrop-blur-xl border-b border-[#182336] flex items-center justify-between sticky top-0 z-30 shadow-2xl">
+        <header className="h-28 px-6 bg-[#0a0f18]/95 backdrop-blur-xl border-b border-[#182336] flex items-center justify-between sticky top-0 z-30 shadow-2xl">
           <div className="flex items-center gap-6">
             
             {/* BIG PROMINENT LOGO & BRANDING */}
             <div className="flex items-center gap-4">
-              <div className="relative w-20 h-20 rounded-2xl overflow-hidden shadow-[0_0_35px_rgba(6,182,212,0.7)] border-2 border-cyan-400/80 bg-gradient-to-br from-cyan-950 via-slate-900 to-black flex items-center justify-center flex-shrink-0 group hover:scale-105 transition-transform duration-300">
+              <div className="relative w-24 h-24 rounded-2xl overflow-hidden shadow-[0_0_45px_rgba(6,182,212,0.85)] border-2 border-cyan-400 bg-gradient-to-br from-cyan-950 via-slate-900 to-black flex items-center justify-center flex-shrink-0 group hover:scale-105 transition-transform duration-300">
                 <img 
                   src="/logo.png" 
                   alt="AquaForge Universal Logo" 
@@ -341,39 +398,48 @@ export const App: React.FC = () => {
                 />
                 {/* SVG Fallback */}
                 <div id="aquaforge-svg-fallback" className="hidden w-full h-full items-center justify-center text-cyan-400 bg-cyan-950">
-                  <Server className="w-10 h-10 animate-pulse" />
+                  <Server className="w-12 h-12 animate-pulse" />
                 </div>
               </div>
 
               <div>
                 <div className="flex items-center gap-3">
-                  <span className="font-black text-2xl tracking-widest bg-gradient-to-r from-cyan-300 via-teal-200 to-white bg-clip-text text-transparent drop-shadow-[0_2px_12px_rgba(6,182,212,0.6)]">
+                  <span className="font-black text-3xl tracking-widest bg-gradient-to-r from-cyan-300 via-teal-200 to-white bg-clip-text text-transparent drop-shadow-[0_2px_14px_rgba(6,182,212,0.7)]">
                     AQUAFORGE
                   </span>
 
-                  {/* DYNAMIC MINECRAFT VERSION SELECTOR */}
-                  <div className="relative inline-block">
+                  {/* DYNAMIC MINECRAFT ALL-ERA VERSION SELECTOR */}
+                  <div className="relative inline-block max-w-xs sm:max-w-md">
                     <select
                       value={mcVersion}
                       onChange={(e) => {
                         setMcVersion(e.target.value);
                         showToast(`Switched active profile to ${e.target.value}`, 'success');
                       }}
-                      className="text-xs font-mono font-bold px-3 py-1 rounded-lg bg-cyan-950/90 text-cyan-300 border border-cyan-500/60 focus:outline-none cursor-pointer pr-7 appearance-none shadow-sm hover:border-cyan-400 transition-colors"
+                      className="text-xs font-mono font-bold px-3 py-1.5 rounded-xl bg-cyan-950/90 text-cyan-300 border border-cyan-500/70 focus:outline-none cursor-pointer pr-8 appearance-none shadow-md hover:border-cyan-400 transition-colors truncate max-w-full"
                     >
-                      {availableVersions.map(v => (
-                        <option key={v} value={v} className="bg-slate-900 text-slate-200">{v}</option>
+                      {MINECRAFT_VERSIONS_DATA.map((group) => (
+                        <optgroup key={group.era} label={group.era} className="bg-slate-950 text-cyan-400 font-bold">
+                          {group.versions.map((ver) => (
+                            <option key={ver.id} value={ver.id} className="bg-slate-900 text-slate-200 py-1">
+                              {ver.name}
+                            </option>
+                          ))}
+                        </optgroup>
                       ))}
                     </select>
-                    <ChevronDown className="w-3.5 h-3.5 text-cyan-400 absolute right-2 top-1/2 -translate-y-1/2 pointer-events-none" />
+                    <ChevronDown className="w-3.5 h-3.5 text-cyan-400 absolute right-2.5 top-1/2 -translate-y-1/2 pointer-events-none" />
                   </div>
                 </div>
-                <div className="flex items-center gap-2 mt-0.5">
-                  <span className="text-[10px] font-mono uppercase tracking-wider text-cyan-400/90 font-bold bg-cyan-950/70 px-2 py-0.5 rounded border border-cyan-800/40">
+                <div className="flex flex-wrap items-center gap-2 mt-1">
+                  <span className="text-[10px] font-mono uppercase tracking-wider text-cyan-400 font-bold bg-cyan-950/80 px-2 py-0.5 rounded border border-cyan-800/50">
                     Enterprise Studio
                   </span>
                   <span className="text-[11px] font-mono text-slate-400">
                     Created by <span className="text-cyan-300 font-bold">Turgut Efekan Koç (efekkoc)</span>
+                  </span>
+                  <span className="hidden xl:inline text-[11px] text-cyan-500/80 font-mono">
+                    • {activeVersionInfo.features}
                   </span>
                 </div>
               </div>
