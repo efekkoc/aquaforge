@@ -3,7 +3,7 @@ import {
   Sparkles, CheckCircle2, Shield, Zap, Coins, Box, Compass, 
   Fish, Swords, Lock, Eye, Download, Check, ExternalLink, Server, Layers,
   MessageSquare, Award, MapPin, TrendingUp, ShoppingCart, Navigation, Target,
-  BarChart3, Crown, Flame, Pickaxe
+  BarChart3, Crown, Flame, Pickaxe, Landmark, Trees
 } from 'lucide-react';
 
 export interface SuitePlugin {
@@ -238,6 +238,28 @@ export const ALL_AQUA_PLUGINS: SuitePlugin[] = [
     description: 'Anti-CombatLog engine with notched BossBar timer, command blocking, and inventory drops on quit.',
     githubUrl: 'https://github.com/efekkoc/AquaCombat',
     features: ['Instantly slays players who combat-log', 'Dynamic 15-second notched BossBar countdown', 'Blocks escape commands (/spawn, /home, /tpa)', 'Smooth visual and sound transitions']
+  },
+  {
+    id: 'aquanations',
+    name: 'AquaNations',
+    category: 'World Protection',
+    icon: Landmark,
+    color: 'from-emerald-400 to-teal-600',
+    version: '1.20.x – 1.21.11 (Universal)',
+    description: 'Enterprise civilizations, towns, nations & 3D Display Entity monuments engine.',
+    githubUrl: 'https://github.com/efekkoc/AquaNations',
+    features: ['Towns & empires with daily upkeep taxes', '1.21 Display Entity 3D animated civilization monuments', 'Smart plot zoning (Residential, Commercial, Arena, Embassy)', 'Siege war declarations with notched BossBar capture timers']
+  },
+  {
+    id: 'aquasurvival',
+    name: 'AquaSurvival',
+    category: 'Progression',
+    icon: Trees,
+    color: 'from-green-500 to-emerald-700',
+    version: '1.20.x – 1.21.11 (Universal)',
+    description: 'Enterprise survival & SMP mechanics (1.21 Display graves, dynamic sleep vote, silk spawners & elevators).',
+    githubUrl: 'https://github.com/efekkoc/AquaSurvival',
+    features: ['1.21 Display Entity gravestones with Soul Recovery Compass', 'Multiplayer sleep vote with real-time BossBar countdown', 'Silk Touch spawner harvesting with PDC mob memory', 'Fast leaf decay & vertical wool elevators']
   }
 ];
 
@@ -245,23 +267,24 @@ export const PRESET_BUNDLES = [
   {
     id: 'ultimate',
     name: '🌟 Ultimate Complete Suite',
-    badge: 'ALL-IN-ONE (20 PLUGINS)',
-    description: 'Deploy all 20 Aqua flagship plugins simultaneously. 100% self-sufficient server network covering security, economy, combat, claims, chat, pass, skills, market, warps, enchants, scoreboard, ranks, and radar.',
+    badge: 'ALL-IN-ONE (22 PLUGINS)',
+    description: 'Deploy all 22 Aqua flagship plugins simultaneously. 100% self-sufficient server network covering towns, survival graves, security, economy, combat, claims, chat, pass, skills, market, warps, enchants, scoreboard, ranks, and radar.',
     pluginIds: [
       'aquamap', 'aquasecurity', 'aquarunes', 'aquawatchdog', 'aquaeconomy', 
       'aquacrates', 'aquastaff', 'aquadungeons', 'aquaclaims', 'aquaskills', 
       'aquachat', 'aquapass', 'aquafishing', 'aquamarket', 'aquawarps', 
-      'aquabounties', 'aquaenchants', 'aquascoreboard', 'aquaranks', 'aquacombat'
+      'aquabounties', 'aquaenchants', 'aquascoreboard', 'aquaranks', 'aquacombat',
+      'aquanations', 'aquasurvival'
     ],
     tagColor: 'border-cyan-500 bg-cyan-950/60 text-cyan-300'
   },
   {
     id: 'survival_smp',
-    name: '⚔️ Competitive Survival & SMP',
-    badge: 'POPULAR',
-    description: 'Ideal for public survival, SMP, and Lifesteal servers with claims, chat, economy, market, warps, enchants, ranks, scoreboard, and combat log prevention.',
+    name: '⚔️ Complete Survival, SMP & Nations Package',
+    badge: 'SURVIVAL PACKAGE',
+    description: 'The turnkey bundle for survival & SMP servers: 3D Display graves, sleep vote, silk spawners, elevators, nations/towns, claims, chat, economy, market, warps, enchants, ranks, scoreboard, and combat log prevention.',
     pluginIds: [
-      'aquamap', 'aquaclaims', 'aquachat', 'aquaeconomy', 'aquamarket', 
+      'aquasurvival', 'aquanations', 'aquamap', 'aquaclaims', 'aquachat', 'aquaeconomy', 'aquamarket', 
       'aquawarps', 'aquaskills', 'aquapass', 'aquaenchants', 'aquascoreboard', 
       'aquaranks', 'aquacombat', 'aquabounties', 'aquacrates'
     ],
