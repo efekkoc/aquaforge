@@ -3,7 +3,7 @@ import {
   Sparkles, CheckCircle2, Shield, Zap, Coins, Box, Compass, 
   Fish, Swords, Lock, Eye, Download, Check, ExternalLink, Server, Layers,
   MessageSquare, Award, MapPin, TrendingUp, ShoppingCart, Navigation, Target,
-  BarChart3, Crown, Flame, Pickaxe, Landmark, Trees
+  BarChart3, Crown, Flame, Pickaxe, Landmark, Trees, KeyRound
 } from 'lucide-react';
 
 export interface SuitePlugin {
@@ -260,6 +260,17 @@ export const ALL_AQUA_PLUGINS: SuitePlugin[] = [
     description: 'Enterprise survival & SMP mechanics (1.21 Display graves, dynamic sleep vote, silk spawners & elevators).',
     githubUrl: 'https://github.com/efekkoc/AquaSurvival',
     features: ['1.21 Display Entity gravestones with Soul Recovery Compass', 'Multiplayer sleep vote with real-time BossBar countdown', 'Silk Touch spawner harvesting with PDC mob memory', 'Fast leaf decay & vertical wool elevators']
+  },
+  {
+    id: 'aquaauth',
+    name: 'AquaAuth',
+    category: 'Security & Auth',
+    icon: KeyRound,
+    color: 'from-amber-500 to-red-600',
+    version: '1.20.x – 1.21.11 (Universal)',
+    description: 'Enterprise player authentication, password confirmation & session lockdown gatekeeper.',
+    githubUrl: 'https://github.com/efekkoc/AquaAuth',
+    features: ['Password registration with confirmation (/register <pass> <passAgain>)', 'Salted SHA-256 key-stretched cryptographic hashing', 'Pre-login complete movement, chat & damage lockdown', '30-minute verified IP session auto-login cache']
   }
 ];
 
@@ -267,10 +278,10 @@ export const PRESET_BUNDLES = [
   {
     id: 'ultimate',
     name: '🌟 Ultimate Complete Suite',
-    badge: 'ALL-IN-ONE (22 PLUGINS)',
-    description: 'Deploy all 22 Aqua flagship plugins simultaneously. 100% self-sufficient server network covering towns, survival graves, security, economy, combat, claims, chat, pass, skills, market, warps, enchants, scoreboard, ranks, and radar.',
+    badge: 'ALL-IN-ONE (23 PLUGINS)',
+    description: 'Deploy all 23 Aqua flagship plugins simultaneously. 100% self-sufficient server network covering authentication, towns, survival graves, security, economy, combat, claims, chat, pass, skills, market, warps, enchants, scoreboard, ranks, and radar.',
     pluginIds: [
-      'aquamap', 'aquasecurity', 'aquarunes', 'aquawatchdog', 'aquaeconomy', 
+      'aquaauth', 'aquamap', 'aquasecurity', 'aquarunes', 'aquawatchdog', 'aquaeconomy', 
       'aquacrates', 'aquastaff', 'aquadungeons', 'aquaclaims', 'aquaskills', 
       'aquachat', 'aquapass', 'aquafishing', 'aquamarket', 'aquawarps', 
       'aquabounties', 'aquaenchants', 'aquascoreboard', 'aquaranks', 'aquacombat',
@@ -282,9 +293,9 @@ export const PRESET_BUNDLES = [
     id: 'survival_smp',
     name: '⚔️ Complete Survival, SMP & Nations Package',
     badge: 'SURVIVAL PACKAGE',
-    description: 'The turnkey bundle for survival & SMP servers: 3D Display graves, sleep vote, silk spawners, elevators, nations/towns, claims, chat, economy, market, warps, enchants, ranks, scoreboard, and combat log prevention.',
+    description: 'The turnkey bundle for survival & SMP servers: login authentication, 3D Display graves, sleep vote, silk spawners, elevators, nations/towns, claims, chat, economy, market, warps, enchants, ranks, scoreboard, and combat log prevention.',
     pluginIds: [
-      'aquasurvival', 'aquanations', 'aquamap', 'aquaclaims', 'aquachat', 'aquaeconomy', 'aquamarket', 
+      'aquaauth', 'aquasurvival', 'aquanations', 'aquamap', 'aquaclaims', 'aquachat', 'aquaeconomy', 'aquamarket', 
       'aquawarps', 'aquaskills', 'aquapass', 'aquaenchants', 'aquascoreboard', 
       'aquaranks', 'aquacombat', 'aquabounties', 'aquacrates'
     ],
@@ -294,8 +305,8 @@ export const PRESET_BUNDLES = [
     id: 'hardcore_security',
     name: '🛡️ Hardcore Secure Network',
     badge: 'PROTECTION',
-    description: 'Focused on high-security networks with 2FA, anti-cheat packet inspection, staff tools, combat log guard, ranks, and banking.',
-    pluginIds: ['aquasecurity', 'aquawatchdog', 'aquastaff', 'aquacombat', 'aquaranks', 'aquachat', 'aquaeconomy'],
+    description: 'Focused on high-security networks with login auth, 2FA, anti-cheat packet inspection, staff tools, combat log guard, ranks, and banking.',
+    pluginIds: ['aquaauth', 'aquasecurity', 'aquawatchdog', 'aquastaff', 'aquacombat', 'aquaranks', 'aquachat', 'aquaeconomy'],
     tagColor: 'border-blue-500 bg-blue-950/60 text-blue-300'
   },
   {
