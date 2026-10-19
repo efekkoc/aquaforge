@@ -388,14 +388,22 @@ export const AquaMapRadarView: React.FC<AquaMapRadarViewProps> = ({ serverStatus
               className={`w-full h-full ${isDragging ? 'cursor-grabbing' : 'cursor-grab'}`}
             />
 
-            {/* Compass HUD Indicator (Top Right) */}
-            <div className="absolute top-4 right-4 p-2.5 bg-black/70 backdrop-blur-md rounded-2xl border border-slate-800 text-center font-mono pointer-events-none shadow-lg">
-              <span className="text-xs font-bold text-red-400 block">N</span>
-              <div className="w-7 h-7 mx-auto my-0.5 border border-slate-700 rounded-full flex items-center justify-center">
-                <Navigation className="w-4 h-4 text-cyan-400 rotate-45" />
+            {/* Interactive Compass HUD Button (Top Right: Align North & Recenter Spawn) */}
+            <button
+              onClick={() => {
+                setCenterCoord({ x: 0, z: 0 });
+                setSelectedPlayer(null);
+                setZoom(1.2);
+              }}
+              className="absolute top-4 right-4 p-2.5 bg-[#0a111e]/90 hover:bg-cyan-950/80 active:scale-95 backdrop-blur-md rounded-2xl border border-slate-800 hover:border-cyan-500/80 text-center font-mono cursor-pointer shadow-xl transition-all group z-10"
+              title="Click to Align North & Recenter Spawn (0,0)"
+            >
+              <span className="text-xs font-bold text-red-400 block group-hover:scale-110 transition-transform">N</span>
+              <div className="w-7 h-7 mx-auto my-0.5 border border-slate-700 group-hover:border-cyan-500/80 rounded-full flex items-center justify-center bg-slate-900/60 transition-colors shadow-inner">
+                <Navigation className="w-4 h-4 text-cyan-400 group-hover:text-cyan-300 transition-colors" />
               </div>
-              <span className="text-[9px] text-slate-500 block">Compass</span>
-            </div>
+              <span className="text-[9px] text-slate-400 group-hover:text-cyan-300 block transition-colors">Align N</span>
+            </button>
 
             {/* Bottom Coordinates & Navigation Tip */}
             <div className="absolute bottom-4 left-4 px-3.5 py-1.5 bg-black/80 backdrop-blur-md rounded-xl border border-slate-800 text-xs font-mono text-slate-300 pointer-events-none flex items-center gap-3 shadow-lg">
