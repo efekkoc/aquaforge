@@ -13,15 +13,19 @@ import { MarketplaceService } from './services/MarketplaceService.js';
 import { DevSyncService } from './services/DevSyncService.js';
 import { ConfigInspector } from './services/ConfigInspector.js';
 import { ResourcePackService } from './services/ResourcePackService.js';
+import { BackupService } from './services/BackupService.js';
+import { DiscordWebhookService } from './services/DiscordWebhookService.js';
+import { DependencyService } from './services/DependencyService.js';
 
 const PORT = process.env.PORT ? parseInt(process.env.PORT, 10) : 4000;
 const BASE_DATA_DIR = path.resolve(process.cwd(), 'server_data');
 const PLUGINS_DIR = path.join(BASE_DATA_DIR, 'plugins');
 const PACKS_DIR = path.join(BASE_DATA_DIR, 'resourcepacks');
+const BACKUPS_DIR = path.join(BASE_DATA_DIR, 'backups');
 const SERVER_PROPERTIES_PATH = path.join(BASE_DATA_DIR, 'server.properties');
 
 // Ensure base directories
-[BASE_DATA_DIR, PLUGINS_DIR, PACKS_DIR].forEach(dir => {
+[BASE_DATA_DIR, PLUGINS_DIR, PACKS_DIR, BACKUPS_DIR].forEach(dir => {
   if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
 });
 
@@ -33,6 +37,9 @@ const marketplaceService = new MarketplaceService(PLUGINS_DIR);
 const devSyncService = new DevSyncService(PLUGINS_DIR);
 const configInspector = new ConfigInspector(BASE_DATA_DIR);
 const resourcePackService = new ResourcePackService(PACKS_DIR, SERVER_PROPERTIES_PATH);
+const backupService = new BackupService(BASE_DATA_DIR);
+const discordService = new DiscordWebhookService(BASE_DATA_DIR);
+const dependencyService = new DependencyService();
 
 // File Upload config
 const uploadStorage = multer.diskStorage({
@@ -280,6 +287,140 @@ app.get('/api/resourcepacks/download/:fileName', (req, res) => {
   if (!fullPath) return res.status(404).send('Resource pack not found');
   res.download(fullPath);
 });
+
+// 8. Backup & Snapshot Vault
+app.get('/api/backups', (req, res) => {
+  res.json({ backups: backupService.listBackups() });
+});
+
+app.post('/api/backups/create', async (req, res) => {
+  const { type } = req.body;
+  try {
+    const backup = await backupService.createBackup(type || 'FULL');
+    res.json({ success: true, backup });
+  } catch (err: any) {
+    res.status(500).json({ success: false, error: err.message });
+  }
+});
+
+app.post('/api/backups/:fileName/restore', (req, res) => {
+  const result = backupService.restoreBackup(req.params.fileName);
+  res.json(result);
+});
+
+app.delete('/api/backups/:fileName', (req, res) => {
+  const success = backupService.deleteBackup(req.params.fileName);
+  res.json({ success });
+});
+
+app.get('/api/backups/download/:fileName', (req, res) => {
+  const filePath = backupService.getBackupPath(req.params.fileName);
+  if (!filePath) return res.status(404).send('Backup not found');
+  res.download(filePath);
+});
+
+// 9. Discord Alert Webhooks
+app.get('/api/discord/config', (req, res) => {
+  res.json(discordService.getConfig());
+});
+
+app.post('/api/discord/config', (req, res) => {
+  const updated = discordService.updateConfig(req.body);
+  res.json({ success: true, config: updated });
+});
+
+app.post('/api/discord/test', async (req, res) => {
+  const result = await discordService.sendTestWebhook();
+  res.json(result);
+});
+
+// 10. Plugin Dependency Conflict Matrix
+app.get('/api/plugins/dependencies', (req, res) => {
+  const plugins = pluginManager.getPlugins();
+  const analysis = dependencyService.analyze(plugins);
+  res.json(analysis);
+});
+
+// 11. Visual server.properties Tweak Studio
+function getPropertiesObj(): Record<string, any> {
+  if (!fs.existsSync(SERVER_PROPERTIES_PATH)) {
+    const defaultProps = `motd=\\u00A7b\\u00A7lAQUAFORGE \\u00A77Studio \\u00A7f- Powered by efekkoc
+server-port=25565
+max-players=50
+gamemode=survival
+difficulty=normal
+pvp=true
+allow-flight=false
+enable-command-block=true
+spawn-monsters=true
+spawn-animals=true
+view-distance=10
+simulation-distance=8
+online-mode=true
+white-list=false
+level-name=world
+`;
+    fs.writeFileSync(SERVER_PROPERTIES_PATH, defaultProps, 'utf-8');
+  }
+
+  const content = fs.readFileSync(SERVER_PROPERTIES_PATH, 'utf-8');
+  const props: Record<string, any> = {};
+  for (const line of content.split(/\r?\n/)) {
+    if (line.trim().startsWith('#') || !line.includes('=')) continue;
+    const idx = line.indexOf('=');
+    const k = line.substring(0, idx).trim();
+    let v: any = line.substring(idx + 1).trim();
+    if (v === 'true') v = true;
+    else if (v === 'false') v = false;
+    else if (!isNaN(Number(v)) && v !== '') v = Number(v);
+    props[k] = v;
+  }
+  return props;
+}
+
+app.get('/api/properties', (req, res) => {
+  res.json({ properties: getPropertiesObj() });
+});
+
+app.post('/api/properties', (req, res) => {
+  const { updates } = req.body;
+  if (!updates || typeof updates !== 'object') {
+    return res.status(400).json({ error: 'Invalid updates payload' });
+  }
+
+  const current = getPropertiesObj();
+  const merged = { ...current, ...updates };
+
+  let out = '# Minecraft server properties - Managed by AquaForge Studio\n';
+  out += `# Auto-synced at ${new Date().toISOString()}\n`;
+  for (const [k, v] of Object.entries(merged)) {
+    out += `${k}=${v}\n`;
+  }
+
+  fs.copyFileSync(SERVER_PROPERTIES_PATH, `${SERVER_PROPERTIES_PATH}.backup`);
+  fs.writeFileSync(SERVER_PROPERTIES_PATH, out, 'utf-8');
+
+  res.json({ success: true, properties: merged });
+});
+
+// 12. AquaMap Live Radar & World Coordinates
+const radarPlayers = [
+  { id: '1', name: 'efekkoc', x: 124, y: 72, z: -350, world: 'world', health: 20, gamemode: 'SURVIVAL', ping: 18 },
+  { id: '2', name: 'Alex_Master', x: -85, y: 64, z: 210, world: 'world', health: 18, gamemode: 'SURVIVAL', ping: 32 },
+  { id: '3', name: 'PaperAdmin', x: 0, y: 110, z: 0, world: 'world', health: 20, gamemode: 'CREATIVE', ping: 12 }
+];
+
+app.get('/api/radar/players', (req, res) => {
+  res.json({
+    world: 'world',
+    spawn: { x: 0, y: 64, z: 0 },
+    time: '12:00 (Day)',
+    weather: 'CLEAR',
+    engine: 'AquaMap Dynamic Radar Engine v2.0',
+    players: serverManager.getStatus() === 'ONLINE' ? radarPlayers : []
+  });
+});
+
 
 // WebSocket Connection Handler
 wss.on('connection', (ws) => {

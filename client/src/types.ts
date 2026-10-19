@@ -98,3 +98,43 @@ export interface ResourcePackItem {
   downloadUrl: string;
   isApplied: boolean;
 }
+
+export interface BackupArchive {
+  id: string;
+  fileName: string;
+  sizeBytes: number;
+  createdAt: string;
+  type: 'FULL' | 'WORLD' | 'PLUGINS';
+}
+
+export interface DiscordWebhookConfig {
+  enabled: boolean;
+  url: string;
+  serverName: string;
+  notifyOnStart: boolean;
+  notifyOnStop: boolean;
+  notifyOnCrash: boolean;
+  notifyOnLowTps: boolean;
+}
+
+export interface DependencyCheckResult {
+  pluginName: string;
+  requiredDependency: string;
+  isInstalled: boolean;
+  isOptional: boolean;
+  suggestedJar?: string;
+  downloadSlug?: string;
+}
+
+export interface WorldRadarPlayer {
+  id: string;
+  name: string;
+  x: number;
+  y: number;
+  z: number;
+  world: string;
+  health: number;
+  gamemode: string;
+  ping: number;
+}
+

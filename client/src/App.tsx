@@ -5,14 +5,20 @@ import {
   Sparkles, AlertTriangle, ArrowUpRight, CheckCircle2, ChevronRight,
   Sliders, UserCheck, AlertOctagon, Download, Code2, Copy, Check, Power, Trash2, Wand2,
   Image as ImageIcon, Video, Github, Search, Plus, FolderSearch, ArrowRight, Save,
-  HelpCircle, ExternalLink, X, ChevronDown, UserX, Crown, Megaphone, Bell, Upload
+  HelpCircle, ExternalLink, X, ChevronDown, UserX, Crown, Megaphone, Bell, Upload,
+  Compass, Archive, Layers
 } from 'lucide-react';
 import { ansiToHtml } from './utils/ansi';
 import { ServerStatus, ServerMetrics, DiagnosticReport, PluginMeta, DevSyncWatcher, ResourcePackItem } from './types';
+import { AquaMapRadarView } from './components/AquaMapRadarView';
+import { VisualPropertiesView } from './components/VisualPropertiesView';
+import { BackupVaultView } from './components/BackupVaultView';
+import { DiscordBridgeView } from './components/DiscordBridgeView';
+import { DependencyMatrixView } from './components/DependencyMatrixView';
 
 export const App: React.FC = () => {
   // Navigation & Role Mode (Admin vs Developer)
-  const [activeTab, setActiveTab] = useState<'overview' | 'terminal' | 'diagnostics' | 'plugins' | 'devsync' | 'config' | 'resourcepack' | 'players' | 'settings'>('overview');
+  const [activeTab, setActiveTab] = useState<'overview' | 'terminal' | 'diagnostics' | 'plugins' | 'devsync' | 'config' | 'resourcepack' | 'map' | 'properties' | 'backups' | 'discord' | 'dependencies' | 'players' | 'settings'>('overview');
   const [userRole, setUserRole] = useState<'admin' | 'developer'>('admin');
   
   // Selected Minecraft Version (Dynamic All-Era Database)
@@ -579,7 +585,7 @@ export const App: React.FC = () => {
                 <>
                   <button
                     onClick={() => setActiveTab('overview')}
-                    className={`w-full flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
+                    className={`w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
                       activeTab === 'overview' ? 'bg-emerald-950/80 text-emerald-300 border border-emerald-700/50 shadow-md' : 'text-slate-400 hover:bg-slate-900'
                     }`}
                   >
@@ -588,33 +594,53 @@ export const App: React.FC = () => {
                   </button>
 
                   <button
-                    onClick={() => setActiveTab('players')}
-                    className={`w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
-                      activeTab === 'players' ? 'bg-emerald-950/80 text-emerald-300 border border-emerald-700/50 shadow-md' : 'text-slate-400 hover:bg-slate-900'
+                    onClick={() => setActiveTab('map')}
+                    className={`w-full flex items-center justify-between px-3 py-2 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
+                      activeTab === 'map' ? 'bg-cyan-950/90 text-cyan-300 border border-cyan-500/70 shadow-md' : 'text-slate-400 hover:bg-slate-900'
                     }`}
                   >
                     <div className="flex items-center gap-2.5">
-                      <Users className="w-4 h-4 text-amber-400" />
-                      <span>Player Manager</span>
+                      <Compass className="w-4 h-4 text-cyan-400" />
+                      <span>AquaMap Live Radar</span>
                     </div>
-                    <span className="text-[10px] px-1.5 py-0.2 rounded font-mono bg-slate-800 text-slate-300">
-                      {status === 'ONLINE' ? playersList.length : 0}
+                    <span className="text-[9px] px-1.5 py-0.2 rounded font-mono bg-cyan-900/60 text-cyan-300 border border-cyan-700/60 font-bold">
+                      RADAR
                     </span>
                   </button>
 
                   <button
-                    onClick={() => setActiveTab('settings')}
-                    className={`w-full flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
-                      activeTab === 'settings' ? 'bg-emerald-950/80 text-emerald-300 border border-emerald-700/50 shadow-md' : 'text-slate-400 hover:bg-slate-900'
+                    onClick={() => setActiveTab('properties')}
+                    className={`w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
+                      activeTab === 'properties' ? 'bg-emerald-950/80 text-emerald-300 border border-emerald-700/50 shadow-md' : 'text-slate-400 hover:bg-slate-900'
                     }`}
                   >
                     <Sliders className="w-4 h-4 text-cyan-400" />
-                    <span>Server Tuning & RAM</span>
+                    <span>Server Tuning & Config</span>
+                  </button>
+
+                  <button
+                    onClick={() => setActiveTab('backups')}
+                    className={`w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
+                      activeTab === 'backups' ? 'bg-emerald-950/80 text-emerald-300 border border-emerald-700/50 shadow-md' : 'text-slate-400 hover:bg-slate-900'
+                    }`}
+                  >
+                    <Archive className="w-4 h-4 text-amber-400" />
+                    <span>Backup Vault</span>
+                  </button>
+
+                  <button
+                    onClick={() => setActiveTab('discord')}
+                    className={`w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
+                      activeTab === 'discord' ? 'bg-emerald-950/80 text-emerald-300 border border-emerald-700/50 shadow-md' : 'text-slate-400 hover:bg-slate-900'
+                    }`}
+                  >
+                    <Bell className="w-4 h-4 text-indigo-400" />
+                    <span>Discord Alert Bridge</span>
                   </button>
 
                   <button
                     onClick={() => setActiveTab('terminal')}
-                    className={`w-full flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
+                    className={`w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
                       activeTab === 'terminal' ? 'bg-emerald-950/80 text-emerald-300 border border-emerald-700/50 shadow-md' : 'text-slate-400 hover:bg-slate-900'
                     }`}
                   >
@@ -624,7 +650,7 @@ export const App: React.FC = () => {
 
                   <button
                     onClick={() => setActiveTab('plugins')}
-                    className={`w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
+                    className={`w-full flex items-center justify-between px-3 py-2 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
                       activeTab === 'plugins' ? 'bg-emerald-950/80 text-emerald-300 border border-emerald-700/50 shadow-md' : 'text-slate-400 hover:bg-slate-900'
                     }`}
                   >
@@ -639,7 +665,7 @@ export const App: React.FC = () => {
 
                   <button
                     onClick={() => setActiveTab('resourcepack')}
-                    className={`w-full flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
+                    className={`w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
                       activeTab === 'resourcepack' ? 'bg-emerald-950/80 text-emerald-300 border border-emerald-700/50 shadow-md' : 'text-slate-400 hover:bg-slate-900'
                     }`}
                   >
@@ -654,7 +680,7 @@ export const App: React.FC = () => {
                 <>
                   <button
                     onClick={() => setActiveTab('diagnostics')}
-                    className={`w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
+                    className={`w-full flex items-center justify-between px-3 py-2 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
                       activeTab === 'diagnostics' ? 'bg-cyan-950/80 text-cyan-300 border border-cyan-700/50 shadow-md' : 'text-slate-400 hover:bg-slate-900'
                     }`}
                   >
@@ -670,18 +696,8 @@ export const App: React.FC = () => {
                   </button>
 
                   <button
-                    onClick={() => setActiveTab('terminal')}
-                    className={`w-full flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
-                      activeTab === 'terminal' ? 'bg-cyan-950/80 text-cyan-300 border border-cyan-700/50 shadow-md' : 'text-slate-400 hover:bg-slate-900'
-                    }`}
-                  >
-                    <Terminal className="w-4 h-4 text-cyan-400" />
-                    <span>Interactive Console</span>
-                  </button>
-
-                  <button
                     onClick={() => setActiveTab('devsync')}
-                    className={`w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
+                    className={`w-full flex items-center justify-between px-3 py-2 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
                       activeTab === 'devsync' ? 'bg-cyan-950/80 text-cyan-300 border border-cyan-700/50 shadow-md' : 'text-slate-400 hover:bg-slate-900'
                     }`}
                   >
@@ -695,8 +711,53 @@ export const App: React.FC = () => {
                   </button>
 
                   <button
+                    onClick={() => setActiveTab('dependencies')}
+                    className={`w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
+                      activeTab === 'dependencies' ? 'bg-cyan-950/80 text-cyan-300 border border-cyan-700/50 shadow-md' : 'text-slate-400 hover:bg-slate-900'
+                    }`}
+                  >
+                    <Layers className="w-4 h-4 text-purple-400" />
+                    <span>Dependency Matrix</span>
+                  </button>
+
+                  <button
+                    onClick={() => setActiveTab('config')}
+                    className={`w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
+                      activeTab === 'config' ? 'bg-cyan-950/80 text-cyan-300 border border-cyan-700/50 shadow-md' : 'text-slate-400 hover:bg-slate-900'
+                    }`}
+                  >
+                    <FileCode className="w-4 h-4 text-amber-400" />
+                    <span>YAML Config Studio</span>
+                  </button>
+
+                  <button
+                    onClick={() => setActiveTab('map')}
+                    className={`w-full flex items-center justify-between px-3 py-2 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
+                      activeTab === 'map' ? 'bg-cyan-950/90 text-cyan-300 border border-cyan-500/70 shadow-md' : 'text-slate-400 hover:bg-slate-900'
+                    }`}
+                  >
+                    <div className="flex items-center gap-2.5">
+                      <Compass className="w-4 h-4 text-cyan-400" />
+                      <span>AquaMap Live Radar</span>
+                    </div>
+                    <span className="text-[9px] px-1.5 py-0.2 rounded font-mono bg-cyan-900/60 text-cyan-300 border border-cyan-700/60 font-bold">
+                      RADAR
+                    </span>
+                  </button>
+
+                  <button
+                    onClick={() => setActiveTab('terminal')}
+                    className={`w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
+                      activeTab === 'terminal' ? 'bg-cyan-950/80 text-cyan-300 border border-cyan-700/50 shadow-md' : 'text-slate-400 hover:bg-slate-900'
+                    }`}
+                  >
+                    <Terminal className="w-4 h-4 text-cyan-400" />
+                    <span>Interactive Console</span>
+                  </button>
+
+                  <button
                     onClick={() => setActiveTab('plugins')}
-                    className={`w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
+                    className={`w-full flex items-center justify-between px-3 py-2 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
                       activeTab === 'plugins' ? 'bg-cyan-950/80 text-cyan-300 border border-cyan-700/50 shadow-md' : 'text-slate-400 hover:bg-slate-900'
                     }`}
                   >
@@ -710,18 +771,8 @@ export const App: React.FC = () => {
                   </button>
 
                   <button
-                    onClick={() => setActiveTab('config')}
-                    className={`w-full flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
-                      activeTab === 'config' ? 'bg-cyan-950/80 text-cyan-300 border border-cyan-700/50 shadow-md' : 'text-slate-400 hover:bg-slate-900'
-                    }`}
-                  >
-                    <FileCode className="w-4 h-4 text-amber-400" />
-                    <span>YAML Config Studio</span>
-                  </button>
-
-                  <button
                     onClick={() => setActiveTab('overview')}
-                    className={`w-full flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
+                    className={`w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
                       activeTab === 'overview' ? 'bg-cyan-950/80 text-cyan-300 border border-cyan-700/50 shadow-md' : 'text-slate-400 hover:bg-slate-900'
                     }`}
                   >
@@ -1830,6 +1881,35 @@ export const App: React.FC = () => {
                   ))}
                 </div>
               </div>
+            )}
+
+            {/* ================= TAB: AQUAMAP LIVE RADAR ================= */}
+            {activeTab === 'map' && (
+              <AquaMapRadarView serverStatus={status} />
+            )}
+
+            {/* ================= TAB: VISUAL SERVER.PROPERTIES TWEAK STUDIO ================= */}
+            {activeTab === 'properties' && (
+              <VisualPropertiesView showToast={showToast} />
+            )}
+
+            {/* ================= TAB: 1-CLICK BACKUP VAULT ================= */}
+            {activeTab === 'backups' && (
+              <BackupVaultView showToast={showToast} formatFileSize={formatFileSize} />
+            )}
+
+            {/* ================= TAB: DISCORD WEBHOOK ALERT BRIDGE ================= */}
+            {activeTab === 'discord' && (
+              <DiscordBridgeView showToast={showToast} />
+            )}
+
+            {/* ================= TAB: PLUGIN DEPENDENCY CONFLICT MATRIX ================= */}
+            {activeTab === 'dependencies' && (
+              <DependencyMatrixView
+                plugins={plugins}
+                showToast={showToast}
+                onRefreshPlugins={() => fetch('/api/plugins').then(r => r.json()).then(d => setPlugins(d.plugins || []))}
+              />
             )}
 
           </main>
