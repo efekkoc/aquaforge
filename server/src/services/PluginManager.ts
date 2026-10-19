@@ -199,11 +199,27 @@ export class PluginManager {
       },
       aquadungeons: {
         fileName: 'AquaDungeons-1.0.0.jar',
-        yml: `name: AquaDungeons\nversion: 1.0.0\nmain: com.aquaforge.dungeons.AquaDungeons\napi-version: '1.21'\nauthor: efekkoc\ndescription: Procedural wave-based mob arena and boss fight engine with dynamic BossBars.`
+        yml: `name: AquaDungeons\nversion: 1.0.0\nmain: com.aquaforge.dungeons.AquaDungeons\napi-version: '1.21'\nauthor: efekkoc\ndescription: Procedural wave-based mob arena and boss fight engine with dynamic BossBars (1.20.x - 1.21.11).`
+      },
+      aquaclaims: {
+        fileName: 'AquaClaims-1.0.0.jar',
+        yml: `name: AquaClaims\nversion: 1.0.0\nmain: com.aquaforge.claims.AquaClaims\napi-version: '1.21'\nauthor: efekkoc\ndescription: Chunk land claiming, real-time particle grid borders & grief prevention (1.20.x - 1.21.11).`
+      },
+      aquaskills: {
+        fileName: 'AquaSkills-1.0.0.jar',
+        yml: `name: AquaSkills\nversion: 1.0.0\nmain: com.aquaforge.skills.AquaSkills\napi-version: '1.21'\nauthor: efekkoc\ndescription: MMORPG skill leveling, stat scaling and action bar XP telemetry (1.20.x - 1.21.11).`
+      },
+      aquachat: {
+        fileName: 'AquaChat-1.0.0.jar',
+        yml: `name: AquaChat\nversion: 1.0.0\nmain: com.aquaforge.chat.AquaChat\napi-version: '1.21'\nauthor: efekkoc\ndescription: RGB Gradient Chat, Channel Switcher & Item Showcase Engine (1.20.x - 1.21.11).`
+      },
+      aquapass: {
+        fileName: 'AquaPass-1.0.0.jar',
+        yml: `name: AquaPass\nversion: 1.0.0\nmain: com.aquaforge.pass.AquaPass\napi-version: '1.21'\nauthor: efekkoc\ndescription: Battle Pass, Daily Quests & Tier Reward Engine for Paper 1.20.x - 1.21.11.`
       },
       aquafishing: {
         fileName: 'AquaFishing-1.0.0.jar',
-        yml: `name: AquaFishing\nversion: 1.0.0\nmain: com.efekoc.aquafishing.AquaFishing\napi-version: '1.21'\nauthor: efekkoc\ndescription: Advanced RPG Fishing with 40 custom fish, reeling mini-game, and bossbars.`
+        yml: `name: AquaFishing\nversion: 1.0.0\nmain: com.efekoc.aquafishing.AquaFishing\napi-version: '1.21'\nauthor: efekkoc\ndescription: Advanced RPG Fishing with 40 custom fish, reeling mini-game, and bossbars (1.20.x - 1.21.11).`
       }
     };
 

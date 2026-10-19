@@ -1,0 +1,19 @@
+# ===================================================================
+#  AquaClaims Configuration
+#  Author: Turgut Efekan Koç (efekkoc) - https://github.com/efekkoc
+# ===================================================================
+
+claims:
+  initial-claim-blocks: 100
+  claim-blocks-accrued-per-hour: 50
+  max-claim-blocks: 10000
+
+protection:
+  prevent-explosions: true
+  prevent-fire-spread: true
+  prevent-pvp-in-claims: true
+  prevent-container-theft: true
+
+visuals:
+  particle-boundary: true
+  boundary-particle: "FLAME"

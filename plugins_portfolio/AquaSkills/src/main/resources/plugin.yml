@@ -1,0 +1,26 @@
+name: AquaSkills
+version: '1.0.0'
+main: com.aquaforge.skills.AquaSkills
+api-version: '1.21'
+author: Turgut Efekan Koç (efekkoc)
+website: https://github.com/efekkoc/AquaSkills
+description: MMO RPG Skill Progression & Ability Engine for Paper 1.20.x – 1.21.11
+
+commands:
+  skills:
+    description: View your RPG skills, levels, and passive abilities
+    permission: aquaskills.user
+    aliases: [skill, stats]
+    usage: /<command>
+  aquaskills:
+    description: Admin XP management
+    permission: aquaskills.admin
+    usage: /<command> [givexp|reset] <player> <skill> <amount>
+
+permissions:
+  aquaskills.user:
+    description: Standard player skills access
+    default: true
+  aquaskills.admin:
+    description: Administrator skill controls
+    default: op

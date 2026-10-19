@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import { 
   Sparkles, CheckCircle2, Shield, Zap, Coins, Box, Compass, 
-  Fish, Swords, Lock, Eye, Download, Check, ExternalLink, Server, Layers
+  Fish, Swords, Lock, Eye, Download, Check, ExternalLink, Server, Layers,
+  MessageSquare, Award, MapPin, TrendingUp
 } from 'lucide-react';
 
 export interface SuitePlugin {
   id: string;
   name: string;
-  category: 'Security & Auth' | 'Economy' | 'Combat & RPG' | 'Anti-Cheat' | 'Utility & Radar' | 'Moderation' | 'Loot & Rewards' | 'MMO Arena';
+  category: 'Security & Auth' | 'Economy' | 'Combat & RPG' | 'Anti-Cheat' | 'Utility & Radar' | 'Moderation' | 'Loot & Rewards' | 'MMO Arena' | 'Chat & Social' | 'World Protection' | 'Progression';
   icon: any;
   color: string;
   version: string;
@@ -23,7 +24,7 @@ export const ALL_AQUA_PLUGINS: SuitePlugin[] = [
     category: 'Utility & Radar',
     icon: Compass,
     color: 'from-cyan-500 to-blue-600',
-    version: '1.20.x – 1.21.4 (Universal)',
+    version: '1.20.x – 1.21.11 (Universal)',
     description: 'Clientless 60 FPS live canvas minimap, player radar, waypoints & HUD compass engine for Paper.',
     githubUrl: 'https://github.com/efekkoc/AquaMap',
     features: ['Hardware-accelerated 60 FPS Canvas', 'Interactive double-click waypoints', 'North alignment compass HUD', 'Multi-dimension Overworld/Nether/End']
@@ -34,7 +35,7 @@ export const ALL_AQUA_PLUGINS: SuitePlugin[] = [
     category: 'Security & Auth',
     icon: Lock,
     color: 'from-emerald-500 to-teal-600',
-    version: '1.20.x – 1.21.4 (Universal)',
+    version: '1.20.x – 1.21.11 (Universal)',
     description: 'Enterprise 2FA TOTP (Google Authenticator) & total session lockdown guard for server staff.',
     githubUrl: 'https://github.com/efekkoc/AquaSecurity',
     features: ['RFC 6238 TOTP Google Authenticator', 'Strict freeze lockdown on login', '24h trusted IP session caching', 'Admin emergency secret reset']
@@ -45,8 +46,8 @@ export const ALL_AQUA_PLUGINS: SuitePlugin[] = [
     category: 'Combat & RPG',
     icon: Zap,
     color: 'from-purple-500 to-pink-600',
-    version: '1.20.x – 1.21.4 (Universal)',
-    description: 'Modern 1.21.4 Data Components & PDC weapon and armor rune engine with drag-and-drop socketing.',
+    version: '1.20.x – 1.21.11 (Universal)',
+    description: 'Modern 1.21.x Data Components & PDC weapon and armor rune engine with drag-and-drop socketing.',
     githubUrl: 'https://github.com/efekkoc/AquaRunes',
     features: ['6 Legendary Runes (Vampire, Tempest, Gale, etc.)', 'Drag & drop inventory socketing', 'Ambient rotating particle aura rings', 'Custom Data Components & Lore']
   },
@@ -56,7 +57,7 @@ export const ALL_AQUA_PLUGINS: SuitePlugin[] = [
     category: 'Anti-Cheat',
     icon: Eye,
     color: 'from-red-500 to-orange-600',
-    version: '1.20.x – 1.21.4 (Universal)',
+    version: '1.20.x – 1.21.11 (Universal)',
     description: 'Real-time sliding CPS & raycast reach anti-cheat telemetry with Discord webhook triage.',
     githubUrl: 'https://github.com/efekkoc/AquaWatchdog',
     features: ['Raycast vector reach detection (>3.05 blocks)', '1000ms sliding window CPS & macro detection', 'Async Discord & AquaForge webhook alerts', 'In-game staff alerts & latency logging']
@@ -67,7 +68,7 @@ export const ALL_AQUA_PLUGINS: SuitePlugin[] = [
     category: 'Economy',
     icon: Coins,
     color: 'from-amber-500 to-yellow-600',
-    version: '1.20.x – 1.21.4 (Universal)',
+    version: '1.20.x – 1.21.11 (Universal)',
     description: 'Enterprise high-performance banking & economy engine with Vault API provider and peer transfers.',
     githubUrl: 'https://github.com/efekkoc/AquaEconomy',
     features: ['Zero-lag in-memory transaction engine', 'Dual-layer Wallet + Bank with interest', 'Instant peer-to-peer /pay transfers', 'Vault API compatible provider']
@@ -78,10 +79,10 @@ export const ALL_AQUA_PLUGINS: SuitePlugin[] = [
     category: 'Loot & Rewards',
     icon: Box,
     color: 'from-fuchsia-500 to-rose-600',
-    version: '1.20.x – 1.21.4 (Universal)',
+    version: '1.20.x – 1.21.11 (Universal)',
     description: '3D particle animated loot crate & reward matrix with pitch escalations and firework climaxes.',
     githubUrl: 'https://github.com/efekkoc/AquaCrates',
-    features: ['3D spiral particle unboxing animation', 'Firework victory celebration', '1.21.1/1.21.4 item lore support', 'Pity system guaranteed rewards']
+    features: ['3D spiral particle unboxing animation', 'Firework victory celebration', '1.21.1/1.21.4/1.21.11 item lore support', 'Pity system guaranteed rewards']
   },
   {
     id: 'aquastaff',
@@ -89,7 +90,7 @@ export const ALL_AQUA_PLUGINS: SuitePlugin[] = [
     category: 'Moderation',
     icon: Shield,
     color: 'from-blue-600 to-indigo-600',
-    version: '1.20.x – 1.21.4 (Universal)',
+    version: '1.20.x – 1.21.11 (Universal)',
     description: 'Unified staff mode with silent vanish, suspect freeze lockdown, and live inventory inspection.',
     githubUrl: 'https://github.com/efekkoc/AquaStaff',
     features: ['1-Click flight & staff mode (/staff)', 'Silent vanish invisibility (/v)', 'Suspect freeze lockdown (/freeze)', 'Live target inventory view (/invsee)']
@@ -100,10 +101,54 @@ export const ALL_AQUA_PLUGINS: SuitePlugin[] = [
     category: 'MMO Arena',
     icon: Swords,
     color: 'from-orange-500 to-red-600',
-    version: '1.20.x – 1.21.4 (Universal)',
+    version: '1.20.x – 1.21.11 (Universal)',
     description: 'Procedural wave-based mob arena and boss fight engine with dynamic multi-phase BossBars.',
     githubUrl: 'https://github.com/efekkoc/AquaDungeons',
     features: ['Multi-wave mob arenas with scaling HP', 'Dynamic colored BossBar tracking', 'Raid party queue management', 'Wave completion reward tables']
+  },
+  {
+    id: 'aquaclaims',
+    name: 'AquaClaims',
+    category: 'World Protection',
+    icon: MapPin,
+    color: 'from-emerald-600 to-green-600',
+    version: '1.20.x – 1.21.11 (Universal)',
+    description: 'Chunk-based land claiming with interactive particle borders and trust access delegation.',
+    githubUrl: 'https://github.com/efekkoc/AquaClaims',
+    features: ['Chunk coordinate hashing claim engine', 'Glowing particle boundary visualizer', 'Co-op friend trust delegation (/trust)', 'Zero external grief prevention dependency']
+  },
+  {
+    id: 'aquaskills',
+    name: 'AquaSkills',
+    category: 'Progression',
+    icon: TrendingUp,
+    color: 'from-violet-500 to-purple-600',
+    version: '1.20.x – 1.21.11 (Universal)',
+    description: 'MMORPG character leveling, attribute stat boosts, and real-time action bar XP telemetry.',
+    githubUrl: 'https://github.com/efekkoc/AquaSkills',
+    features: ['5 Core Skills (Mining, Woodcutting, Combat, Farming, Agility)', 'Passive stat buffs (Bonus Hearts, Crit, Speed)', 'Real-time Action Bar XP animations', 'Level-up sound and firework celebration']
+  },
+  {
+    id: 'aquachat',
+    name: 'AquaChat',
+    category: 'Chat & Social',
+    icon: MessageSquare,
+    color: 'from-sky-500 to-blue-500',
+    version: '1.20.x – 1.21.11 (Universal)',
+    description: 'RGB MiniMessage gradient chat, multi-channel broadcast, mention pings & held item showcase.',
+    githubUrl: 'https://github.com/efekkoc/AquaChat',
+    features: ['Kyori Adventure native hex & gradient colors', 'Multi-channel routing (Global, Local radius, Staff)', 'Item showcase command (/item)', 'Anti-spam rate limit protection']
+  },
+  {
+    id: 'aquapass',
+    name: 'AquaPass',
+    category: 'Loot & Rewards',
+    icon: Award,
+    color: 'from-amber-400 to-orange-500',
+    version: '1.20.x – 1.21.11 (Universal)',
+    description: 'Seasonal Battle Pass engine with Free & Premium tracks, daily quests, and 54-slot virtual GUI.',
+    githubUrl: 'https://github.com/efekkoc/AquaPass',
+    features: ['Dual-track 50-tier reward progression', 'Interactive 54-slot GUI menu (/pass)', 'Automated quest objectives (Mining, Mob Slayer)', 'Admin command injection tooling']
   },
   {
     id: 'aquafishing',
@@ -111,7 +156,7 @@ export const ALL_AQUA_PLUGINS: SuitePlugin[] = [
     category: 'Combat & RPG',
     icon: Fish,
     color: 'from-teal-500 to-cyan-600',
-    version: '1.20.x – 1.21.4 (Universal)',
+    version: '1.20.x – 1.21.11 (Universal)',
     description: 'Advanced RPG fishing engine with 40 custom fish, reeling mini-game, 10 rod tiers & bossbars.',
     githubUrl: 'https://github.com/efekkoc/AquaFishing',
     features: ['Interactive timing & reeling mini-game', '40 custom fish species & rarity tiers', '10 RPG fishing rod upgrades', 'ResourcePack CDN custom models']
@@ -122,33 +167,33 @@ export const PRESET_BUNDLES = [
   {
     id: 'ultimate',
     name: '🌟 Ultimate Complete Suite',
-    badge: 'ALL-IN-ONE',
-    description: 'Deploy all 9 Aqua plugins simultaneously. Complete coverage for security, economy, combat, moderation, and telemetries.',
-    pluginIds: ['aquamap', 'aquasecurity', 'aquarunes', 'aquawatchdog', 'aquaeconomy', 'aquacrates', 'aquastaff', 'aquadungeons', 'aquafishing'],
+    badge: 'ALL-IN-ONE (13 PLUGINS)',
+    description: 'Deploy all 13 Aqua flagship plugins simultaneously. Complete coverage for security, economy, combat, claims, chat, pass, skills, moderation, and telemetries.',
+    pluginIds: ['aquamap', 'aquasecurity', 'aquarunes', 'aquawatchdog', 'aquaeconomy', 'aquacrates', 'aquastaff', 'aquadungeons', 'aquaclaims', 'aquaskills', 'aquachat', 'aquapass', 'aquafishing'],
     tagColor: 'border-cyan-500 bg-cyan-950/60 text-cyan-300'
   },
   {
     id: 'survival_smp',
     name: '⚔️ Competitive Survival & SMP',
     badge: 'POPULAR',
-    description: 'Ideal for public survival, SMP, and Lifesteal servers with economy, runes, crates, fishing, and radar.',
-    pluginIds: ['aquamap', 'aquaeconomy', 'aquarunes', 'aquafishing', 'aquacrates'],
+    description: 'Ideal for public survival, SMP, and Lifesteal servers with claims, chat, economy, runes, crates, skills, pass, and radar.',
+    pluginIds: ['aquamap', 'aquaclaims', 'aquachat', 'aquaeconomy', 'aquaskills', 'aquapass', 'aquarunes', 'aquafishing', 'aquacrates'],
     tagColor: 'border-emerald-500 bg-emerald-950/60 text-emerald-300'
   },
   {
     id: 'hardcore_security',
     name: '🛡️ Hardcore Secure Network',
     badge: 'PROTECTION',
-    description: 'Focused on high-security networks with 2FA, anti-cheat packet inspection, staff tools, and banking.',
-    pluginIds: ['aquasecurity', 'aquawatchdog', 'aquastaff', 'aquaeconomy'],
+    description: 'Focused on high-security networks with 2FA, anti-cheat packet inspection, staff tools, chat moderation, and banking.',
+    pluginIds: ['aquasecurity', 'aquawatchdog', 'aquastaff', 'aquachat', 'aquaeconomy'],
     tagColor: 'border-blue-500 bg-blue-950/60 text-blue-300'
   },
   {
     id: 'mmo_rpg',
     name: '🏰 MMO Dungeons & Adventure',
     badge: 'RPG READY',
-    description: 'Turn your server into an RPG world with mob arenas, rune socketing, custom loot boxes, and fishing.',
-    pluginIds: ['aquadungeons', 'aquarunes', 'aquacrates', 'aquamap', 'aquafishing'],
+    description: 'Turn your server into an RPG world with mob arenas, skills leveling, battle pass, rune socketing, custom loot boxes, and fishing.',
+    pluginIds: ['aquadungeons', 'aquaskills', 'aquapass', 'aquarunes', 'aquacrates', 'aquamap', 'aquafishing'],
     tagColor: 'border-purple-500 bg-purple-950/60 text-purple-300'
   }
 ];

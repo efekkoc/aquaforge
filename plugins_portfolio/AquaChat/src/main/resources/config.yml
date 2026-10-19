@@ -1,0 +1,35 @@
+# ==============================================================================
+#                      AquaChat Configuration
+#        Universal RGB Gradient Chat & Item Engine for Paper 1.20.x – 1.21.11
+#         Author: Turgut Efekan Koç (efekkoc) | GitHub: efekkoc/AquaChat
+# ==============================================================================
+
+settings:
+  # Universal Paper 1.20.x – 1.21.11 compatibility mode
+  engine_version: "1.21.11-Universal"
+  enable_hex_colors: true
+  enable_mention_ding: true
+  mention_sound: "BLOCK_NOTE_BLOCK_BELL"
+
+channels:
+  global:
+    prefix: "<gradient:#00d2ff:#3a7bd5>[Global]</gradient> "
+    format: "%prefix%player%suffix% &8» &f%message%"
+    radius: -1 # Infinite
+  local:
+    prefix: "<gradient:#11998e:#38ef7d>[Local]</gradient> "
+    format: "%prefix%player%suffix% &8» &7%message%"
+    radius: 100 # In blocks
+  staff:
+    prefix: "<gradient:#ff416c:#ff4b2b>[Staff]</gradient> "
+    format: "%prefix%player% &8» &c%message%"
+    permission: "aquachat.staffchat"
+
+items:
+  placeholder: "[i]"
+  hover_display_name: true
+  show_lore_and_enchants: true
+
+cooldown:
+  chat_cooldown_seconds: 1.5
+  bypass_permission: "aquachat.bypass.cooldown"

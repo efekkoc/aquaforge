@@ -1,0 +1,39 @@
+# ==============================================================================
+#                      AquaPass Configuration
+#         Universal Battle Pass Engine for Paper 1.20.x – 1.21.11
+#         Author: Turgut Efekan Koç (efekkoc) | GitHub: efekkoc/AquaPass
+# ==============================================================================
+
+settings:
+  season_name: "Season I: Echoes of the Abyss"
+  xp_per_tier: 1000
+  max_tiers: 50
+  daily_reset_hour_utc: 0
+
+quests:
+  mine_diamonds:
+    name: "Deepslate Wealth"
+    description: "Mine 10 Diamond Ores"
+    xp_reward: 250
+    target_count: 10
+  slay_mobs:
+    name: "Monster Slayer"
+    description: "Slay 50 Monsters"
+    xp_reward: 300
+    target_count: 50
+  catch_fish:
+    name: "Master Angler"
+    description: "Catch 15 Fish"
+    xp_reward: 200
+    target_count: 15
+
+rewards:
+  tier_1:
+    free: "GIVE %player% iron_ingot 16"
+    premium: "GIVE %player% diamond 5"
+  tier_5:
+    free: "GIVE %player% golden_apple 3"
+    premium: "GIVE %player% netherite_scrap 1"
+  tier_10:
+    free: "GIVE %player% emerald 32"
+    premium: "GIVE %player% elytra 1"

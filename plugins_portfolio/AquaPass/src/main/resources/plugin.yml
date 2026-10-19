@@ -1,0 +1,29 @@
+name: AquaPass
+version: '1.0.0'
+main: com.aquaforge.pass.AquaPass
+api-version: '1.21'
+author: Turgut Efekan Koç (efekkoc)
+website: https://github.com/efekkoc/AquaPass
+description: Battle Pass, Quest Tracker & Tier Reward Engine for Paper 1.20.x – 1.21.11
+
+commands:
+  pass:
+    description: Open the Battle Pass menu & claim rewards
+    permission: aquapass.use
+    aliases: [bp, battlepass]
+    usage: /<command>
+  passadmin:
+    description: Administrative controls for Battle Pass
+    permission: aquapass.admin
+    usage: /<command> [givexp|reset|reload] <player> [amount]
+
+permissions:
+  aquapass.use:
+    description: Standard battle pass access
+    default: true
+  aquapass.premium:
+    description: Premium battle pass tier access
+    default: op
+  aquapass.admin:
+    description: Admin access to manage player pass progress
+    default: op

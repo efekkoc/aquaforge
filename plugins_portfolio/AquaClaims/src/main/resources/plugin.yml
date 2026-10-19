@@ -1,0 +1,33 @@
+name: AquaClaims
+version: '1.0.0'
+main: com.aquaforge.claims.AquaClaims
+api-version: '1.21'
+author: Turgut Efekan Koç (efekkoc)
+website: https://github.com/efekkoc/AquaClaims
+description: Visual Land Claiming & Anti-Grief Engine for Paper 1.20.x – 1.21.11
+
+commands:
+  claim:
+    description: Claim the chunk you are currently standing on
+    permission: aquaclaims.user
+    usage: /<command>
+  unclaim:
+    description: Abandon the land claim you are standing on
+    permission: aquaclaims.user
+    usage: /<command>
+  trust:
+    description: Grant building and container permissions to a player
+    permission: aquaclaims.user
+    usage: /<command> <player>
+  untrust:
+    description: Revoke permissions from a player in your claim
+    permission: aquaclaims.user
+    usage: /<command> <player>
+
+permissions:
+  aquaclaims.user:
+    description: Standard player claiming permissions
+    default: true
+  aquaclaims.admin:
+    description: Admin bypass for all claims
+    default: op

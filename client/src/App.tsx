@@ -6,7 +6,7 @@ import {
   Sliders, UserCheck, AlertOctagon, Download, Code2, Copy, Check, Power, Trash2, Wand2,
   Image as ImageIcon, Video, Github, Search, Plus, FolderSearch, ArrowRight, Save,
   HelpCircle, ExternalLink, X, ChevronDown, UserX, Crown, Megaphone, Bell, Upload,
-  Compass, Archive, Layers
+  Compass, Archive, Layers, Globe, Globe2
 } from 'lucide-react';
 import { ansiToHtml } from './utils/ansi';
 import { ServerStatus, ServerMetrics, DiagnosticReport, PluginMeta, DevSyncWatcher, ResourcePackItem } from './types';
@@ -16,11 +16,15 @@ import { BackupVaultView } from './components/BackupVaultView';
 import { DiscordBridgeView } from './components/DiscordBridgeView';
 import { DependencyMatrixView } from './components/DependencyMatrixView';
 import { AquaSuiteHubView } from './components/AquaSuiteHubView';
+import { GlobalConnectTunnelView } from './components/GlobalConnectTunnelView';
+import { WorldVaultView } from './components/WorldVaultView';
+import { ServerWizardModal } from './components/ServerWizardModal';
 
 export const App: React.FC = () => {
   // Navigation & Role Mode (Admin vs Developer)
-  const [activeTab, setActiveTab] = useState<'overview' | 'terminal' | 'diagnostics' | 'plugins' | 'devsync' | 'config' | 'resourcepack' | 'map' | 'properties' | 'backups' | 'discord' | 'dependencies' | 'players' | 'settings' | 'suite'>('overview');
+  const [activeTab, setActiveTab] = useState<'overview' | 'terminal' | 'diagnostics' | 'plugins' | 'devsync' | 'config' | 'resourcepack' | 'map' | 'properties' | 'backups' | 'discord' | 'dependencies' | 'players' | 'settings' | 'suite' | 'tunnel' | 'world'>('overview');
   const [userRole, setUserRole] = useState<'admin' | 'developer'>('admin');
+  const [showServerWizard, setShowServerWizard] = useState<boolean>(false);
   
   // Selected Minecraft Version (Dynamic All-Era Database)
   const [mcVersion, setMcVersion] = useState<string>('1.21.4 – The Garden Awakens');
@@ -517,6 +521,16 @@ export const App: React.FC = () => {
 
           {/* Right Controls: Role Switcher & Power Buttons & Info (ALWAYS VISIBLE & LOCKED) */}
           <div className="flex items-center gap-2 sm:gap-3 shrink-0 ml-auto">
+            {/* 1-Click Server Wizard Trigger */}
+            <button
+              onClick={() => setShowServerWizard(true)}
+              className="flex items-center gap-1.5 px-3 py-1.5 bg-gradient-to-r from-cyan-600 via-teal-600 to-emerald-600 hover:from-cyan-500 hover:to-emerald-500 text-white rounded-xl text-xs font-bold cursor-pointer transition-all shadow-md shadow-cyan-900/40"
+              title="30-Second Server Setup Wizard"
+            >
+              <Wand2 className="w-3.5 h-3.5 animate-spin-slow" />
+              <span>1-Click Wizard</span>
+            </button>
+
             {/* Guide / Info Modal Trigger */}
             <button
               onClick={() => setShowInfoModal(true)}
@@ -638,6 +652,31 @@ export const App: React.FC = () => {
                   </button>
 
                   <button
+                    onClick={() => setActiveTab('tunnel')}
+                    className={`w-full flex items-center justify-between px-3 py-2 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
+                      activeTab === 'tunnel' ? 'bg-cyan-950/90 text-cyan-300 border border-cyan-500/70 shadow-md' : 'text-slate-400 hover:bg-slate-900'
+                    }`}
+                  >
+                    <div className="flex items-center gap-2.5">
+                      <Globe className="w-4 h-4 text-cyan-400" />
+                      <span>Global Play Tunnel</span>
+                    </div>
+                    <span className="text-[9px] px-1.5 py-0.2 rounded font-mono bg-emerald-950 text-emerald-400 border border-emerald-700/60 font-bold">
+                      EDGE
+                    </span>
+                  </button>
+
+                  <button
+                    onClick={() => setActiveTab('world')}
+                    className={`w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
+                      activeTab === 'world' ? 'bg-emerald-950/80 text-emerald-300 border border-emerald-700/50 shadow-md' : 'text-slate-400 hover:bg-slate-900'
+                    }`}
+                  >
+                    <Globe2 className="w-4 h-4 text-teal-400" />
+                    <span>World Vault & Seeds</span>
+                  </button>
+
+                  <button
                     onClick={() => setActiveTab('map')}
                     className={`w-full flex items-center justify-between px-3 py-2 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
                       activeTab === 'map' ? 'bg-cyan-950/90 text-cyan-300 border border-cyan-500/70 shadow-md' : 'text-slate-400 hover:bg-slate-900'
@@ -735,6 +774,31 @@ export const App: React.FC = () => {
                     <span className="text-[9px] px-1.5 py-0.2 rounded font-mono bg-cyan-900 text-cyan-300 border border-cyan-700/60 font-bold">
                       PRESETS
                     </span>
+                  </button>
+
+                  <button
+                    onClick={() => setActiveTab('tunnel')}
+                    className={`w-full flex items-center justify-between px-3 py-2 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
+                      activeTab === 'tunnel' ? 'bg-cyan-950/90 text-cyan-300 border border-cyan-500/70 shadow-md' : 'text-slate-400 hover:bg-slate-900'
+                    }`}
+                  >
+                    <div className="flex items-center gap-2.5">
+                      <Globe className="w-4 h-4 text-cyan-400" />
+                      <span>Global Play Tunnel</span>
+                    </div>
+                    <span className="text-[9px] px-1.5 py-0.2 rounded font-mono bg-emerald-950 text-emerald-400 border border-emerald-700/60 font-bold">
+                      EDGE
+                    </span>
+                  </button>
+
+                  <button
+                    onClick={() => setActiveTab('world')}
+                    className={`w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
+                      activeTab === 'world' ? 'bg-cyan-950/80 text-cyan-300 border border-cyan-700/50 shadow-md' : 'text-slate-400 hover:bg-slate-900'
+                    }`}
+                  >
+                    <Globe2 className="w-4 h-4 text-teal-400" />
+                    <span>World Vault & Seeds</span>
                   </button>
 
                   <button
@@ -1979,6 +2043,16 @@ export const App: React.FC = () => {
               />
             )}
 
+            {/* ================= TAB: GLOBAL PLAY TUNNEL ================= */}
+            {activeTab === 'tunnel' && (
+              <GlobalConnectTunnelView serverStatus={status} />
+            )}
+
+            {/* ================= TAB: WORLD VAULT & SEEDS ================= */}
+            {activeTab === 'world' && (
+              <WorldVaultView onSendCommand={handleSendCommand} />
+            )}
+
             {/* ================= TAB: AQUAMAP LIVE RADAR ================= */}
             {activeTab === 'map' && (
               <AquaMapRadarView serverStatus={status} />
@@ -2105,6 +2179,21 @@ export const App: React.FC = () => {
           </div>
         </div>
       )}
+
+      {/* ================= 1-CLICK SERVER WIZARD MODAL ================= */}
+      <ServerWizardModal
+        isOpen={showServerWizard}
+        onClose={() => setShowServerWizard(false)}
+        onCompleteLaunch={(config) => {
+          setMcVersion(config.version);
+          handleDeployPreset(config.selectedPlugins);
+          showToast(`🚀 Server ${config.serverName} launched with ${config.selectedPlugins.length} Aqua plugins!`, 'success');
+          if (status === 'OFFLINE') {
+            handleServerAction('start');
+          }
+          setActiveTab('overview');
+        }}
+      />
 
     </div>
   );

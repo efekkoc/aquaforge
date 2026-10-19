@@ -1,0 +1,20 @@
+# ===================================================================
+#  AquaSkills Configuration
+#  Author: Turgut Efekan Koç (efekkoc) - https://github.com/efekkoc
+# ===================================================================
+
+skills:
+  mining:
+    double-drop-chance-per-level: 0.5 # % per level
+    xp-per-stone: 2
+    xp-per-iron: 10
+    xp-per-diamond: 45
+    xp-per-ancient-debris: 100
+
+  combat:
+    bonus-damage-percent-per-level: 0.4 # % per level
+    xp-per-zombie: 15
+    xp-per-player: 100
+
+action-bar:
+  show-xp-gain: true
