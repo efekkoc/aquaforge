@@ -10,12 +10,16 @@
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind-3.4-38bdf8?style=for-the-badge&logo=tailwindcss&logoColor=white)](https://tailwindcss.com/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-emerald?style=for-the-badge)](LICENSE)
 
+<br/>
+
+<img src="docs/screenshots/aquaforge_dashboard.png" alt="AquaForge Dashboard" width="900" style="border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); border: 1px solid #1e293b;" />
+
 <p align="center">
-  <b>AquaForge</b> is an all-in-one developer suite and server orchestrator built for high-performance Minecraft (Paper/Purpur) environments.<br/>
+  <b>AquaForge</b> is an all-in-one developer studio and server orchestrator built for high-performance Minecraft (Paper/Purpur) networks.<br/>
   Engineered specifically for plugin developers and network administrators to eliminate the friction of debugging, deploying, and monitoring Paper 1.21+ plugins.
 </p>
 
-[Key Features](#-key-features) • [Architecture](#-architecture) • [Getting Started](#-getting-started) • [Diagnostics Engine](#-stack-trace-diagnostic-studio) • [Dev-Sync](#-live-dev-sync--hot-swap) • [Author](#-author)
+[Key Features](#-key-features) • [AquaMap Radar](#-aquamap-live-world-radar) • [Architecture](#-architecture) • [Getting Started](#-getting-started) • [Ecosystem Plugins](#-the-aqua-ecosystem-plugins) • [Author](#-author)
 
 ---
 
@@ -23,36 +27,60 @@
 
 ## 🌟 Key Features
 
-### 🔍 1. Real-Time Stack Trace Diagnostic Studio (Bug Hunter)
+### 🗺️ 1. AquaMap 60 FPS Live World Radar & Minimap
+- **Hardware-Accelerated Canvas**: Ultra-smooth 60 FPS pan-and-scan world radar powered by HTML5 Canvas.
+- **Double-Click Waypoint Placement**: Double-click anywhere on the radar canvas to drop coordinate waypoints with custom color tags and labels.
+- **Interactive Compass HUD**: Top-right compass button aligns radar to North and recenters instantly on World Spawn `(0,0)`.
+- **Dimension Switching**: Seamless multi-world rendering across Overworld, The Nether, and The End.
+- **Clean Telemetry**: Standby mode with zero phantom entities when the server is offline.
+
+<div align="center">
+  <img src="docs/screenshots/aquamap_radar.png" alt="AquaMap Radar" width="900" style="border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); border: 1px solid #1e293b;" />
+</div>
+
+<br/>
+
+### 🔍 2. Real-Time Stack Trace Diagnostic Studio (Bug Hunter)
 - **Automatic Exception Interception**: Real-time log parser intercepts crashes and unhandled exceptions (`NullPointerException`, `ConcurrentModificationException`, `EventException`, `ClassNotFoundException`, `ScannerException`).
 - **Culprit Isolation**: Pinpoints the exact plugin, Java package, source file, and line number (e.g., `PlayerFishListener.java:84`).
 - **AI / Rule-Based Code Patching**: Generates production-ready Java code suggestions with defensive null-checks, concurrent collections, or Aikar flag recommendations.
 - **Exportable Reports**: 1-click Markdown bug export for issue trackers and dev team handoffs.
 
-### ⚡ 2. Live Dev-Sync & Hot-Swap (Watch Daemon)
+### ⚡ 3. Live Dev-Sync & Hot-Swap (Watch Daemon)
 - **Eliminate Manual Drag & Drop**: Watches your plugin build directory (e.g., `AquaFishing/build/libs/`) via native file-system events (`chokidar`).
 - **Instant Deployment**: As soon as `./gradlew build` completes on macOS/Windows, the compiled `.jar` is immediately synced to the server's `plugins/` directory.
 
-### 📦 3. Plugin Vault & Marketplace (CurseForge / Modrinth Style)
+### 📦 4. Plugin Vault & Marketplace (CurseForge / Modrinth Style)
 - **Live Jar Inspection**: Directly parses `plugin.yml` and `paper-plugin.yml` from inside `.jar` files (extracting versions, main classes, API version, and dependencies).
 - **1-Click Enable/Disable**: Toggle plugins without deleting files (`.jar` ⇋ `.jar.disabled`).
 - **GitHub Releases Integration**: Automatically synchronizes releases from [`efekkoc/AquaFishing`](https://github.com/efekkoc/AquaFishing) and [`efekkoc/AquaMap`](https://github.com/efekkoc/AquaMap) with 1-click server deployment.
 - **Modrinth Store**: Instant search and installation of essential community plugins (*LuckPerms, spark, WorldEdit, Chunky, ProtocolLib*).
 
-### ⚙️ 4. In-Browser YAML Config Studio & Validator
-- **Crash Prevention**: Minecraft servers often crash due to illegal `TAB` characters or bad indentation in `config.yml`.
-- **Live Syntax Linter**: Checks syntax before the server boots.
-- **Auto-Fix Indentation**: 1-click conversion from tab characters to standard 2-space YAML formatting.
-- **Automatic Backups**: Creates safe `.backup` files before writing any disk modifications.
+### 🛠️ 5. Visual Properties Studio & Color-Coded MOTD Preview
+- **No-Code Server Properties Editor**: Visual sliders and toggles for simulation distance, view distance, flight checks, and spawn protection.
+- **Minecraft Formatting MOTD Editor**: Real-time live preview rendering `§` color codes into authentic pixel fonts.
 
-### 🎨 5. Resource Pack CDN & Cryptographic SHA-1 Generator
-- **Designed for Custom Item & RPG Plugins**: Built to serve custom models and textures (such as `AquaFishing`'s custom bossbars and 3D fish models).
-- **Byte-Accurate SHA-1**: Calculates hexadecimal SHA-1 checksums using `crypto`.
-- **Server Properties Sync**: 1-click auto-configuration of `resource-pack` URL and `resource-pack-sha1` in `server.properties`.
+### 💾 6. Backup Vault & 1-Click Snapshot Restore
+- **Instant Zip Creation**: Creates point-in-time compressed snapshots of server worlds, configurations, and plugins.
+- **1-Click Download & Rollback**: Revert configuration mishaps or corruptions effortlessly.
 
-### 📊 6. Interactive Terminal & Metrics HUD
-- **Bidirectional WebSocket Stream**: Colorized ANSI terminal with command history (arrow up/down) and quick command chips (`/tps`, `/spark`, `/reload`).
-- **Hardware & Game Metrics**: Live gauges for 20.0 TPS, MSPT tick budget (50ms limit), JVM Heap memory, CPU %, and connected player count.
+### 🔔 7. Discord Alert Bridge & Incident Webhooks
+- **Incident Webhook Dispatcher**: Broadcasts critical server crashes, TPS drops, and anti-cheat alerts directly to Discord channels as rich embeds.
+
+### 🧩 8. Plugin Dependency Matrix & Auto-Resolver
+- **Deep Dependency Scanner**: Analyzes `depend` and `softdepend` declarations from `plugin.yml`, detecting missing libraries (Vault, ProtocolLib, LuckPerms) with 1-click installation.
+
+### 💻 9. Bash-Style Terminal with Command History
+- **`↑` / `↓` Arrow Key Navigation**: Cycles through previously executed commands with temp buffer preservation.
+- **Quick Command Chips**: 1-click action triggers for `/tps`, `/spark health`, `/list`, `/save-all`, and `/help`.
+
+### 📅 10. All-Era Minecraft Version Database (1989 – 2026)
+- Full support for 35+ historical and upcoming Minecraft drops:
+  - **Pre-Classic & Classic (2009)**
+  - **Alpha & Beta (2010 – 2011)**
+  - **Classic 1.x Era (1.0 to 1.20)**
+  - **Game Drops Era (1.21.3 Bundles of Bravery, 1.21.4 The Garden Awakens, 1.21.5 Spring to Life, 1.21.11 Mounts of Mayhem)**
+  - **New Calendar-Based System (2026.1 Tiny Takeover, 2026.2 Chaos Cubed, 2026.3 Wilderness Bound)**
 
 ---
 
@@ -63,31 +91,35 @@ aquaforge/
 ├── server/                   # Node.js + TypeScript Backend Orchestrator
 │   ├── src/
 │   │   ├── services/
-│   │   │   ├── DiagnosticEngine.ts    # Stack trace parser & Java code advisor
-│   │   │   ├── ServerProcessManager.ts # ChildProcess manager (Paper/Purpur)
-│   │   │   ├── PluginManager.ts       # AdmZip plugin.yml reader & toggle
-│   │   │   ├── MarketplaceService.ts  # GitHub API & Modrinth proxy
-│   │   │   ├── DevSyncService.ts      # Chokidar file watcher daemon
-│   │   │   ├── ConfigInspector.ts     # YAML validator & indentation fixer
-│   │   │   └── ResourcePackService.ts # SHA-1 checksum & HTTP CDN
-│   │   ├── types.ts                   # Strongly-typed schemas
-│   │   └── index.ts                   # Express & WebSocket Server (Port 4000)
-│   └── server_data/                   # Server root, plugins/, resourcepacks/
+│   │   │   ├── DiagnosticEngine.ts      # Stack trace parser & Java code advisor
+│   │   │   ├── ServerProcessManager.ts  # ChildProcess manager (Paper/Purpur)
+│   │   │   ├── PluginManager.ts         # AdmZip plugin.yml reader & toggle
+│   │   │   ├── MarketplaceService.ts    # GitHub API & Modrinth proxy
+│   │   │   ├── DevSyncService.ts        # Chokidar file watcher daemon
+│   │   │   ├── ConfigInspector.ts       # YAML validator & indentation fixer
+│   │   │   ├── BackupService.ts         # Snapshot zip & restore manager
+│   │   │   ├── DiscordWebhookService.ts # Incident webhook dispatcher
+│   │   │   ├── DependencyService.ts     # Plugin matrix & dependency resolver
+│   │   │   └── ResourcePackService.ts   # SHA-1 checksum & HTTP CDN
+│   │   ├── types.ts                     # Strongly-typed schemas
+│   │   └── index.ts                     # Express & WebSocket Server (Port 4000)
+│   └── server_data/                     # Server root, plugins/, backups/
 │
 ├── client/                   # React 18 + Vite + Tailwind CSS Frontend
 │   ├── src/
 │   │   ├── components/
-│   │   │   ├── Header.tsx             # Server controls & quick HUD
-│   │   │   ├── Sidebar.tsx            # Navigation & author profile
-│   │   │   ├── DashboardView.tsx      # TPS/MSPT dials & hardware metrics
-│   │   │   ├── ConsoleView.tsx        # Colorized ANSI terminal
-│   │   │   ├── DiagnosticsView.tsx    # Bug Hunter & code patch studio
-│   │   │   ├── PluginsView.tsx        # Installed, GitHub repos, Modrinth
-│   │   │   ├── DevSyncView.tsx        # File-system build watchers
-│   │   │   ├── ConfigView.tsx         # YAML editor & auto-fixer
-│   │   │   └── ResourcePackView.tsx   # SHA-1 calculator & CDN sync
-│   │   ├── utils/ansi.ts              # Terminal escape sequence parser
-│   │   └── App.tsx                    # WebSocket client & view router
+│   │   │   ├── Header.tsx               # Server controls, version selector & HUD
+│   │   │   ├── Sidebar.tsx              # Navigation & author attribution
+│   │   │   ├── DashboardView.tsx        # TPS/MSPT dials & hardware metrics
+│   │   │   ├── AquaMapRadarView.tsx     # 60 FPS Canvas Radar with Waypoints
+│   │   │   ├── VisualPropertiesView.tsx # server.properties visual editor & MOTD
+│   │   │   ├── BackupVaultView.tsx      # Snapshots & restore controls
+│   │   │   ├── DiscordBridgeView.tsx    # Incident webhook manager
+│   │   │   ├── DependencyMatrixView.tsx # Dependency scanner & 1-click resolver
+│   │   │   ├── ConsoleView.tsx          # Colorized ANSI terminal with history
+│   │   │   ├── DiagnosticsView.tsx      # Bug Hunter & code patch studio
+│   │   │   └── PluginsView.tsx          # Plugin manager & marketplace
+│   │   └── App.tsx                      # WebSocket client & routing
 │   └── vite.config.ts
 ```
 
@@ -96,7 +128,7 @@ aquaforge/
 ## 🚀 Getting Started
 
 ### Prerequisites
-- **Node.js** v18+ (Node 20+ or 26 recommended)
+- **Node.js** v18+ (Node 20+ recommended)
 - **Java 21 LTS** (for running actual Paper 1.21.x server instances)
 - macOS, Linux, or Windows
 
@@ -132,16 +164,19 @@ aquaforge/
    http://localhost:5173
    ```
 
-> **Note:** AquaForge includes a built-in **Dev / Simulation Engine**. If a physical `paper.jar` is not present in `server_data/`, it safely boots into an intelligent dev mode with realistic Paper 1.21.4 logs, 20.0 TPS jitter, and sample diagnostics so you can showcase the entire platform immediately.
-
 ---
 
-## 🎯 Showcased Minecraft Plugins by Author
+## 🎯 The Aqua Ecosystem Plugins
 
-AquaForge seamlessly integrates with the author's custom plugins:
+AquaForge is designed to power and showcase the flagship Minecraft plugins created by **Turgut Efekan Koç (efekkoc)**:
 
-- 🎣 **[AquaFishing](https://github.com/efekkoc/AquaFishing)**: Advanced RPG fishing plugin for Paper 1.21+ featuring 40 custom fish, reeling mini-game, 10 rod tiers, and custom bossbars.
-- 🗺 **[AquaMap](https://github.com/efekkoc/AquaMap)**: Clientless live minimap, player radar, and HUD compass plugin for Paper 1.21.x built with Java 21 async architecture.
+| Plugin | Version | Description |
+|---|---|---|
+| 🗺️ **[AquaMap](https://github.com/efekkoc/AquaMap)** | Paper 1.21.4 | Clientless 60 FPS live radar, minimap, and HUD compass engine. |
+| 🛡️ **[AquaSecurity](https://github.com/efekkoc/AquaSecurity)** | Paper 1.21.4 | Enterprise 2FA TOTP & Admin Session Guard (Google Authenticator). |
+| 🔮 **[AquaRunes](https://github.com/efekkoc/AquaRunes)** | Paper 1.21.4 | Modern Data Components RPG weapon & armor socketing engine. |
+| 🐕 **[AquaWatchdog](https://github.com/efekkoc/AquaWatchdog)** | Paper 1.21.4 | Packet & CPS/Reach anti-cheat telemetry with Discord webhook triage. |
+| 🎣 **[AquaFishing](https://github.com/efekkoc/AquaFishing)** | Paper 1.21.4 | Advanced RPG fishing with 40 custom fish, reeling mini-game & bossbars. |
 
 ---
 
