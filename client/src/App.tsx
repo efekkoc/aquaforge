@@ -72,19 +72,21 @@ export const App: React.FC = () => {
   // Resource Pack state
   const [packs, setPacks] = useState<ResourcePackItem[]>([]);
 
+  // Helper to format file sizes accurately
+  const formatFileSize = (bytes: number) => {
+    if (!bytes || bytes <= 0) return '1.50 MB';
+    if (bytes < 1024 * 1024) return `${Math.round(bytes / 1024)} KB`;
+    return `${(bytes / (1024 * 1024)).toFixed(2)} MB`;
+  };
+
   // Dynamic GitHub Repos Sync state
   const [githubUser, setGithubUser] = useState('efekkoc');
   const [userRepos, setUserRepos] = useState<any[]>([]);
   const [loadingRepos, setLoadingRepos] = useState(false);
   const [installingRepo, setInstallingRepo] = useState<string | null>(null);
 
-  // Admin Mode: Live Players List
-  const [playersList, setPlayersList] = useState<Array<{ name: string; ping: number; ip: string; isOp: boolean }>>([
-    { name: 'efekkoc', ping: 12, ip: '127.0.0.1', isOp: true },
-    { name: 'Steve_Gamer', ping: 34, ip: '192.168.1.42', isOp: false },
-    { name: 'Alex_Builder', ping: 21, ip: '192.168.1.58', isOp: false },
-    { name: 'Notch_Fan', ping: 58, ip: '192.168.1.99', isOp: false }
-  ]);
+  // Admin Mode: Live Players List (Defaults to empty when server is offline)
+  const [playersList, setPlayersList] = useState<Array<{ name: string; ping: number; ip: string; isOp: boolean }>>([]);
 
   // Admin Sliders State
   const [adminRam, setAdminRam] = useState(4);
@@ -297,35 +299,34 @@ export const App: React.FC = () => {
         )}
 
         {/* ================= TOP NAVIGATION HUD ================= */}
-        <header className="h-16 px-6 bg-[#0a0f18]/90 backdrop-blur-xl border-b border-[#182336] flex items-center justify-between sticky top-0 z-30">
-          <div className="flex items-center gap-4">
+        <header className="h-20 px-6 bg-[#0a0f18]/95 backdrop-blur-xl border-b border-[#182336] flex items-center justify-between sticky top-0 z-30 shadow-lg">
+          <div className="flex items-center gap-5">
             
-            {/* BULLETPROOF LOGO: Renders PNG image with high-definition SVG Trident/Anvil fallback */}
-            <div className="flex items-center gap-3">
-              <div className="relative w-10 h-10 rounded-xl overflow-hidden shadow-[0_0_20px_rgba(6,182,212,0.4)] border border-cyan-400/40 bg-gradient-to-br from-cyan-950 to-slate-900 flex items-center justify-center">
+            {/* BIG PROMINENT LOGO & BRANDING */}
+            <div className="flex items-center gap-3.5">
+              <div className="relative w-14 h-14 rounded-2xl overflow-hidden shadow-[0_0_30px_rgba(6,182,212,0.6)] border-2 border-cyan-400/60 bg-gradient-to-br from-cyan-950 via-slate-900 to-black flex items-center justify-center flex-shrink-0 group hover:scale-105 transition-transform duration-300">
                 <img 
                   src="/logo.png" 
                   alt="AquaForge" 
                   onError={(e) => {
-                    // If file is missing or still loading, switch to fallback SVG icon
                     e.currentTarget.style.display = 'none';
                     const parent = e.currentTarget.parentElement;
                     if (parent) {
                       const svg = document.getElementById('aquaforge-svg-fallback');
-                      if (svg) svg.style.display = 'block';
+                      if (svg) svg.style.display = 'flex';
                     }
                   }}
                   className="w-full h-full object-cover" 
                 />
                 {/* SVG Fallback */}
-                <div id="aquaforge-svg-fallback" className="hidden text-cyan-400">
-                  <Server className="w-6 h-6 animate-pulse" />
+                <div id="aquaforge-svg-fallback" className="hidden w-full h-full items-center justify-center text-cyan-400 bg-cyan-950">
+                  <Server className="w-8 h-8 animate-pulse" />
                 </div>
               </div>
 
               <div>
-                <div className="flex items-center gap-2">
-                  <span className="font-extrabold text-base tracking-tight bg-gradient-to-r from-cyan-300 via-teal-200 to-white bg-clip-text text-transparent">
+                <div className="flex items-center gap-2.5">
+                  <span className="font-black text-xl tracking-wider bg-gradient-to-r from-cyan-300 via-teal-200 to-white bg-clip-text text-transparent drop-shadow-[0_2px_10px_rgba(6,182,212,0.4)]">
                     AQUAFORGE
                   </span>
 
@@ -337,7 +338,7 @@ export const App: React.FC = () => {
                         setMcVersion(e.target.value);
                         showToast(`Switched active profile to ${e.target.value}`, 'success');
                       }}
-                      className="text-[10px] font-mono px-2 py-0.5 rounded bg-cyan-950/90 text-cyan-300 border border-cyan-700/60 focus:outline-none cursor-pointer pr-5 appearance-none"
+                      className="text-[11px] font-mono font-bold px-2.5 py-1 rounded-lg bg-cyan-950/90 text-cyan-300 border border-cyan-500/50 focus:outline-none cursor-pointer pr-6 appearance-none shadow-sm hover:border-cyan-400 transition-colors"
                     >
                       {availableVersions.map(v => (
                         <option key={v} value={v} className="bg-slate-900 text-slate-200">{v}</option>
@@ -924,7 +925,7 @@ export const App: React.FC = () => {
                         <div key={p.fileName} className="p-2.5 bg-slate-900/70 rounded-xl border border-slate-800 flex items-center justify-between text-xs">
                           <div>
                             <span className="font-bold text-slate-200">{p.name}</span>
-                            <span className="text-[10px] text-slate-500 font-mono ml-2">v{p.version}</span>
+                            <span className="text-[10px] text-cyan-400 font-mono ml-2">v{p.version} • {formatFileSize(p.fileSizeBytes)}</span>
                           </div>
                           <button
                             onClick={() => handleTogglePlugin(p.fileName)}
@@ -1068,64 +1069,79 @@ export const App: React.FC = () => {
                   </div>
 
                   <div className="divide-y divide-slate-800/60">
-                    {playersList.map((p) => (
-                      <div key={p.name} className="p-4 flex items-center justify-between hover:bg-slate-900/40 transition-colors">
-                        <div className="flex items-center gap-3">
-                          <div className="w-8 h-8 rounded-lg bg-emerald-950/80 border border-emerald-700/60 flex items-center justify-center font-bold font-mono text-emerald-300 text-xs">
-                            {p.name.substring(0, 2).toUpperCase()}
-                          </div>
-                          <div>
-                            <div className="flex items-center gap-2">
-                              <span className="font-bold text-sm text-slate-200">{p.name}</span>
-                              {p.isOp && (
-                                <span className="flex items-center gap-1 text-[10px] font-bold font-mono px-1.5 py-0.2 rounded bg-amber-950 text-amber-400 border border-amber-800">
-                                  <Crown className="w-3 h-3" /> OP
-                                </span>
-                              )}
-                            </div>
-                            <span className="text-[10px] text-slate-500 font-mono">IP: {p.ip}</span>
-                          </div>
+                    {playersList.length === 0 ? (
+                      <div className="p-12 text-center space-y-3">
+                        <div className="w-12 h-12 rounded-2xl bg-slate-900 border border-slate-800 flex items-center justify-center mx-auto text-slate-500">
+                          <Users className="w-6 h-6 text-slate-500" />
                         </div>
-
-                        <div className="flex items-center gap-2">
-                          <span className="text-xs font-mono text-slate-400 mr-2">{p.ping}ms</span>
-                          <button
-                            onClick={() => {
-                              handleSendCommand(`kick ${p.name} Administrative reason`);
-                              setPlayersList(prev => prev.filter(x => x.name !== p.name));
-                              showToast(`Kicked player ${p.name}`, 'warn');
-                            }}
-                            className="px-2.5 py-1 bg-slate-800 hover:bg-amber-950/60 text-slate-300 hover:text-amber-400 border border-slate-700 rounded-lg text-xs font-medium cursor-pointer"
-                          >
-                            Kick
-                          </button>
-                          <button
-                            onClick={() => {
-                              handleSendCommand(`ban ${p.name} Banned by Admin`);
-                              setPlayersList(prev => prev.filter(x => x.name !== p.name));
-                              showToast(`Banned player ${p.name}`, 'error');
-                            }}
-                            className="px-2.5 py-1 bg-red-950/50 hover:bg-red-900 text-red-300 border border-red-700/50 rounded-lg text-xs font-medium cursor-pointer"
-                          >
-                            Ban
-                          </button>
-                          <button
-                            onClick={() => {
-                              p.isOp = !p.isOp;
-                              handleSendCommand(p.isOp ? `op ${p.name}` : `deop ${p.name}`);
-                              showToast(`${p.name} is now ${p.isOp ? 'Operator (OP)' : 'Regular Member'}`, 'success');
-                              setPlayersList([...playersList]);
-                            }}
-                            className={`p-1.5 rounded-lg border text-xs cursor-pointer ${
-                              p.isOp ? 'bg-amber-950 text-amber-300 border-amber-800' : 'bg-slate-800 text-slate-400 border-slate-700'
-                            }`}
-                            title="Toggle OP status"
-                          >
-                            <Crown className="w-3.5 h-3.5" />
-                          </button>
-                        </div>
+                        <h4 className="font-bold text-sm text-slate-300">No Active Players Connected</h4>
+                        <p className="text-xs text-slate-500 max-w-md mx-auto leading-relaxed">
+                          {status === 'ONLINE' 
+                            ? 'Server is online on port 25565. When players join, their real Minecraft gamertags, network latency ping, and kick/ban controls will appear here.'
+                            : 'Server is currently offline. Start the server using the green "Start Server" button at the top to accept player connections.'
+                          }
+                        </p>
                       </div>
-                    ))}
+                    ) : (
+                      playersList.map((p) => (
+                        <div key={p.name} className="p-4 flex items-center justify-between hover:bg-slate-900/40 transition-colors">
+                          <div className="flex items-center gap-3">
+                            <div className="w-8 h-8 rounded-lg bg-emerald-950/80 border border-emerald-700/60 flex items-center justify-center font-bold font-mono text-emerald-300 text-xs">
+                              {p.name.substring(0, 2).toUpperCase()}
+                            </div>
+                            <div>
+                              <div className="flex items-center gap-2">
+                                <span className="font-bold text-sm text-slate-200">{p.name}</span>
+                                {p.isOp && (
+                                  <span className="flex items-center gap-1 text-[10px] font-bold font-mono px-1.5 py-0.2 rounded bg-amber-950 text-amber-400 border border-amber-800">
+                                    <Crown className="w-3 h-3" /> OP
+                                  </span>
+                                )}
+                              </div>
+                              <span className="text-[10px] text-slate-500 font-mono">IP: {p.ip}</span>
+                            </div>
+                          </div>
+
+                          <div className="flex items-center gap-2">
+                            <span className="text-xs font-mono text-slate-400 mr-2">{p.ping}ms</span>
+                            <button
+                              onClick={() => {
+                                handleSendCommand(`kick ${p.name} Administrative reason`);
+                                setPlayersList(prev => prev.filter(x => x.name !== p.name));
+                                showToast(`Kicked player ${p.name}`, 'warn');
+                              }}
+                              className="px-2.5 py-1 bg-slate-800 hover:bg-amber-950/60 text-slate-300 hover:text-amber-400 border border-slate-700 rounded-lg text-xs font-medium cursor-pointer"
+                            >
+                              Kick
+                            </button>
+                            <button
+                              onClick={() => {
+                                handleSendCommand(`ban ${p.name} Banned by Admin`);
+                                setPlayersList(prev => prev.filter(x => x.name !== p.name));
+                                showToast(`Banned player ${p.name}`, 'error');
+                              }}
+                              className="px-2.5 py-1 bg-red-950/50 hover:bg-red-900 text-red-300 border border-red-700/50 rounded-lg text-xs font-medium cursor-pointer"
+                            >
+                              Ban
+                            </button>
+                            <button
+                              onClick={() => {
+                                p.isOp = !p.isOp;
+                                handleSendCommand(p.isOp ? `op ${p.name}` : `deop ${p.name}`);
+                                showToast(`${p.name} is now ${p.isOp ? 'Operator (OP)' : 'Regular Member'}`, 'success');
+                                setPlayersList([...playersList]);
+                              }}
+                              className={`p-1.5 rounded-lg border text-xs cursor-pointer ${
+                                p.isOp ? 'bg-amber-950 text-amber-300 border-amber-800' : 'bg-slate-800 text-slate-400 border-slate-700'
+                              }`}
+                              title="Toggle OP status"
+                            >
+                              <Crown className="w-3.5 h-3.5" />
+                            </button>
+                          </div>
+                        </div>
+                      ))
+                    )}
                   </div>
                 </div>
               </div>
@@ -1500,8 +1516,8 @@ export const App: React.FC = () => {
                       </div>
 
                       <div className="pt-3 mt-3 border-t border-slate-800/80 flex items-center justify-between">
-                        <span className="text-[10px] font-mono text-slate-500">
-                          {(plugin.fileSizeBytes / (1024 * 1024)).toFixed(2)} MB
+                        <span className="text-[10px] font-mono font-semibold text-cyan-400 bg-cyan-950/40 px-2 py-0.5 rounded border border-cyan-800/50">
+                          {formatFileSize(plugin.fileSizeBytes)}
                         </span>
                         <div className="flex gap-2">
                           <button
