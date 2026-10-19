@@ -3,7 +3,7 @@ import {
   Sparkles, CheckCircle2, Shield, Zap, Coins, Box, Compass, 
   Fish, Swords, Lock, Eye, Download, Check, ExternalLink, Server, Layers,
   MessageSquare, Award, MapPin, TrendingUp, ShoppingCart, Navigation, Target,
-  BarChart3, Crown, Flame, Pickaxe, Landmark, Trees, KeyRound, PartyPopper
+  BarChart3, Crown, Flame, Pickaxe, Landmark, Trees, KeyRound, PartyPopper, ArrowLeftRight
 } from 'lucide-react';
 
 export interface SuitePlugin {
@@ -293,6 +293,17 @@ export const ALL_AQUA_PLUGINS: SuitePlugin[] = [
     description: 'Enterprise server monetization, web-store delivery sync, timed subscriptions, and donor perks suite.',
     githubUrl: 'https://github.com/efekkoc/AquaVIP',
     features: ['Web-store console sync (/givevip <player> <tier> <duration>)', 'Full server priority join bypass', 'Donor perk suite (/fly, /feed, /heal, /craft, /anvil, /ec, /hat, /near)', 'Auto-expiring subscriptions with persistent storage & alerts']
+  },
+  {
+    id: 'aquatrade',
+    name: 'AquaTrade',
+    category: 'Economy',
+    icon: ArrowLeftRight,
+    color: 'from-teal-500 to-cyan-600',
+    version: '1.20.x – 1.21.11 (Universal)',
+    description: 'Enterprise secure player-to-player trade GUI, anti-scam countdown, item, money & XP exchange.',
+    githubUrl: 'https://github.com/efekkoc/AquaTrade',
+    features: ['54-slot dual-sided secure trade interface', 'Instant anti-scam reset on item or currency change', 'Direct Vault economy & XP level transfer buttons', 'Shift + Right Click instant player trade invitation']
   }
 ];
 
@@ -300,10 +311,10 @@ export const PRESET_BUNDLES = [
   {
     id: 'ultimate',
     name: '🌟 Ultimate Complete Suite',
-    badge: 'ALL-IN-ONE (25 PLUGINS)',
-    description: 'Deploy all 25 Aqua flagship plugins simultaneously. 100% self-sufficient server network covering automated events, donor VIP monetization, authentication, towns, survival graves, security, economy, combat, claims, chat, pass, skills, market, warps, enchants, scoreboard, ranks, and radar.',
+    badge: 'ALL-IN-ONE (26 PLUGINS)',
+    description: 'Deploy all 26 Aqua flagship plugins simultaneously. 100% self-sufficient server network covering automated events, player trading, donor VIP monetization, authentication, towns, survival graves, security, economy, combat, claims, chat, pass, skills, market, warps, enchants, scoreboard, ranks, and radar.',
     pluginIds: [
-      'aquavip', 'aquaevents', 'aquaauth', 'aquamap', 'aquasecurity', 'aquarunes', 'aquawatchdog', 'aquaeconomy', 
+      'aquatrade', 'aquavip', 'aquaevents', 'aquaauth', 'aquamap', 'aquasecurity', 'aquarunes', 'aquawatchdog', 'aquaeconomy', 
       'aquacrates', 'aquastaff', 'aquadungeons', 'aquaclaims', 'aquaskills', 
       'aquachat', 'aquapass', 'aquafishing', 'aquamarket', 'aquawarps', 
       'aquabounties', 'aquaenchants', 'aquascoreboard', 'aquaranks', 'aquacombat',
@@ -315,9 +326,9 @@ export const PRESET_BUNDLES = [
     id: 'survival_smp',
     name: '⚔️ Complete Survival, SMP & Nations Package',
     badge: 'SURVIVAL PACKAGE',
-    description: 'The turnkey bundle for survival & SMP servers: donor VIP monetization, survival events, airdrops, login authentication, 3D Display graves, sleep vote, silk spawners, elevators, nations/towns, claims, chat, economy, market, warps, enchants, ranks, scoreboard, and combat log prevention.',
+    description: 'The turnkey bundle for survival & SMP servers: secure player trade GUI, donor VIP monetization, survival events, airdrops, login authentication, 3D Display graves, sleep vote, silk spawners, elevators, nations/towns, claims, chat, economy, market, warps, enchants, ranks, scoreboard, and combat log prevention.',
     pluginIds: [
-      'aquavip', 'aquaevents', 'aquaauth', 'aquasurvival', 'aquanations', 'aquamap', 'aquaclaims', 'aquachat', 'aquaeconomy', 'aquamarket', 
+      'aquatrade', 'aquavip', 'aquaevents', 'aquaauth', 'aquasurvival', 'aquanations', 'aquamap', 'aquaclaims', 'aquachat', 'aquaeconomy', 'aquamarket', 
       'aquawarps', 'aquaskills', 'aquapass', 'aquaenchants', 'aquascoreboard', 
       'aquaranks', 'aquacombat', 'aquabounties', 'aquacrates'
     ],
