@@ -155,6 +155,7 @@ export const App: React.FC = () => {
   // Dynamic GitHub Repos Sync state (Neutral: global user can search any profile)
   const [githubUser, setGithubUser] = useState('');
   const [userRepos, setUserRepos] = useState<any[]>([]);
+  const [repoFilterQuery, setRepoFilterQuery] = useState('');
   const [loadingRepos, setLoadingRepos] = useState(false);
   const [installingRepo, setInstallingRepo] = useState<string | null>(null);
 
@@ -1742,6 +1743,25 @@ export const App: React.FC = () => {
                     </form>
                   </div>
 
+                  {/* Filter and Count Bar */}
+                  {userRepos.length > 0 && (
+                    <div className="flex items-center justify-between gap-3 pt-2 pb-1 border-b border-slate-800">
+                      <div className="relative flex-1">
+                        <Search className="w-3.5 h-3.5 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
+                        <input
+                          type="text"
+                          value={repoFilterQuery}
+                          onChange={(e) => setRepoFilterQuery(e.target.value)}
+                          placeholder="Filter fetched plugins (e.g. Trade, VIP, Security, Combat, Ranks)..."
+                          className="w-full pl-8 pr-3 py-1.5 bg-slate-900/90 border border-slate-800 rounded-xl text-xs text-slate-200 placeholder:text-slate-500 focus:outline-none focus:border-cyan-500"
+                        />
+                      </div>
+                      <span className="text-[11px] font-mono text-cyan-400 whitespace-nowrap">
+                        Showing {userRepos.filter(r => r.name.toLowerCase().includes(repoFilterQuery.toLowerCase()) || (r.description && r.description.toLowerCase().includes(repoFilterQuery.toLowerCase()))).length} of {userRepos.length} Repos
+                      </span>
+                    </div>
+                  )}
+
                   {/* Fetched GitHub Repos for this user */}
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-3 pt-2">
                     {loadingRepos ? (
@@ -1749,7 +1769,9 @@ export const App: React.FC = () => {
                     ) : userRepos.length === 0 ? (
                       <p className="text-xs text-slate-500 italic">No repositories found for @{githubUser}. Try another username.</p>
                     ) : (
-                      userRepos.map((repo) => (
+                      userRepos
+                        .filter(r => r.name.toLowerCase().includes(repoFilterQuery.toLowerCase()) || (r.description && r.description.toLowerCase().includes(repoFilterQuery.toLowerCase())))
+                        .map((repo) => (
                         <div key={repo.name} className="p-3.5 bg-slate-900/70 rounded-xl border border-slate-800 flex items-center justify-between gap-3">
                           <div className="overflow-hidden">
                             <span className="font-bold text-xs text-slate-200 block truncate">{repo.name}</span>
