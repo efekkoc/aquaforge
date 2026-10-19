@@ -378,7 +378,7 @@ export const App: React.FC = () => {
 
         {/* ================= TOP NAVIGATION HUD ================= */}
         <header className="h-28 px-6 bg-[#0a0f18]/95 backdrop-blur-xl border-b border-[#182336] flex items-center justify-between sticky top-0 z-30 shadow-2xl">
-          <div className="flex items-center gap-6">
+          <div className="flex items-center gap-6 shrink-0">
             
             {/* BIG PROMINENT LOGO & BRANDING */}
             <div className="flex items-center gap-4">
@@ -448,7 +448,7 @@ export const App: React.FC = () => {
             <div className="h-6 w-[1px] bg-slate-800 hidden sm:block" />
 
             {/* Server Status Pill (Accurate: 0 players and OFFLINE when not running) */}
-            <div className="hidden sm:flex items-center gap-2 px-3 py-1 rounded-full bg-[#0e1626] border border-slate-800 text-xs font-mono">
+            <div className="hidden sm:flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#0e1626] border border-slate-800 text-xs font-mono whitespace-nowrap shrink-0">
               <span className={`w-2 h-2 rounded-full ${
                 status === 'ONLINE' ? 'bg-emerald-400 shadow-[0_0_8px_#34d399]' :
                 status === 'STARTING' ? 'bg-amber-400 animate-ping' : 'bg-slate-600'
@@ -460,8 +460,8 @@ export const App: React.FC = () => {
           </div>
 
           {/* Center Telemetry Gauges (Only shown when server is actually ONLINE) */}
-          {status === 'ONLINE' ? (
-            <div className="hidden lg:flex items-center gap-6 px-4 py-1.5 bg-[#0b1220]/90 rounded-xl border border-[#1b273d] text-xs font-mono">
+          {status === 'ONLINE' && (
+            <div className="hidden xl:flex items-center gap-6 px-4 py-2 bg-[#0b1220]/90 rounded-xl border border-[#1b273d] text-xs font-mono whitespace-nowrap shrink-0">
               <div className="flex items-center gap-2">
                 <Activity className="w-3.5 h-3.5 text-cyan-400" />
                 <span className="text-slate-400">TPS:</span>
@@ -483,14 +483,10 @@ export const App: React.FC = () => {
                 <span className="font-bold text-amber-300">{metrics.onlinePlayers} / {metrics.maxPlayers}</span>
               </div>
             </div>
-          ) : (
-            <div className="hidden lg:flex items-center gap-2 px-3 py-1 bg-slate-900/60 rounded-xl border border-slate-800 text-xs text-slate-400 font-mono">
-              <span>Ready to Launch • Paper {mcVersion.replace('Paper ', '')} Profile</span>
-            </div>
           )}
 
           {/* Right Controls: Role Switcher & Power Buttons & Info */}
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-3 shrink-0">
             {/* Guide / Info Modal Trigger */}
             <button
               onClick={() => setShowInfoModal(true)}
